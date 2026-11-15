@@ -273,11 +273,14 @@ test('Markdown-útflutningur: allar glósur, aðgreindur frumtexti, íslenskir s
   assert.match(md, /^# Ódysseifskviða – endursögn/);
   assert.match(md, /## I\. þáttur — Aþena kemur til Íþöku/);
   assert.match(md, /## II\. þáttur — Þingið á Íþöku/);
-  assert.match(md, /Bls\. 6 · Efnisgreinar 1–2/);
-  assert.match(md, /Tegund: Endurvinnsla/);
-  assert.match(md, /\*\*Valinn frumtexti:\*\*\n\n> „Guðirnir sitja/);
-  assert.match(md, /\*\*Mín glósa:\*\*\n\nGuðirnir funda\./);
-  assert.equal((md.match(/### Glósa \d+/g) || []).length, 3, 'engin glósa týnist');
+  // ein stutt kóðalína á glósu; númer byrja upp á nýtt í hverjum kafla
+  assert.match(md, /\n1 · bls\. 6 · ¶ 1–2 · \(ev\)\n\n> „Guðirnir sitja/);
+  assert.match(md, /\n1 · bls\. 7 · ¶ 1 · \(s\)\n/);
+  assert.match(md, /\n2 · bls\. 7 · ¶ 1 · \(a\)\n/);
+  assert.match(md, /Sjálf heldur Aþena til Íþ“\n\nGuðirnir funda\./, 'glósan kemur beint á eftir frumtexta');
+  assert.match(md, /Skýringar: bls\. = blaðsíða .*¶ = efnisgrein .*\(e\) endursögn · \(a\) athugasemd · \(s\) spurning · \(ev\) endurvinnsla · \(t\) tilvitnun/);
+  assert.ok(!/Tegund:|Valinn frumtexti|Mín glósa|### Glósa/.test(md), 'engar langar merkingar');
+  assert.equal((md.match(/^\d+ · (bls|pdf-s)\. /gm) || []).length, 3, 'engin glósa týnist');
   assert.ok(md.includes('Þetta er löng glósa með ð, þ, æ og ö.'.repeat(1)));
   assert.ok(md.length > 15000);
   assert.match(md, /\\# ekki fyrirsögn/);
@@ -286,8 +289,8 @@ test('Markdown-útflutningur: allar glósur, aðgreindur frumtexti, íslenskir s
   // margra efnisgreina val: hver lína frumtexta í tilvitnun
   assert.match(md, /> „Guðirnir[^\n]*\n>\n> Sjálf heldur/);
   const noQ = C.toMarkdown(C.exportModel(index, st.notes, { includeQuote: false }));
-  assert.ok(!noQ.includes('Valinn frumtexti'));
-  assert.equal((noQ.match(/### Glósa/g) || []).length, 3);
+  assert.ok(!noQ.includes('> „'));
+  assert.equal((noQ.match(/^\d+ · bls\. /gm) || []).length, 3);
   // tilvitnun sem byrjar þegar á gæsalöppum fær ekki tvöfaldar
   const qa = C.anchorForUnit(index, sec('thattur-01').units.find(u => u.type === 'tilvitnun').id).anchor;
   const mdq = C.toMarkdown(C.exportModel(index, [C.newNote(qa, { body: 'x' })]));
@@ -298,4 +301,7 @@ test('útflutningur: PDF-síða notuð þegar prentað númer er óstaðfest', (
   const a = C.anchorForUnit(index, sec('titill').units[0].id).anchor;
   assert.equal(a.printedPages, null);
   assert.equal(C.locationParts(index, a).pages, 'PDF-síða 1');
+  assert.equal(C.locationCode(a), 'pdf-s. 1 · ¶ 1');
+  const md = C.toMarkdown(C.exportModel(index, [C.newNote(a, { type: 'tilvitnun', body: 'x' })]));
+  assert.match(md, /\n1 · pdf-s\. 1 · ¶ 1 · \(t\)\n/);
 });

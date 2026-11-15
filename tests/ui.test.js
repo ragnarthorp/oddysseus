@@ -301,10 +301,10 @@ test('útflutningur: Markdown og PDF með öllum glósum', { skip }, async () =>
   const mdPath = await saveDownload(page, '#fileDownload');
   assert.match(path.basename(mdPath), /^odysseifskvida-glosur-\d{4}-\d{2}-\d{2}\.md$/);
   const md = fs.readFileSync(mdPath, 'utf8').replace(/^﻿/, '');
-  assert.equal((md.match(/### Glósa \d/g) || []).length, 3);
+  assert.equal((md.match(/^1 · bls\. \d+ · ¶ \d+ · \(a\)$/gm) || []).length, 3, 'þrír kaflar, glósa 1 í hverjum');
   assert.match(md, /## I\. þáttur — Aþena kemur til Íþöku/);
   assert.match(md, /## Helstu nöfn/);
-  assert.match(md, /Tegund: Athugasemd/);
+  assert.ok(!/Tegund:/.test(md));
   assert.match(md, /> „Guðirnir sitja/);
   assert.ok(md.includes('LOKAORÐ'));
   await page.click('#fileDlg [data-close]');
@@ -324,7 +324,8 @@ test('útflutningur: Markdown og PDF með öllum glósum', { skip }, async () =>
     const txt = execFileSync('pdftotext', ['-enc', 'UTF-8', pdfPath, '-'], { stdio: ['ignore', 'pipe', 'ignore'] }).toString().replace(/\s+/g, ' ');
     assert.match(txt, /XXIV\. þáttur — Friður/);
     assert.match(txt, /LOKAORÐ/);
-    assert.ok(!/Valinn frumtexti/.test(txt));
+    assert.ok(!txt.includes(S('thattur-24').units[0].text.slice(0, 40)), 'frumtexti ekki með');
+    assert.match(txt, /1 · bls\. 48 · ¶ 1 · \(a\)/);
     assert.match(txt, /Sía: XXIV\. þáttur/);
   } catch (e) { if (e.code !== 'ENOENT') throw e; }
   assert.deepEqual(page.errors, []);

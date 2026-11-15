@@ -65,6 +65,7 @@
     para(model.title, 'bold', 20, { gapAfter: 1 });
     para('Mínar glósur', 'normal', 13, { color: MUTED, gapAfter: 1 });
     para(`${model.scopeLabel} · ${model.count} ${model.count === 1 ? 'glósa' : 'glósur'} · ${fmt(model.generatedAt)}`, 'normal', 9.5, { color: MUTED, gapAfter: 3 });
+    if (model.items.length) para('Skýringar: ' + model.legend + '. Frumtexti er skáletraður með striki á undan; glósan fylgir á eftir.', 'normal', 8.5, { color: MUTED, gapAfter: 2 });
     rule(ACCENT);
     if (!model.items.length) para('Engar glósur.', 'italic', 11);
 
@@ -76,17 +77,10 @@
         para(it.section, 'bold', 14, { color: ACCENT, gapAfter: 2 });
         cur = it.section;
       }
-      need(lh(10) * 6 + 4);
-      para(`Glósa ${it.n}`, 'bold', 10, { color: MUTED, gapAfter: 0.5 });
-      para(`${it.work}\n${it.section}\n${it.location}`, 'normal', 10, { color: MUTED, gapAfter: 0.5 });
-      para(`Tegund: ${it.type}${it.orphan ? ' · ATH: tenging við texta fannst ekki' : ''}`, 'normal', 10, { color: MUTED, gapAfter: 2 });
-      if (it.quote != null) {
-        para('Valinn frumtexti:', 'bold', 10, { gapAfter: 0.5 });
-        para(it.quote, 'italic', 10.5, { indent: 5, bar: QUOTE_BAR, color: [60, 60, 60], gapAfter: 2.5 });
-      }
-      para('Mín glósa:', 'bold', 10, { gapAfter: 0.5 });
-      para(it.body.trim() ? it.body : '(tóm glósa)', it.body.trim() ? 'normal' : 'italic', 11, { gapAfter: 3 });
-      rule();
+      need(lh(8.5) + lh(10.5) * 2 + lh(11) * 2);
+      para(it.code, 'normal', 8.5, { color: MUTED, gapAfter: 1 });
+      if (it.quote != null) para(it.quote, 'italic', 10.5, { indent: 5, bar: QUOTE_BAR, color: [60, 60, 60], gapAfter: 1.5 });
+      para(it.body.trim() ? it.body : '(tóm glósa)', it.body.trim() ? 'normal' : 'italic', 11, { gapAfter: 5 });
     }
 
     const pages = doc.getNumberOfPages();

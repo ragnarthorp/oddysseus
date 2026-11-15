@@ -55,7 +55,20 @@ Glósa geymir auðkenni og útgáfu skjals, kafla, upphaf og endi sem `{unitId, 
 
 ## Útflutningur
 
-„Flytja út“ neðst í glósuspjaldinu býður upp á PDF eða Markdown (.md), allar glósur eða núverandi síu, röð í textanum (sjálfgefið) eða eftir stofnun, og hvort valinn frumtexti fylgi. Hver glósa hefur heiti verks, þátt og kaflaheiti, „Bls.“ (staðfest) eða „PDF-síða“, efnisgrein eða bil, tegund og texta nemandans. Frumtexti er greinilega aðgreindur. Talið er sannreynt svo að engin vistuð glósa falli niður.
+„Flytja út“ neðst í glósuspjaldinu býður upp á PDF eða Markdown (.md), allar glósur eða núverandi síu, röð í textanum (sjálfgefið) eða eftir stofnun, og hvort valinn frumtexti fylgi. Talið er sannreynt svo að engin vistuð glósa falli niður.
+
+Útflutningurinn er hafður þjappaður svo glósurnar lesist án truflunar. Heiti verks og fyrirsagnir kafla (t.d. „I. þáttur — Aþena kemur til Íþöku“) haldast. Hver glósa fær aðeins eina stutta kóðalínu í lágstöfum, svo frumtextann (ef hann er valinn) og loks texta nemandans:
+
+```
+1 · bls. 6 · ¶ 1–2 · (e)
+> „Guðirnir sitja á þingi á Ólympsfjalli. …“
+Guðirnir funda og Aþena biður um heimferð Ódysseifs.
+```
+
+- Glósur eru númeraðar 1, 2, 3 … innan hvers kafla.
+- `bls.` er staðfest prentað blaðsíðunúmer eða bil; `pdf-s.` er notað þegar prentað númer er óstaðfest. `¶` er efnisgrein eða bil.
+- Tegundir: `(e)` endursögn, `(a)` athugasemd, `(s)` spurning, `(ev)` endurvinnsla, `(t)` tilvitnun.
+- Skýringar á kóðunum standa einu sinni efst í skjalinu.
 
 - PDF er búið til með jsPDF í vafranum. Textinn er raunverulegur vektor-texti með innfelldu Unicode-letri og sjálfvirkri línu- og síðuskiptingu, ekki skjáskot. Stafir sem letrið hefur ekki (t.d. broskarlar) falla út.
 - Markdown er UTF-8 (með BOM svo eldri forrit lesi stafina rétt). Það hefur skýrar fyrirsagnir og frumtexta í `>`-tilvitnun. Merki í texta nemandans sem annars yrðu fyrirsagnir, tilvitnanir eða HTML eru gerð óvirk.

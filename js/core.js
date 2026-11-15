@@ -15,14 +15,24 @@
   const MAX_BODY = 200000;
 
   const NOTE_TYPES = [
-    { id: 'endursogn', label: 'Endursögn', hint: 'með eigin orðum' },
-    { id: 'athugasemd', label: 'Athugasemd', hint: 'hugleiðing eða tenging' },
-    { id: 'spurning', label: 'Spurning', hint: 'það sem er óljóst' },
-    { id: 'endurvinnsla', label: 'Endurvinnsla', hint: 'ritun sem hófst sem afrit af frumtexta' },
-    { id: 'tilvitnun', label: 'Tilvitnun', hint: 'óbreyttur frumtexti' },
+    { id: 'endursogn', label: 'Endursögn', code: 'e', hint: 'með eigin orðum' },
+    { id: 'athugasemd', label: 'Athugasemd', code: 'a', hint: 'hugleiðing eða tenging' },
+    { id: 'spurning', label: 'Spurning', code: 's', hint: 'það sem er óljóst' },
+    { id: 'endurvinnsla', label: 'Endurvinnsla', code: 'ev', hint: 'ritun sem hófst sem afrit af frumtexta' },
+    { id: 'tilvitnun', label: 'Tilvitnun', code: 't', hint: 'óbreyttur frumtexti' },
   ];
   const TYPE_IDS = NOTE_TYPES.map(t => t.id);
   const typeLabel = id => (NOTE_TYPES.find(t => t.id === id) || { label: id }).label;
+  const typeCode = id => (NOTE_TYPES.find(t => t.id === id) || { code: '?' }).code;
+  /* Skýringar á kóðum í útflutningi (birtast einu sinni efst). */
+  const EXPORT_LEGEND = 'bls. = blaðsíða · pdf-s. = PDF-síða (prentað númer óstaðfest) · ¶ = efnisgrein · '
+    + NOTE_TYPES.map(t => `(${t.code}) ${t.label.toLowerCase()}`).join(' · ');
+
+  /* Stuttur staðarkóði: „bls. 6–7 · ¶ 3–4“. */
+  function locationCode(anchor) {
+    const pg = anchor.printedPages ? 'bls. ' + range(anchor.printedPages[0], anchor.printedPages[1]) : 'pdf-s. ' + range(anchor.pdfPages[0], anchor.pdfPages[1]);
+    return `${pg} · ¶ ${range(anchor.paragraphs[0], anchor.paragraphs[1])}`;
+  }
   const RECYCLE_GUIDANCE = 'Lýstu aðalatriðinu með þínum orðum. Þú mátt stytta textann, útskýra erfið orð eða bæta við dæmi.';
 
   const DEFAULT_SETTINGS = { fontSize: 20, font: 'serif', lineHeight: 'venjulegt', width: 'midlungs', theme: 'ljost' };
@@ -299,10 +309,16 @@
   function exportModel(index, notes, opts) {
     const o = Object.assign({ includeQuote: true, order: 'texti', scopeLabel: 'Allar glósur' }, opts);
     const sorted = sortNotes(index, notes, o.order);
+    const perSection = new Map();
     const items = sorted.map((n, i) => {
       const loc = n.anchor ? locationParts(index, n.anchor) : { section: 'Óþekktur staður', pages: '', paras: '' };
+      const num = (perSection.get(loc.section) || 0) + 1; // númer innan kafla
+      perSection.set(loc.section, num);
+      const code = [String(num), n.anchor ? locationCode(n.anchor) : null, `(${typeCode(n.type)})`, n.orphan ? 'ótengd' : null].filter(Boolean).join(' · ');
       return {
         n: i + 1,
+        num,
+        code,
         work: index.doc.title,
         section: loc.section,
         location: [loc.pages, loc.paras].filter(Boolean).join(' · '),
@@ -312,7 +328,7 @@
         orphan: !!n.orphan,
       };
     });
-    return { title: index.doc.title, generatedAt: new Date(), scopeLabel: o.scopeLabel, includeQuote: o.includeQuote, items, count: items.length };
+    return { title: index.doc.title, generatedAt: new Date(), scopeLabel: o.scopeLabel, includeQuote: o.includeQuote, legend: EXPORT_LEGEND, items, count: items.length };
   }
 
   function withQuoteMarks(q) {
@@ -328,23 +344,14 @@
   }
   function toMarkdown(model) {
     const out = [`# ${model.title}`, '', `*Mínar glósur · ${model.scopeLabel} · ${model.count} ${model.count === 1 ? 'glósa' : 'glósur'} · ${fmtDate(model.generatedAt)}*`, ''];
+    if (model.items.length) out.push(`*Skýringar: ${model.legend}. Frumtexti er í tilvitnun, glósan fylgir á eftir.*`, '');
     let cur = null;
     if (!model.items.length) out.push('Engar glósur.', '');
     for (const it of model.items) {
       if (it.section !== cur) { out.push(`## ${it.section}`, ''); cur = it.section; }
-      out.push(`### Glósa ${it.n}`, '');
-      out.push(`${it.work}  `);
-      out.push(`${it.section}  `);
-      out.push(`${it.location}  `);
-      out.push(`Tegund: ${it.type}`, '');
-      if (it.quote != null) {
-        out.push('**Valinn frumtexti:**', '');
-        const q = it.quote;
-        out.push(q.split('\n').map(l => (l ? '> ' + mdEscapeLine(l) : '>')).join('\n'), '');
-      }
-      out.push('**Mín glósa:**', '');
+      out.push(it.code, '');
+      if (it.quote != null) out.push(it.quote.split('\n').map(l => (l ? '> ' + mdEscapeLine(l) : '>')).join('\n'), '');
       out.push(it.body.trim() ? mdParagraphs(it.body) : '*(tóm glósa)*', '');
-      out.push('---', '');
     }
     return out.join('\n');
   }
@@ -367,6 +374,6 @@
     DEFAULT_SETTINGS, SETTING_OPTIONS, FONT_MIN, FONT_MAX, sanitizeSettings,
     buildIndex, sectionLabel, sectionShort, pageAt, makeAnchor, anchorForUnit, verifyAnchor, locationParts,
     newNote, finalizeNote, sortNotes, filterNotes, notesForUnit,
-    makeWorkfile, parseWorkfile, exportModel, withQuoteMarks, toMarkdown, fmtDate, fileStamp,
+    makeWorkfile, parseWorkfile, exportModel, withQuoteMarks, typeCode, locationCode, EXPORT_LEGEND, toMarkdown, fmtDate, fileStamp,
   };
 });

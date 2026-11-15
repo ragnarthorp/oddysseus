@@ -49,14 +49,15 @@ test('PDF: raunveruleg skrá með mörgum síðum, innfelldu letri og öllum gl�
   assert.match(txt, /Ódysseifskviða – endursögn/);
   assert.match(txt, /I\. þáttur — Aþena kemur til Íþöku/);
   assert.match(txt, /XXIV\. þáttur — Friður/);
-  assert.match(txt, /Bls\. 6 · Efnisgrein 1/);
-  assert.match(txt, /Tegund: Endurvinnsla|Tegund: Endursögn/);
-  assert.match(txt, /Valinn frumtexti:/);
-  assert.match(txt, /Mín glósa:/);
+  assert.match(txt, /1 · bls\. 6 · ¶ 1 · \((e|a|s|ev|t)\)/);
+  assert.match(txt, /Skýringar: bls\. = blaðsíða/);
+  assert.ok(!/Tegund:|Valinn frumtexti:|Mín glósa:/.test(txt), 'engar langar merkingar');
   assert.match(txt, /ð þ æ ö Ð Þ Æ Ö – „gæsalappir“ …/);
   assert.match(txt, /„… hún er dauðleg, en þú ódauðleg og eldist eigi\./, 'tilvitnun án tvöfaldra gæsalappa');
   assert.match(txt, /ENDIR/, 'löng glósa skilar sér til enda');
-  assert.equal((txt.match(/Glósa \d+ Ódysseifskviða – endursögn \S+/g) || []).length, ns.length, 'engin glósa týnist; heiti verks við hverja glósu');
+  assert.equal((txt.match(/\d+ · bls\. \d+(–\d+)? · ¶ \d+(–\d+)? · \((e|a|s|ev|t)\)/g) || []).length, ns.length, 'engin glósa týnist');
+  assert.match(txt, /1 · bls\. 11 · ¶ 1 · \(\w+\).*2 · bls\. 12 · ¶ \d+ · \(t\).*3 · bls\. 12 · ¶ \d+ · \(s\)/, 'þrjár glósur í V. þætti fá númer 1–3 innan kaflans');
+  assert.match(txt, /1 · bls\. 13 · ¶ 1 /, 'númerun byrjar aftur í VI. þætti');
   assert.match(txt, new RegExp(`Síða ${pages} af ${pages}`));
 });
 
