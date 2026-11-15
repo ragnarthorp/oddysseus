@@ -201,7 +201,7 @@ function sampleState() {
   const a2 = C.anchorForUnit(index, s2.units[0].id).anchor;
   const long = 'Þetta er löng glósa með ð, þ, æ og ö. '.repeat(400);
   return {
-    settings: { fontSize: 24, font: 'sans', lineHeight: 'rumt', width: 'breidur', theme: 'dokkt' },
+    settings: { fontSize: 24, font: 'sans', lineHeight: 'rumt', width: 'breidur', theme: 'dokkt', cornell: true },
     position: { sectionId: 'thattur-02', unitId: s2.units[1].id },
     notes: [
       C.finalizeNote(C.newNote(a1, { type: 'endurvinnsla', body: 'Guðirnir funda.\n\nAþena fær Seif til að leyfa heimferð.', origin: 'recycle', insertedText: a1.quote })),
@@ -304,4 +304,76 @@ test('útflutningur: PDF-síða notuð þegar prentað númer er óstaðfest', (
   assert.equal(C.locationCode(a), 'pdf-s. 1 · ¶ 1');
   const md = C.toMarkdown(C.exportModel(index, [C.newNote(a, { type: 'tilvitnun', body: 'x' })]));
   assert.match(md, /\n1 · pdf-s\. 1 · ¶ 1 · \(t\)\n/);
+});
+
+function cornellNotes() {
+  const s1 = sec('thattur-01'), s2 = sec('thattur-02');
+  const a = C.makeAnchor(index, { unitId: s1.units[0].id, offset: 0 }, { unitId: s1.units[0].id, offset: 59 }).anchor;
+  const full = C.anchorForUnit(index, s1.units[2].id).anchor;
+  return [
+    C.newNote(C.anchorForSection(index, 'thattur-01').anchor, { kind: 'samantekt', type: 'athugasemd', body: 'Kaflinn kynnir vandann á Íþöku.\nAþena tekur málin í sínar hendur.' }),
+    C.finalizeNote(C.newNote(a, { kind: 'cornell', cue: 'Hver hatar Ódysseif?', type: 'endurvinnsla', body: 'Póseidon | hatar Ódysseif og er fjarri.', origin: 'recycle', insertedText: a.quote })),
+    C.finalizeNote(C.newNote(full, { kind: 'cornell', cue: 'Telemakkos', type: 'endurvinnsla', body: full.quote, origin: 'recycle', insertedText: full.quote })),
+    C.newNote(C.anchorForUnit(index, s1.units[3].id).anchor, { type: 'spurning', body: 'Hvað eru bernskubrögð?' }),
+    C.finalizeNote(C.newNote(C.anchorForUnit(index, s2.units[0].id).anchor, { kind: 'cornell', cue: 'Þingið', type: 'endurvinnsla', body: 'Telemakkos kallar saman þing.', origin: 'recycle', insertedText: s2.units[0].text })),
+  ];
+}
+
+test('Cornell: kaflatenging, gerðir glósa og röð (athugasemd við kaflann aftast)', () => {
+  const ns = cornellNotes();
+  assert.equal(ns[1].type, 'endurvinnsla', 'umorðaður texti');
+  assert.equal(ns[2].type, 'tilvitnun', 'óbreyttur texti');
+  assert.equal(ns[1].cue, 'Hver hatar Ódysseif?');
+  const sa = ns[0].anchor;
+  assert.ok(C.isSectionAnchor(sa));
+  assert.deepEqual(sa.printedPages, [6, 6]);
+  assert.ok(C.verifyAnchor(index, sa).ok);
+  assert.ok(!C.verifyAnchor(index, Object.assign({}, sa, { sectionId: 'titill' })).ok);
+  assert.equal(C.locationParts(index, sa).paras, 'Allur kaflinn');
+  const sorted = C.sortNotes(index, ns);
+  assert.equal(sorted[3].kind, 'samantekt', 'athugasemd við kaflann kemur á eftir glósum kaflans');
+  assert.equal(sorted[4].anchor.sectionId, 'thattur-02');
+  assert.equal(C.notesForUnit(ns, sec('thattur-01').units[0].id).length, 1);
+});
+
+test('Cornell: vinnuskrá varðveitir lykilorð og gerð; ógildar Cornell-glósur hafnað', () => {
+  const ns = cornellNotes();
+  const wf = C.makeWorkfile(index, { notes: ns, settings: { cornell: true } });
+  const r = C.parseWorkfile(index, JSON.stringify(wf));
+  assert.ok(r.ok, r.errors.join('; '));
+  assert.deepEqual(r.data.notes, JSON.parse(JSON.stringify(ns)));
+  assert.equal(r.data.settings.cornell, true);
+  const bad = clone(wf); bad.notes[0].kind = 'eitthvad';
+  assert.match(C.parseWorkfile(index, JSON.stringify(bad)).errors[0], /óþekkt gerð/);
+  const bad2 = clone(wf); bad2.notes[1].anchor = clone(wf.notes[0].anchor);
+  assert.match(C.parseWorkfile(index, JSON.stringify(bad2)).errors[0], /kaflatenging/);
+  const bad3 = clone(wf); bad3.notes[0].anchor = clone(wf.notes[1].anchor);
+  assert.match(C.parseWorkfile(index, JSON.stringify(bad3)).errors[0], /án kaflatengingar/);
+  const bad4 = clone(wf); bad4.notes[0].anchor.docVersion = 'sha256-x';
+  assert.match(C.parseWorkfile(index, JSON.stringify(bad4)).errors[0], /aðra útgáfu/);
+});
+
+test('Cornell-útflutningur (Markdown): tafla með lykilorði vinstra megin og athugasemd í lok kafla', () => {
+  const ns = cornellNotes();
+  const m = C.cornellModel(index, ns, { includeQuote: true });
+  assert.equal(m.count, ns.length);
+  assert.deepEqual(m.sections.map(g => g.id), ['thattur-01', 'thattur-02']);
+  const md = C.toCornellMarkdown(m);
+  assert.match(md, /^# Ódysseifskviða – endursögn – Cornell-glósur/);
+  const ch1 = md.split('## I. þáttur — Aþena kemur til Íþöku')[1].split('## II.')[0];
+  assert.match(ch1, /\| Lykilorð \/ spurning \| Glósa \|\n\|---\|---\|/);
+  assert.match(ch1, /\| Hver hatar Ódysseif\?<br>bls\. 6 · ¶ 1 \| Póseidon \\\| hatar Ódysseif og er fjarri\.<br><br>\*„Guðirnir sitja/, 'umorðað: frumtexti fylgir');
+  assert.match(ch1, /\| Telemakkos<br>bls\. 6 · ¶ 3 \| Telemakkos, sonur Ódysseifs[^|]*burt\. \|\n/, 'óbreyttur texti án tvítekningar');
+  assert.match(ch1, /\| \*\(s\) spurning\*<br>bls\. 6 · ¶ 4 \| Hvað eru bernskubrögð\?/);
+  assert.ok(ch1.indexOf('**Athugasemdir við kaflann**') > ch1.lastIndexOf('| '), 'athugasemd í lok kaflans');
+  assert.match(ch1, /\*\*Athugasemdir við kaflann\*\*\n\nKaflinn kynnir vandann á Íþöku\. {2}\nAþena/);
+  const ch2 = md.split('## II. þáttur — Þingið á Íþöku')[1];
+  assert.match(ch2, /\*\(engar athugasemdir\)\*/);
+  const noQ = C.toCornellMarkdown(C.cornellModel(index, ns, { includeQuote: false }));
+  assert.ok(!noQ.includes('„Guðirnir sitja'));
+  assert.match(C.toCornellMarkdown(C.cornellModel(index, [])), /Engar glósur\./);
+  // venjulegur útflutningur sýnir lykilorð og athugasemd við kaflann
+  const plain = C.toMarkdown(C.exportModel(index, ns));
+  assert.match(plain, /\*\*Hver hatar Ódysseif\?\*\*/);
+  assert.match(plain, /4 · kaflinn · \(a\) · athugasemdir við kaflann/);
 });

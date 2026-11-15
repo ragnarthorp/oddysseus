@@ -118,6 +118,11 @@
     r.style.setProperty('--measure', WIDTHS[s.width]);
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.content = getComputedStyle(r).getPropertyValue('--bg').trim() || '#fbfaf7';
+    r.dataset.cornell = s.cornell ? '1' : '0';
+    $('btnCornell').setAttribute('aria-pressed', s.cornell ? 'true' : 'false');
+    $('sbCue').hidden = !s.cornell;
+    $('sbRecycle').hidden = s.cornell;
+    $('sbOwn').classList.toggle('primary', !s.cornell);
     $('fsValue').textContent = s.fontSize + ' px';
     $('fsDown').disabled = s.fontSize <= C.FONT_MIN;
     $('fsUp').disabled = s.fontSize >= C.FONT_MAX;
@@ -196,6 +201,9 @@
         }
       }
       for (const s of art.querySelectorAll('.qblock p.u')) s.classList.add('src');
+      const cn = el('section', { class: 'chap-notes', id: 'chapNotes', 'aria-labelledby': 'chapNotesTitle' });
+      art.appendChild(cn);
+      renderChapNotes();
     }
     renderChapnav(sec);
     $('curSection').textContent = sec.kind === 'titill' ? 'Forsíða' : C.sectionLabel(sec);
@@ -205,6 +213,29 @@
     renderToc();
     if (!opts || !opts.keepScroll) window.scrollTo(0, 0);
     if (!opts || !opts.noSave) { state.position = { sectionId: sec.id, unitId: null }; persist(['position']); }
+  }
+
+  function sectionSummaries(sid) {
+    return state.notes.filter(n => n.kind === 'samantekt' && n.anchor && n.anchor.sectionId === sid);
+  }
+  function renderChapNotes() {
+    const cn = $('chapNotes');
+    if (!cn) return;
+    cn.innerHTML = '';
+    const sums = sectionSummaries(state.sectionId);
+    cn.appendChild(el('h2', { id: 'chapNotesTitle', tabindex: '-1' }, 'Athugasemdir við kaflann'));
+    if (sums.length) for (const n of sums) cn.appendChild(el('p', { class: 'cn-body' }, n.body.trim() ? n.body : '(tóm athugasemd)'));
+    else cn.appendChild(el('p', { class: 'cn-hint' }, 'Dragðu kaflann saman eða skrifaðu hugleiðingu um hann með eigin orðum.'));
+    const b = el('button', { type: 'button', id: 'btnChapNotes', class: sums.length ? '' : 'primary' },
+      sums.length ? 'Breyta athugasemdum við kaflann' : 'Athugasemdir við kaflann');
+    b.addEventListener('click', () => openChapNotes());
+    cn.appendChild(b);
+  }
+  function openChapNotes() {
+    const existing = sectionSummaries(state.sectionId)[0];
+    if (existing) { openEditor({ mode: 'edit', noteId: existing.id }); return; }
+    const res = C.anchorForSection(index, state.sectionId);
+    if (res.ok) openEditor({ mode: 'new', anchor: res.anchor, origin: 'own', kind: 'samantekt' });
   }
 
   function renderCover(sec, art) {
@@ -361,7 +392,7 @@
     if (!HL) return;
     const ranges = [];
     for (const n of state.notes) {
-      if (n.orphan || !n.anchor || n.anchor.sectionId !== state.sectionId) continue;
+      if (n.orphan || !n.anchor || n.anchor.sectionId !== state.sectionId || C.isSectionAnchor(n.anchor)) continue;
       const r = rangeForAnchor(n.anchor);
       if (r) ranges.push(r);
     }
@@ -446,6 +477,7 @@
   const selbar = $('selbar');
   selbar.addEventListener('pointerdown', () => { barPressed = true; clearTimeout(hideTimer); });
   selbar.addEventListener('mousedown', e => e.preventDefault()); // heldur valinu á borðtölvum
+  $('sbCue').addEventListener('click', () => { const a = state.pending; hideSelbar(); if (a) openEditor({ mode: 'new', anchor: a, origin: 'recycle', kind: 'cornell' }); });
   $('sbOwn').addEventListener('click', () => { const a = state.pending; hideSelbar(); if (a) openEditor({ mode: 'new', anchor: a, origin: 'own' }); });
   $('sbRecycle').addEventListener('click', () => { const a = state.pending; hideSelbar(); if (a) openEditor({ mode: 'new', anchor: a, origin: 'recycle' }); });
 
@@ -467,8 +499,17 @@
   }
   function selectedType() { const i = document.querySelector('input[name="edType"]:checked'); return i ? i.value : 'athugasemd'; }
   function setType(t) { for (const i of document.querySelectorAll('input[name="edType"]')) i.checked = i.value === t; updateGuide(); }
+  const CORNELL_GUIDANCE = 'Vinstra megin: lykilorð eða spurning sem textinn svarar. Hægra megin er valinn texti – þú mátt umorða hann með þínum orðum eða láta hann standa óbreyttan.';
+  const SUMMARY_GUIDANCE = 'Dragðu kaflann saman með eigin orðum eða skrifaðu hugleiðingu um hann.';
   function updateGuide() {
     const ed = state.editor;
+    const kind = ed && ed.kind;
+    if (kind === 'cornell' || kind === 'samantekt') {
+      $('edGuide').hidden = false;
+      $('edGuide').textContent = kind === 'cornell' ? CORNELL_GUIDANCE : SUMMARY_GUIDANCE;
+      $('edInsertRow').hidden = true;
+      return;
+    }
     const show = !!ed && (selectedType() === 'endurvinnsla' || ed.origin === 'recycle');
     $('edGuide').hidden = !show;
     $('edGuide').textContent = C.RECYCLE_GUIDANCE;
@@ -478,19 +519,30 @@
   function openEditor(opts) {
     const ed = Object.assign({ insertedText: null }, opts);
     const note = ed.noteId ? state.notes.find(n => n.id === ed.noteId) : null;
-    if (note) { ed.anchor = note.anchor; ed.origin = note.origin; if (!ed.restore) ed.insertedText = note.insertedText; }
+    if (note) { ed.anchor = note.anchor; ed.origin = note.origin; ed.kind = note.kind; if (!ed.restore) ed.insertedText = note.insertedText; }
     state.editor = ed;
     const a = ed.anchor;
+    const kind = ed.kind || null;
     const loc = C.locationParts(index, a);
-    $('edTitle').textContent = ed.mode === 'edit' ? 'Breyta glósu' : ed.origin === 'recycle' ? 'Endurvinna valinn texta' : 'Ný glósa';
+    $('edTitle').textContent = kind === 'samantekt' ? 'Athugasemdir við kaflann'
+      : kind === 'cornell' ? (ed.mode === 'edit' ? 'Breyta Cornell-glósu' : 'Lykilorð / spurning')
+      : ed.mode === 'edit' ? 'Breyta glósu' : ed.origin === 'recycle' ? 'Endurvinna valinn texta' : 'Ný glósa';
     $('edLoc').textContent = `${loc.section} · ${loc.pages} · ${loc.paras}`;
-    $('edSrc').textContent = a.quote;
-    let body = '', type = 'athugasemd';
-    if (ed.restore) { body = ed.restore.body; type = ed.restore.type; }
-    else if (note) { body = note.body; type = note.type; }
+    $('edSrc').textContent = a.quote || '';
+    $('edSrcWrap').hidden = kind === 'samantekt';
+    $('edTypes').hidden = kind === 'cornell' || kind === 'samantekt';
+    $('edCueWrap').hidden = kind !== 'cornell';
+    $('edFields').classList.toggle('cornell', kind === 'cornell');
+    $('edResetQuote').hidden = kind !== 'cornell';
+    $('edBodyLabel').textContent = kind === 'cornell' ? 'Valinn texti – má umorða' : kind === 'samantekt' ? 'Athugasemdir við kaflann' : 'Mín glósa';
+    let body = '', type = 'athugasemd', cue = '';
+    if (ed.restore) { body = ed.restore.body; type = ed.restore.type; cue = ed.restore.cue || ''; }
+    else if (note) { body = note.body; type = note.type; cue = note.cue || ''; }
     else if (ed.origin === 'recycle') { body = a.quote; ed.insertedText = a.quote; type = 'endurvinnsla'; }
     $('edBody').value = body;
+    $('edCue').value = cue;
     ed.initialBody = body;
+    ed.initialCue = cue;
     setType(type);
     $('edNote').textContent = '';
     const dlg = $('editorDlg');
@@ -498,6 +550,7 @@
     syncViewport();
     if (!dlg.open) dlg.showModal();
     const ta = $('edBody');
+    if (kind === 'cornell') { $('edCue').focus(); ta.scrollTop = 0; saveDraftSoon(); return; }
     ta.focus();
     if (ed.origin === 'recycle' && !note) { try { ta.setSelectionRange(0, 0); } catch (e) { /* */ } ta.scrollTop = 0; }
     saveDraftSoon();
@@ -517,11 +570,19 @@
     draftTimer = setTimeout(() => {
       const ed = state.editor;
       if (!ed) return;
-      state.draft = { mode: ed.mode, noteId: ed.noteId || null, anchor: ed.anchor, origin: ed.origin, insertedText: ed.insertedText, body: $('edBody').value, type: selectedType(), savedAt: new Date().toISOString() };
+      state.draft = { mode: ed.mode, noteId: ed.noteId || null, anchor: ed.anchor, origin: ed.origin, kind: ed.kind || null, insertedText: ed.insertedText, body: $('edBody').value, cue: $('edCue').value, type: selectedType(), savedAt: new Date().toISOString() };
       persist(['draft']);
     }, 400);
   }
   $('edBody').addEventListener('input', saveDraftSoon);
+  $('edCue').addEventListener('input', saveDraftSoon);
+  $('edResetQuote').addEventListener('click', () => {
+    const ed = state.editor; if (!ed) return;
+    $('edBody').value = ed.anchor.quote;
+    ed.insertedText = ed.anchor.quote;
+    $('edBody').focus();
+    saveDraftSoon();
+  });
 
   $('edInsert').addEventListener('click', () => {
     const ed = state.editor; if (!ed) return;
@@ -539,14 +600,18 @@
     const ed = state.editor; if (!ed) return;
     clearTimeout(draftTimer);
     const body = $('edBody').value;
+    const kind = ed.kind || null;
+    // Cornell: umorðaður texti er „Endurvinnsla“, óbreyttur verður „Tilvitnun“ (finalizeNote). Kafla-athugasemd er „Athugasemd“.
+    const type = kind === 'cornell' ? 'endurvinnsla' : kind === 'samantekt' ? 'athugasemd' : selectedType();
+    const extra = kind === 'cornell' ? { kind, cue: $('edCue').value } : kind ? { kind } : {};
     let note;
     if (ed.mode === 'edit') {
       const old = state.notes.find(n => n.id === ed.noteId);
       if (!old) { closeEditor(); return; }
-      note = C.finalizeNote(Object.assign({}, old, { body, type: selectedType(), insertedText: ed.insertedText, origin: ed.origin, updatedAt: new Date().toISOString() }));
+      note = C.finalizeNote(Object.assign({}, old, { body, type, insertedText: ed.insertedText, origin: ed.origin, updatedAt: new Date().toISOString() }, extra));
       state.notes = state.notes.map(n => (n.id === note.id ? note : n));
     } else {
-      note = C.finalizeNote(C.newNote(ed.anchor, { type: selectedType(), body, origin: ed.origin, insertedText: ed.insertedText }));
+      note = C.finalizeNote(C.newNote(ed.anchor, Object.assign({ type, body, origin: ed.origin, insertedText: ed.insertedText }, extra)));
       state.notes = state.notes.concat([note]);
     }
     state.draft = null;
@@ -555,9 +620,12 @@
     $('editorDlg').close();
     afterNotesChanged();
     const ok = await persist(['notes', 'draft']);
-    const msg = note.unchangedCopy ? 'Textinn var óbreyttur og var vistaður sem „Tilvitnun“.' : 'Glósa vistuð.';
+    const msg = kind === 'samantekt' ? 'Athugasemdir við kaflann vistaðar.'
+      : kind === 'cornell' ? (note.unchangedCopy ? 'Cornell-glósa vistuð (óbreyttur texti).' : 'Cornell-glósa vistuð.')
+      : note.unchangedCopy ? 'Textinn var óbreyttur og var vistaður sem „Tilvitnun“.' : 'Glósa vistuð.';
     toast(ok ? msg + ' Vistað í þessu tæki.' : 'Glósan er geymd í minni en vistun í tækinu mistókst. Vistaðu vinnuskrá.');
-    if (anchorSection === state.sectionId) {
+    if (anchorSection === state.sectionId && kind === 'samantekt') { const b = $('btnChapNotes'); if (b) b.focus({ preventScroll: true }); }
+    else if (anchorSection === state.sectionId) {
       const b = document.querySelector(`.nb[data-note-unit="${note.anchor.start.unitId}"]`);
       if (b) b.focus({ preventScroll: true });
     }
@@ -565,7 +633,7 @@
 
   $('edCancel').addEventListener('click', () => {
     const ed = state.editor;
-    if (ed && $('edBody').value !== ed.initialBody && $('edBody').value.trim()) {
+    if (ed && (($('edBody').value !== ed.initialBody && $('edBody').value.trim()) || ($('edCue').value !== (ed.initialCue || '') && $('edCue').value.trim()))) {
       confirmDialog('Hætta við glósu?', [txt('Textinn sem þú skrifaðir verður ekki vistaður.')],
         [{ id: 'back', label: 'Halda áfram að skrifa' }, { id: 'discard', label: 'Henda texta', primary: true }]).then(r => {
         if (r === 'discard') closeEditor(); else $('edBody').focus();
@@ -593,6 +661,7 @@
 
   /* ---------------- glósuspjald ---------------- */
   function afterNotesChanged() {
+    renderChapNotes();
     updateNoteButtons();
     refreshHighlights();
     renderNotes();
@@ -637,12 +706,15 @@
     tag.innerHTML = svg(n.type);
     tag.appendChild(document.createTextNode(C.typeLabel(n.type)));
     head.appendChild(tag);
+    if (n.kind === 'cornell') head.appendChild(el('span', { class: 'kind-tag' }, 'Cornell'));
+    if (n.kind === 'samantekt') head.appendChild(el('span', { class: 'kind-tag' }, 'Við kaflann'));
     let locText = '';
     if (n.anchor) { const l = C.locationParts(index, n.anchor); locText = `${l.sectionShort} · ${l.pages} · ${l.paras}`; }
     head.appendChild(el('span', { class: 'nc-loc' }, locText));
     li.appendChild(head);
     if (n.orphan) li.appendChild(el('p', { class: 'nc-warn' }, 'Tenging við texta fannst ekki: ' + n.orphan));
-    if (n.anchor) li.appendChild(el('blockquote', { class: 'nc-quote' }, n.anchor.quote));
+    if (n.kind === 'cornell') li.appendChild(el('p', { class: 'nc-cue' }, (n.cue || '').trim() ? n.cue : '(ekkert lykilorð)'));
+    if (n.anchor && n.anchor.quote) li.appendChild(el('blockquote', { class: 'nc-quote' }, n.anchor.quote));
     const body = n.body.trim();
     li.appendChild(el('p', { class: 'nc-body' + (body ? '' : ' emptyb') }, body ? n.body : '(tóm glósa)'));
     const act = el('div', { class: 'nc-actions' });
@@ -661,6 +733,13 @@
     if (!n || !n.anchor || n.orphan) return;
     if (!isSide()) closePanel(false);
     if (state.sectionId !== n.anchor.sectionId) renderSection(n.anchor.sectionId, { noSave: true });
+    if (C.isSectionAnchor(n.anchor)) {
+      requestAnimationFrame(() => {
+        const cn = $('chapNotes');
+        if (cn) { cn.scrollIntoView({ behavior: 'smooth', block: 'center' }); $('chapNotesTitle').focus({ preventScroll: true }); }
+      });
+      return;
+    }
     requestAnimationFrame(() => {
       scrollToUnit(n.anchor.start.unitId, true);
       flashAnchor(n.anchor);
@@ -771,17 +850,27 @@
     const nb = e.target.closest('.nb');
     if (nb) {
       const res = C.anchorForUnit(index, nb.dataset.noteUnit);
-      if (res.ok) openEditor({ mode: 'new', anchor: res.anchor, origin: 'paragraph' });
+      if (res.ok) openEditor(state.settings.cornell
+        ? { mode: 'new', anchor: res.anchor, origin: 'recycle', kind: 'cornell' }
+        : { mode: 'new', anchor: res.anchor, origin: 'paragraph' });
     }
   });
 
+  $('btnCornell').addEventListener('click', () => {
+    state.settings = C.sanitizeSettings(Object.assign({}, state.settings, { cornell: !state.settings.cornell }));
+    applySettings();
+    persist(['settings']);
+    toast(state.settings.cornell
+      ? 'Cornell-hamur: veldu texta og skrifaðu lykilorð eða spurningu. Athugasemdir við kaflann eru neðst í hverjum kafla.'
+      : 'Cornell-hamur er óvirkur.');
+  });
   $('btnSettings').addEventListener('click', () => { applySettings(); $('settingsDlg').showModal(); });
   $('fsDown').addEventListener('click', () => changeSetting('fontSize', state.settings.fontSize - 1));
   $('fsUp').addEventListener('click', () => changeSetting('fontSize', state.settings.fontSize + 1));
   for (const inp of document.querySelectorAll('#settingsDlg input[type="radio"]')) inp.addEventListener('change', () => changeSetting(inp.name, inp.value));
   $('btnResetSettings').addEventListener('click', () => {
     const u = currentTopUnit();
-    state.settings = Object.assign({}, C.DEFAULT_SETTINGS);
+    state.settings = Object.assign({}, C.DEFAULT_SETTINGS, { cornell: state.settings.cornell });
     applySettings(); if (u) scrollToUnit(u, false);
     persist(['settings']);
     toast('Lestrarstillingar endurstilltar.');
@@ -849,6 +938,7 @@
     document.querySelector('input[name="exScope"][value="filter"]').disabled = !filtered;
     if (!filtered) document.querySelector('input[name="exScope"][value="all"]').checked = true;
     $('exError').hidden = true;
+    for (const i of document.querySelectorAll('input[name="exLayout"]')) i.checked = i.value === (state.settings.cornell ? 'cornell' : 'venjuleg');
     $('exportDlg').showModal();
   });
 
@@ -869,22 +959,24 @@
     const includeQuote = $('exQuote').checked;
     const notes = scope === 'filter' ? C.filterNotes(state.notes, state.filter) : state.notes.slice();
     const scopeLabel = scope === 'filter' ? filterLabel() : 'Allar glósur';
-    const model = C.exportModel(index, notes, { includeQuote, order, scopeLabel });
+    const cornell = document.querySelector('input[name="exLayout"]:checked').value === 'cornell';
+    const model = cornell ? C.cornellModel(index, notes, { includeQuote, order, scopeLabel }) : C.exportModel(index, notes, { includeQuote, order, scopeLabel });
+    const stem = cornell ? 'odysseifskvida-cornell-' : 'odysseifskvida-glosur-';
     if (model.count !== notes.length) { showExError('Villa: ekki skiluðu sér allar glósur í útflutninginn. Ekkert var búið til.'); return; }
     const btn = $('exBuild');
     btn.disabled = true; btn.textContent = 'Bý til skrá…';
     try {
       let file;
       if (fmt === 'md') {
-        const md = C.toMarkdown(model);
-        file = new File(['﻿' + md], `odysseifskvida-glosur-${C.fileStamp()}.md`, { type: 'text/markdown;charset=utf-8' });
+        const md = cornell ? C.toCornellMarkdown(model) : C.toMarkdown(model);
+        file = new File(['﻿' + md], `${stem}${C.fileStamp()}.md`, { type: 'text/markdown;charset=utf-8' });
       } else {
         await loadScript(VENDOR + 'jspdf.umd.min.js', () => !!(window.jspdf && window.jspdf.jsPDF));
         await loadScript(VENDOR + 'pdf-fonts.js', () => !!window.NASA_PDF_FONTS);
-        const doc = window.OdyPdf.build(window.jspdf.jsPDF, window.NASA_PDF_FONTS, model);
-        file = new File([doc.output('arraybuffer')], `odysseifskvida-glosur-${C.fileStamp()}.pdf`, { type: 'application/pdf' });
+        const doc = (cornell ? window.OdyPdf.buildCornell : window.OdyPdf.build)(window.jspdf.jsPDF, window.NASA_PDF_FONTS, model);
+        file = new File([doc.output('arraybuffer')], `${stem}${C.fileStamp()}.pdf`, { type: 'application/pdf' });
       }
-      deliverFile(file, `${fmt === 'md' ? 'Markdown-skrá' : 'PDF-skjal'} með ${model.count} ${model.count === 1 ? 'glósu' : 'glósum'} (${scopeLabel.toLowerCase()}): ${file.name}`);
+      deliverFile(file, `${cornell ? 'Cornell-' : ''}${fmt === 'md' ? 'Markdown-skrá' : 'PDF-skjal'} með ${model.count} ${model.count === 1 ? 'glósu' : 'glósum'} (${scopeLabel.toLowerCase()}): ${file.name}`);
     } catch (e) {
       showExError('Ekki tókst að búa til skrána: ' + (e && e.message || e));
     } finally {
@@ -987,10 +1079,10 @@
     if (panel && isSide()) openPanel(); else layoutPanel();
     renderNotes();
     const d = state.draft;
-    if (d && d.anchor && C.verifyAnchor(index, d.anchor).ok && (d.body || '').trim()) {
+    if (d && d.anchor && C.verifyAnchor(index, d.anchor).ok && ((d.body || '').trim() || (d.cue || '').trim())) {
       const l = C.locationParts(index, d.anchor);
       showBanner('draft', '', `Óklárað ritdrag fannst (${l.sectionShort} · ${l.paras}).`, [
-        { label: 'Halda áfram', action: () => openEditor({ mode: d.mode, noteId: d.noteId, anchor: d.anchor, origin: d.origin, insertedText: d.insertedText, restore: { body: d.body, type: d.type } }) },
+        { label: 'Halda áfram', action: () => openEditor({ mode: d.mode, noteId: d.noteId, anchor: d.anchor, origin: d.origin, kind: d.kind || undefined, insertedText: d.insertedText, restore: { body: d.body, type: d.type, cue: d.cue } }) },
         { label: 'Henda ritdragi', action: () => { state.draft = null; persist(['draft']); } },
       ]);
     }

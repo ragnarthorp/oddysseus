@@ -521,3 +521,98 @@ test('aðgengi: heiti hnappa, snertifletir og lyklaborð', { skip }, async () =>
   assert.ok(!(await page.isVisible('#editorDlg')));
   await ctx.close();
 });
+
+test('Cornell: hamur, lykilorð/spurning við valinn texta, athugasemdir við kaflann og útflutningur', { skip }, async () => {
+  const { ctx, page } = await open();
+  await goto(page, 'thattur-01');
+  assert.ok(!(await page.isVisible('#sbCue')) || !(await page.isVisible('#selbar')));
+  await page.click('#btnCornell');
+  assert.equal(await page.getAttribute('#btnCornell', 'aria-pressed'), 'true');
+  const u = S('thattur-01').units[0];
+  await select(page, u.id, 0, u.id, 59);
+  assert.ok(await page.isVisible('#sbCue'));
+  assert.ok(!(await page.isVisible('#sbRecycle')));
+  await page.click('#sbCue');
+  assert.equal(await page.textContent('#edTitle'), 'Lykilorð / spurning');
+  assert.ok(await page.isVisible('#edCue'));
+  assert.ok(!(await page.isVisible('#edTypes')));
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'edCue');
+  const quote = u.text.slice(0, 59).trim();
+  assert.equal(await page.inputValue('#edBody'), quote, 'valinn texti hægra megin');
+  // tveir dálkar á iPad: lykilorð vinstra megin
+  const cueBox = await page.$eval('#edCue', e => e.getBoundingClientRect().toJSON());
+  const bodyBox = await page.$eval('#edBody', e => e.getBoundingClientRect().toJSON());
+  assert.ok(cueBox.right <= bodyBox.left, 'lykilorð vinstra megin við texta');
+  await page.fill('#edCue', 'Hver hatar Ódysseif?');
+  await page.fill('#edBody', 'Póseidon hatar Ódysseif.');
+  await page.click('#edSave');
+  await page.waitForFunction(() => window.__ody.state.notes.length === 1);
+  let n = (await notes(page))[0];
+  assert.equal(n.kind, 'cornell'); assert.equal(n.cue, 'Hver hatar Ódysseif?'); assert.equal(n.type, 'endurvinnsla');
+  assert.equal(n.anchor.quote, quote);
+  // penninn í Cornell-ham: heil efnisgrein, óbreytt → tilvitnun
+  await page.click(`.nb[data-note-unit="${S('thattur-01').units[2].id}"]`);
+  await page.fill('#edCue', 'Telemakkos');
+  await page.click('#edSave');
+  await page.waitForFunction(() => window.__ody.state.notes.length === 2);
+  assert.equal((await notes(page))[1].type, 'tilvitnun');
+  // athugasemdir við kaflann
+  await page.click('#btnChapNotes');
+  assert.equal(await page.textContent('#edTitle'), 'Athugasemdir við kaflann');
+  assert.ok(!(await page.isVisible('#edSrcWrap')));
+  await page.fill('#edBody', 'Kaflinn kynnir vandann á Íþöku.');
+  await page.click('#edSave');
+  await page.waitForFunction(() => window.__ody.state.notes.length === 3);
+  assert.match(await page.textContent('#chapNotes'), /Kaflinn kynnir vandann á Íþöku\./);
+  assert.equal(await page.textContent('#btnChapNotes'), 'Breyta athugasemdum við kaflann');
+  await page.click('#btnChapNotes');
+  assert.equal(await page.inputValue('#edBody'), 'Kaflinn kynnir vandann á Íþöku.', 'opnar sömu athugasemd til breytingar');
+  await page.fill('#edBody', 'Kaflinn kynnir vandann á Íþöku og Aþena grípur inn í.');
+  await page.click('#edSave');
+  await page.waitForFunction(() => window.__ody.state.notes.length === 3 && window.__ody.state.notes.some(n => /grípur inn í/.test(n.body)));
+  // glósuspjald og endurhleðsla
+  await page.click('#btnNotes');
+  const cards = await page.$$eval('#noteList .note-card', e => e.map(x => x.textContent));
+  assert.match(cards[0], /Cornell.*Hver hatar Ódysseif\?/);
+  assert.match(cards[2], /Við kaflann.*Aþena grípur inn í/);
+  await reload(page);
+  assert.equal(await page.getAttribute('#btnCornell', 'aria-pressed'), 'true', 'Cornell-hamur munaður');
+  assert.equal((await notes(page)).length, 3);
+  // fara á textastað kafla-athugasemdar
+  await goto(page, 'formali');
+  if (!(await page.isVisible('#notesPanel'))) await page.click('#btnNotes');
+  await page.click('#noteList .note-card:nth-child(3) button:has-text("Fara á textastað")');
+  await page.waitForFunction(() => window.__ody.state.sectionId === 'thattur-01');
+  // útflutningur: Cornell er sjálfgefin uppsetning í Cornell-ham
+  await page.click('#btnExport');
+  assert.ok(await page.isChecked('input[name="exLayout"][value="cornell"]'));
+  await page.check('input[name="exFormat"][value="md"]', { force: true });
+  await page.click('#exBuild');
+  await page.waitForSelector('#fileDlg[open]');
+  assert.match(await page.textContent('#fileInfo'), /Cornell-Markdown-skrá með 3 glósum/);
+  const mdPath = await saveDownload(page, '#fileDownload');
+  assert.match(path.basename(mdPath), /^odysseifskvida-cornell-/);
+  const md = fs.readFileSync(mdPath, 'utf8');
+  assert.match(md, /\| Hver hatar Ódysseif\?<br>bls\. 6 · ¶ 1 \| Póseidon hatar Ódysseif\.<br><br>\*„Guðirnir/);
+  assert.match(md, /\*\*Athugasemdir við kaflann\*\*\n\nKaflinn kynnir vandann á Íþöku og Aþena grípur inn í\./);
+  await page.click('#fileDlg [data-close]');
+  await page.click('#btnExport');
+  await page.check('input[name="exFormat"][value="pdf"]', { force: true });
+  await page.click('#exBuild');
+  await page.waitForSelector('#fileDlg[open]', { timeout: 20000 });
+  const pdfPath = await saveDownload(page, '#fileDownload');
+  assert.equal(fs.readFileSync(pdfPath).slice(0, 5).toString(), '%PDF-');
+  try {
+    const txt = execFileSync('pdftotext', ['-enc', 'UTF-8', pdfPath, '-'], { stdio: ['ignore', 'pipe', 'ignore'] }).toString().replace(/\s+/g, ' ');
+    assert.match(txt, /Hver hatar Ódysseif\?/);
+    assert.match(txt, /Athugasemdir við kaflann Kaflinn kynnir/);
+  } catch (e) { if (e.code !== 'ENOENT') throw e; }
+  // slökkva: venjuleg valstika aftur
+  await page.click('#fileDlg [data-close]');
+  await page.click('#btnCornell');
+  await select(page, u.id, 0, u.id, 20);
+  assert.ok(await page.isVisible('#sbRecycle'));
+  assert.ok(!(await page.isVisible('#sbCue')));
+  assert.deepEqual(page.errors, []);
+  await ctx.close();
+});

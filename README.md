@@ -46,6 +46,19 @@ Glósa geymir auðkenni og útgáfu skjals, kafla, upphaf og endi sem `{unitId, 
 - **Tegundir**: Endursögn, Athugasemd, Spurning, Endurvinnsla og Tilvitnun, hver með lit, tákni og heiti. Ef innsett afrit er óbreytt við vistun er glósan merkt „Tilvitnun“. Að öðru leyti er textinn ekki metinn og vistun aldrei hindruð.
 - **Glósuspjald**: Glósur í röð textans, sía eftir kafla og tegund, breyta, eyða með „Afturkalla“ og „Fara á textastað“. Staðurinn er auðkenndur með CSS Custom Highlight API (Safari 17.2+), annars með auðkenningu efnisgreinar. Textanum er ekki breytt.
 
+## Cornell-glósur
+
+Hnappurinn **Cornell** í efstu stiku kveikir og slekkur á Cornell-ham. Stillingin er munuð í tækinu og fylgir vinnuskrá.
+
+- **Lykilorð / spurning:** Textinn opnast eins og áður. Þegar texti er valinn birtist „Lykilorð / spurning“ í valstikunni, og penninn við efnisgrein gerir það sama fyrir alla efnisgreinina. Í ritspjaldinu er lykilorð eða spurning vinstra megin og valinn texti hægra megin. Nemandinn má umorða textann eða láta hann standa: umorðaður texti vistast sem „Endurvinnsla“ og óbreyttur sem „Tilvitnun“. Upprunalega valið varðveitist alltaf.
+- **Athugasemdir við kaflann:** Neðst í hverjum kafla er hnappurinn „Athugasemdir við kaflann“ (ein athugasemd á kafla, sem má breyta). Hún er tengd kaflanum í heild en ekki textavali, og kemur á eftir öðrum glósum kaflans.
+- **Útflutningur:** Í „Flytja út“ er valið „Uppsetning: Venjuleg / Cornell“, og Cornell er sjálfgefið í Cornell-ham. Bæði PDF og Markdown eru í boði.
+  - Í hverjum kafla er tafla með lykilorði eða spurningu og staðarkóða (`bls. 6 · ¶ 1`) vinstra megin og völdum texta, með eða án umorðunar, hægra megin.
+  - Athugasemdir við kaflann koma í lok hvers kafla.
+  - Ef textinn var umorðaður og „Hafa valinn frumtexta með“ er valið fylgir frumtextinn skáletraður.
+  - Aðrar glósur fá tegund sína vinstra megin, t.d. `(s) spurning`.
+  - Í PDF flæða dálkarnir sjálfstætt yfir síðuskil.
+
 ## Vistun, vinnuskrá og Drive
 
 - Glósur, ritdrög, stillingar og lestrarstaður vistast sjálfkrafa í **IndexedDB** í þessum vafra á þessu tæki. Ef IndexedDB virkar ekki er localStorage notað sem varaleið. Ef hvorugt virkar birtist villuborði. „Vistað í þessu tæki“ birtist aðeins eftir að færslan hefur verið staðfest.

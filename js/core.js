@@ -30,12 +30,13 @@
 
   /* Stuttur staðarkóði: „bls. 6–7 · ¶ 3–4“. */
   function locationCode(anchor) {
+    if (isSectionAnchor(anchor)) return 'kaflinn';
     const pg = anchor.printedPages ? 'bls. ' + range(anchor.printedPages[0], anchor.printedPages[1]) : 'pdf-s. ' + range(anchor.pdfPages[0], anchor.pdfPages[1]);
     return `${pg} · ¶ ${range(anchor.paragraphs[0], anchor.paragraphs[1])}`;
   }
   const RECYCLE_GUIDANCE = 'Lýstu aðalatriðinu með þínum orðum. Þú mátt stytta textann, útskýra erfið orð eða bæta við dæmi.';
 
-  const DEFAULT_SETTINGS = { fontSize: 20, font: 'serif', lineHeight: 'venjulegt', width: 'midlungs', theme: 'ljost' };
+  const DEFAULT_SETTINGS = { fontSize: 20, font: 'serif', lineHeight: 'venjulegt', width: 'midlungs', theme: 'ljost', cornell: false };
   const SETTING_OPTIONS = {
     font: ['serif', 'sans'],
     lineHeight: ['thett', 'venjulegt', 'rumt'],
@@ -50,6 +51,7 @@
     const fs = Number(s.fontSize);
     if (Number.isFinite(fs)) out.fontSize = Math.min(FONT_MAX, Math.max(FONT_MIN, Math.round(fs)));
     for (const k of Object.keys(SETTING_OPTIONS)) if (SETTING_OPTIONS[k].includes(s[k])) out[k] = s[k];
+    out.cornell = s.cornell === true;
     return out;
   }
 
@@ -158,9 +160,33 @@
     return makeAnchor(index, { unitId, offset: 0 }, { unitId, offset: e.unit.text.length });
   }
 
+  /* Tenging við heilan kafla („Athugasemdir við kaflann“) – ekkert textaval. */
+  const isSectionAnchor = a => !!a && a.scope === 'kafli';
+  function anchorForSection(index, sectionId) {
+    const s = index.sectionById.get(sectionId);
+    if (!s || s.kind === 'titill' || !s.units.length) return { ok: false, reason: 'Kafli fannst ekki.' };
+    const first = s.units[0].pages[0];
+    const lastU = s.units[s.units.length - 1];
+    const last = lastU.pages[lastU.pages.length - 1];
+    return {
+      ok: true,
+      anchor: {
+        scope: 'kafli', docId: index.doc.id, docVersion: index.doc.version, sectionId: s.id,
+        unitIds: [], quote: '',
+        pdfPages: [first.pdfPage, last.pdfPage],
+        printedPages: first.printedPage != null && last.printedPage != null ? [first.printedPage, last.printedPage] : null,
+      },
+    };
+  }
+
   /* Staðfestir að tenging vísi enn á sama texta. */
   function verifyAnchor(index, anchor) {
     if (!anchor || typeof anchor !== 'object') return { ok: false, reason: 'Tengingu vantar.' };
+    if (isSectionAnchor(anchor)) {
+      if (anchor.docId !== index.doc.id) return { ok: false, reason: 'Glósan á við annað skjal.' };
+      if (anchor.docVersion !== index.doc.version) return { ok: false, reason: 'Glósan var gerð við aðra útgáfu textans.' };
+      return anchorForSection(index, anchor.sectionId);
+    }
     if (anchor.docId !== index.doc.id) return { ok: false, reason: 'Glósan á við annað skjal.' };
     if (anchor.docVersion !== index.doc.version) return { ok: false, reason: 'Glósan var gerð við aðra útgáfu textans.' };
     if (!anchor.start || !anchor.end) return { ok: false, reason: 'Tenging er ófullkomin.' };
@@ -178,6 +204,10 @@
   function range(a, b) { return a === b ? `${a}` : `${a}–${b}`; }
   function locationParts(index, anchor) {
     const sec = index.sectionById.get(anchor.sectionId);
+    if (isSectionAnchor(anchor)) {
+      const pg = anchor.printedPages ? 'Bls. ' + range(anchor.printedPages[0], anchor.printedPages[1]) : 'PDF-síða ' + range(anchor.pdfPages[0], anchor.pdfPages[1]);
+      return { section: sec ? sectionLabel(sec) : anchor.sectionId, sectionShort: sec ? sectionShort(sec) : '', pages: pg, paras: 'Allur kaflinn' };
+    }
     const pages = anchor.printedPages
       ? 'Bls. ' + range(anchor.printedPages[0], anchor.printedPages[1])
       : 'PDF-síða ' + range(anchor.pdfPages[0], anchor.pdfPages[1]);
@@ -199,6 +229,8 @@
       body: opts && opts.body || '',
       origin: opts && opts.origin || 'own',
       insertedText: opts && opts.insertedText != null ? opts.insertedText : null,
+      ...(opts && opts.kind ? { kind: opts.kind } : {}),
+      ...(opts && opts.kind === 'cornell' ? { cue: opts.cue || '' } : {}),
       createdAt: now,
       updatedAt: now,
       anchor,
@@ -219,6 +251,10 @@
   }
 
   function noteSortKey(index, n) {
+    if (n.anchor && isSectionAnchor(n.anchor)) {
+      const s = index.sectionById.get(n.anchor.sectionId);
+      return s ? [index.sections.indexOf(s), 1e6, 0, n.createdAt || ''] : [1e9, 0, 0, n.createdAt || ''];
+    }
     const e = n.anchor && index.unitById.get(n.anchor.start && n.anchor.start.unitId);
     if (!e) return [1e9, 0, 0, n.createdAt || ''];
     return [e.si, e.ui, n.anchor.start.offset, n.createdAt || ''];
@@ -261,6 +297,10 @@
     if (!TYPE_IDS.includes(n.type)) return `${where}: óþekkt tegund „${String(n.type).slice(0, 30)}“.`;
     if (typeof n.body !== 'string' || n.body.length > MAX_BODY) return `${where}: texti glósunnar er ógildur.`;
     if (n.insertedText != null && typeof n.insertedText !== 'string') return `${where}: afritaður texti er ógildur.`;
+    if (n.kind != null && !['cornell', 'samantekt'].includes(n.kind)) return `${where}: óþekkt gerð glósu.`;
+    if (n.cue != null && (typeof n.cue !== 'string' || n.cue.length > 5000)) return `${where}: lykilorð/spurning er ógilt.`;
+    if (n.kind === 'samantekt' && !isSectionAnchor(n.anchor)) return `${where}: athugasemd við kafla án kaflatengingar.`;
+    if (n.kind !== 'samantekt' && isSectionAnchor(n.anchor)) return `${where}: kaflatenging á rangri glósu.`;
     if (typeof n.createdAt !== 'string' || !ISO.test(n.createdAt)) return `${where}: dagsetningu vantar.`;
     if (n.updatedAt != null && (typeof n.updatedAt !== 'string' || !ISO.test(n.updatedAt))) return `${where}: dagsetning er ógild.`;
     const v = verifyAnchor(index, n.anchor);
@@ -301,6 +341,8 @@
       insertedText: n.insertedText == null ? null : n.insertedText,
       createdAt: n.createdAt, updatedAt: n.updatedAt || n.createdAt, anchor: verifyAnchor(index, n.anchor).anchor,
       ...(n.unchangedCopy ? { unchangedCopy: true } : {}),
+      ...(n.kind ? { kind: n.kind } : {}),
+      ...(n.kind === 'cornell' ? { cue: typeof n.cue === 'string' ? n.cue : '' } : {}),
     }));
     return { ok: true, errors: [], data: { notes, settings: sanitizeSettings(obj.settings), position, savedAt: typeof obj.savedAt === 'string' ? obj.savedAt : null } };
   }
@@ -323,12 +365,72 @@
         section: loc.section,
         location: [loc.pages, loc.paras].filter(Boolean).join(' · '),
         type: typeLabel(n.type),
-        quote: o.includeQuote && n.anchor ? withQuoteMarks(n.anchor.quote) : null,
+        quote: o.includeQuote && n.anchor && !isSectionAnchor(n.anchor) ? withQuoteMarks(n.anchor.quote) : null,
+        cue: n.kind === 'cornell' ? (n.cue || '') : null,
+        kind: n.kind || null,
+        // óbreyttur frumtexti er ekki endurtekinn sem glósutexti þegar frumtextinn fylgir
+        sameAsQuote: !!(o.includeQuote && n.anchor && !isSectionAnchor(n.anchor) && normWs(n.body) === normWs(n.anchor.quote)),
         body: n.body,
         orphan: !!n.orphan,
       };
     });
     return { title: index.doc.title, generatedAt: new Date(), scopeLabel: o.scopeLabel, includeQuote: o.includeQuote, legend: EXPORT_LEGEND, items, count: items.length };
+  }
+
+  /* Cornell-uppsetning: í hverjum kafla er tafla (lykilorð/spurning vinstra megin, texti hægra megin)
+     og athugasemdir við kaflann í lokin. Aðrar glósur fá tegund sína vinstra megin. */
+  function cornellModel(index, notes, opts) {
+    const o = Object.assign({ includeQuote: true, order: 'texti', scopeLabel: 'Allar glósur' }, opts);
+    const sorted = sortNotes(index, notes, o.order);
+    const sections = [];
+    const bySec = new Map();
+    for (const n of sorted) {
+      const sid = n.anchor ? n.anchor.sectionId : '?';
+      let g = bySec.get(sid);
+      if (!g) {
+        const sec = index.sectionById.get(sid);
+        g = { id: sid, label: sec ? sectionLabel(sec) : 'Óþekktur staður', rows: [], summaries: [] };
+        bySec.set(sid, g); sections.push(g);
+      }
+      if (n.kind === 'samantekt') { g.summaries.push(n.body); continue; }
+      const loc = n.anchor ? locationCode(n.anchor) : '';
+      const quote = n.anchor ? n.anchor.quote : '';
+      const reworded = normWs(n.body) !== normWs(quote);
+      const row = {
+        cue: n.kind === 'cornell' ? (n.cue || '').trim() : '',
+        cueIsType: n.kind !== 'cornell',
+        typeLabel: `(${typeCode(n.type)}) ${typeLabel(n.type).toLowerCase()}`,
+        loc: loc + (n.orphan ? ' · ótengd' : ''),
+        text: n.body,
+        quote: o.includeQuote && quote && reworded ? withQuoteMarks(quote) : null,
+      };
+      g.rows.push(row);
+    }
+    const count = sorted.length;
+    return { title: index.doc.title, generatedAt: new Date(), scopeLabel: o.scopeLabel, sections, count };
+  }
+  function mdCell(s) {
+    return String(s).replace(/\r\n?/g, '\n').trim().replace(/[\\|*_`<>[\]]/g, c => '\\' + c).replace(/\n+/g, '<br>');
+  }
+  function toCornellMarkdown(m) {
+    const out = [`# ${m.title} – Cornell-glósur`, '', `*${m.scopeLabel} · ${m.count} ${m.count === 1 ? 'glósa' : 'glósur'} · ${fmtDate(m.generatedAt)}*`, ''];
+    if (!m.sections.length) out.push('Engar glósur.', '');
+    for (const g of m.sections) {
+      out.push(`## ${g.label}`, '');
+      if (g.rows.length) {
+        out.push('| Lykilorð / spurning | Glósa |', '|---|---|');
+        for (const r of g.rows) {
+          const left = (r.cueIsType ? '*' + mdCell(r.typeLabel) + '*' : mdCell(r.cue || '–')) + '<br>' + mdCell(r.loc);
+          let right = mdCell(r.text || '(tóm glósa)');
+          if (r.quote) right += '<br><br>*' + mdCell(r.quote) + '*';
+          out.push(`| ${left} | ${right} |`);
+        }
+        out.push('');
+      }
+      out.push('**Athugasemdir við kaflann**', '');
+      out.push(g.summaries.filter(s => s.trim()).length ? g.summaries.filter(s => s.trim()).map(mdParagraphs).join('\n\n') : '*(engar athugasemdir)*', '');
+    }
+    return out.join('\n');
   }
 
   function withQuoteMarks(q) {
@@ -349,9 +451,10 @@
     if (!model.items.length) out.push('Engar glósur.', '');
     for (const it of model.items) {
       if (it.section !== cur) { out.push(`## ${it.section}`, ''); cur = it.section; }
-      out.push(it.code, '');
+      out.push(it.kind === 'samantekt' ? it.code + ' · athugasemdir við kaflann' : it.code, '');
+      if (it.cue) out.push('**' + mdEscapeLine(it.cue.replace(/\s+/g, ' ').trim()).replace(/</g, '\\<').replace(/\*/g, '\\*') + '**', '');
       if (it.quote != null) out.push(it.quote.split('\n').map(l => (l ? '> ' + mdEscapeLine(l) : '>')).join('\n'), '');
-      out.push(it.body.trim() ? mdParagraphs(it.body) : '*(tóm glósa)*', '');
+      if (!it.sameAsQuote) out.push(it.body.trim() ? mdParagraphs(it.body) : '*(tóm glósa)*', '');
     }
     return out.join('\n');
   }
@@ -374,6 +477,6 @@
     DEFAULT_SETTINGS, SETTING_OPTIONS, FONT_MIN, FONT_MAX, sanitizeSettings,
     buildIndex, sectionLabel, sectionShort, pageAt, makeAnchor, anchorForUnit, verifyAnchor, locationParts,
     newNote, finalizeNote, sortNotes, filterNotes, notesForUnit,
-    makeWorkfile, parseWorkfile, exportModel, withQuoteMarks, typeCode, locationCode, EXPORT_LEGEND, toMarkdown, fmtDate, fileStamp,
+    makeWorkfile, parseWorkfile, exportModel, cornellModel, toCornellMarkdown, isSectionAnchor, anchorForSection, withQuoteMarks, typeCode, locationCode, EXPORT_LEGEND, toMarkdown, fmtDate, fileStamp,
   };
 });

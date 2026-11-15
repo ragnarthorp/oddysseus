@@ -242,7 +242,24 @@ dialog.editor { width: min(720px, calc(100vw - 24px)); max-height: calc(var(--vv
   .guide { font-size: 14px; padding: 6px 10px; }
 }
 
-/* tilkynning */
+.tb[aria-pressed="true"] { background: var(--t-bg-endurvinnsla); color: var(--t-endurvinnsla); border-color: var(--t-endurvinnsla); }
+.ed-fields { display: flex; flex-direction: column; gap: 10px; flex: 1 0 auto; }
+.ed-main, .ed-cue { display: flex; flex-direction: column; gap: 4px; }
+.ed-main { flex: 1 0 auto; }
+#edCue { width: 100%; min-height: 3.2em; resize: vertical; padding: 10px 12px; border: 2px solid var(--t-endurvinnsla); border-radius: 10px; background: var(--bg); font: 600 18px/1.4 var(--reading-font); }
+@media (min-width: 640px) {
+  .ed-fields.cornell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); align-items: stretch; }
+  .ed-fields.cornell #edCue { flex: 1 0 auto; min-height: 7.5em; }
+}
+.kind-tag { font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
+.nc-cue { margin: 2px 0 4px; font-weight: 700; white-space: pre-wrap; overflow-wrap: anywhere; }
+.chap-notes { margin: 2.2em 0 0; padding: 14px 16px; border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 12px; background: var(--panel); font: 16px/1.5 var(--ui-font); }
+.chap-notes h2 { margin: 0 0 6px; font-size: 17px; outline: none; }
+.chap-notes .cn-body { margin: 0 0 10px; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--reading-font); font-size: calc(var(--fs) * .95); line-height: var(--lh); }
+.chap-notes .cn-hint { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+
+/* tilkynning – fer upp fyrir valstikuna þegar hún sést */
+body:has(#selbar:not([hidden])) .toast { bottom: calc(150px + env(safe-area-inset-bottom)); }
 .toast { position: fixed; z-index: 80; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom)); max-width: calc(100% - 24px); display: flex; align-items: center; gap: 12px; background: var(--ink); color: var(--bg); padding: 8px 8px 8px 16px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
 .toast p { margin: 0; }
 .toast button { background: transparent; color: inherit; border-color: currentColor; }

@@ -19,6 +19,9 @@
     <span class="dt-main">Ódysseifskviða – endursögn</span>
     <span class="dt-sub" id="curSection"></span>
   </div>
+  <button type="button" id="btnCornell" class="tb" aria-pressed="false" title="Cornell-glósur: lykilorð eða spurning við valinn texta">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v13M3 16h18"/></svg><span>Cornell</span>
+  </button>
   <button type="button" id="btnSettings" class="tb" aria-haspopup="dialog">
     <span class="aa" aria-hidden="true">Aa</span><span>Lestrarstillingar</span>
   </button>
@@ -64,6 +67,7 @@
 <div id="selbar" class="selbar" role="toolbar" aria-label="Aðgerðir fyrir valinn texta" hidden>
   <p class="sb-info" id="sbInfo"></p>
   <div class="sb-actions">
+    <button type="button" id="sbCue" class="primary" hidden>Lykilorð / spurning</button>
     <button type="button" id="sbOwn" class="primary">Skrifa eigin glósu</button>
     <button type="button" id="sbRecycle">Endurvinna valinn texta</button>
   </div>
@@ -136,8 +140,17 @@
     <div class="ed-insert" id="edInsertRow" hidden>
       <button type="button" id="edInsert">Afrita frumtextann í ritreitinn</button>
     </div>
-    <label class="ed-label" for="edBody">Mín glósa</label>
-    <textarea id="edBody" rows="6" spellcheck="true" lang="is" autocomplete="off"></textarea>
+    <div class="ed-fields" id="edFields">
+      <div class="ed-cue" id="edCueWrap" hidden>
+        <label class="ed-label" for="edCue">Lykilorð eða spurning</label>
+        <textarea id="edCue" rows="3" spellcheck="true" lang="is" autocomplete="off"></textarea>
+      </div>
+      <div class="ed-main">
+        <label class="ed-label" for="edBody" id="edBodyLabel">Mín glósa</label>
+        <textarea id="edBody" rows="6" spellcheck="true" lang="is" autocomplete="off"></textarea>
+        <button type="button" class="link" id="edResetQuote" hidden>Setja óbreyttan frumtexta aftur</button>
+      </div>
+    </div>
     <p class="ed-note" id="edNote" aria-live="polite"></p>
   </div>
   <div class="ed-foot">
@@ -152,6 +165,13 @@
     <button type="button" class="icon-btn" data-close aria-label="Loka útflutningi"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="dlg-body">
     <p class="muted">PDF og Markdown eru til lestrar og skila. Til að halda áfram síðar skaltu nota vinnuskrá.</p>
+    <fieldset class="set-group"><legend class="set-label">Uppsetning</legend>
+      <div class="seg">
+        <label><input type="radio" name="exLayout" value="venjuleg" checked><span>Venjuleg</span></label>
+        <label><input type="radio" name="exLayout" value="cornell"><span>Cornell</span></label>
+      </div>
+      <p class="fine" id="exLayoutHelp">Cornell: lykilorð eða spurning vinstra megin, valinn texti (með eða án umorðunar) hægra megin og athugasemdir við kaflann í lok hvers kafla.</p>
+    </fieldset>
     <fieldset class="set-group"><legend class="set-label">Snið</legend>
       <div class="seg">
         <label><input type="radio" name="exFormat" value="pdf" checked><span>PDF</span></label>

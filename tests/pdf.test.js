@@ -68,3 +68,28 @@ test('PDF: án frumtexta og tómt', () => {
   assert.equal(empty.getNumberOfPages(), 1);
   assert.throws(() => P.build(jsPDF, null, C.exportModel(index, [])), /Leturgerð/);
 });
+
+test('Cornell-PDF: dálkar, lykilorð, athugasemd við kaflann og síðuskil', () => {
+  const s1 = DATA.sections.find(s => s.id === 'thattur-01'), s2 = DATA.sections.find(s => s.id === 'thattur-02');
+  const a = C.anchorForUnit(index, s1.units[0].id).anchor;
+  const ns = [
+    C.finalizeNote(C.newNote(a, { kind: 'cornell', cue: 'Þing guðanna – hvað gerist?', type: 'endurvinnsla', body: 'Aþena fær Seif til að leyfa heimferð. ð þ æ ö', insertedText: a.quote })),
+    C.newNote(C.anchorForSection(index, 'thattur-01').anchor, { kind: 'samantekt', type: 'athugasemd', body: 'Samantekt I. þáttar: biðlarnir og Telemakkos.' }),
+    C.finalizeNote(C.newNote(C.anchorForUnit(index, s2.units[1].id).anchor, { kind: 'cornell', cue: 'Vefur Penelópu', type: 'endurvinnsla', body: 'Penelópa rekur upp vefinn á nóttunni. '.repeat(120) + 'LOKAORÐ', insertedText: s2.units[1].text })),
+  ];
+  const doc = P.buildCornell(jsPDF, window.NASA_PDF_FONTS, C.cornellModel(index, ns, { includeQuote: true }));
+  assert.ok(doc.getNumberOfPages() >= 2, 'langur dálkur flæðir yfir síðuskil');
+  const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'ody-')), 'cornell.pdf');
+  fs.writeFileSync(file, Buffer.from(doc.output('arraybuffer')));
+  if (!havePdftotext()) return;
+  const txt = execFileSync('pdftotext', ['-enc', 'UTF-8', file, '-'], { stdio: ['ignore', 'pipe', 'ignore'] }).toString('utf8').replace(/\s+/g, ' ');
+  assert.match(txt, /Cornell-glósur/);
+  assert.match(txt, /LYKILORÐ \/ SPURNING GLÓSA/);
+  assert.match(txt, /Þing guðanna – hvað gerist\?/);
+  assert.match(txt, /Aþena fær Seif til að leyfa heimferð\. ð þ æ ö/);
+  assert.match(txt, /„Guðirnir sitja á þingi/, 'umorðað: frumtexti fylgir');
+  assert.match(txt, /Athugasemdir við kaflann Samantekt I\. þáttar/);
+  assert.match(txt, /LOKAORÐ/);
+  assert.ok(txt.indexOf('Samantekt I. þáttar') < txt.indexOf('II. þáttur'), 'athugasemd í lok I. þáttar');
+  assert.match(txt, /\(engar athugasemdir\)/);
+});
