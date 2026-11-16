@@ -7,11 +7,13 @@
   else root.OdyPdf = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
+  const I = (typeof module === 'object' && module.exports) ? require('./i18n.js') : self.OdyI18n;
+  const T = I.t;
 
   const INK = [28, 32, 36], MUTED = [92, 98, 104], ACCENT = [140, 74, 38], RULE = [205, 200, 192], QUOTE_BAR = [196, 140, 100];
 
   /* Fjarlægir stafi sem letrið hefur ekki (t.d. broskarla) í stað þess að þeir verði að rusli. */
-  const SUPPORTED = /[\u0009\u000A -~ -ɏͰ-Ͽ -⁯⁰-₟₠-⃏℀-⅏⅐-↏←-⇿∀-⋿■-◿✓-✗]/u;
+  const SUPPORTED = /[\u0009\u000A -~ -ɏͰ-Ͽ\u0400-\u04FF -⁯⁰-₟₠-⃏℀-⅏⅐-↏←-⇿∀-⋿■-◿✓-✗]/u;
   function clean(s) {
     return Array.from(String(s == null ? '' : s).normalize('NFC').replace(/\r\n?/g, '\n').replace(/­/g, '').replace(/\t/g, '    '))
       .map(c => (SUPPORTED.test(c) ? c : (c.codePointAt(0) > 0xffff ? '' : '?'))).join('');
@@ -27,10 +29,10 @@
       }
       FAM = 'OdySans';
     } else {
-      throw new Error('Leturgerð fyrir PDF vantar; íslenskir stafir myndu ekki skila sér.');
+      throw new Error(T('pdf.noFont'));
     }
-    doc.setProperties({ title: model.title + ' – mínar glósur', subject: 'Glósur nemanda', creator: 'Lestrarstofa – Ódysseifskviða' });
-    doc.setLanguage && doc.setLanguage('is');
+    doc.setProperties({ title: T('pdf.footer', { t: model.title }), subject: T('pdf.subject'), creator: 'Lestrarstofa – Ódysseifskviða' });
+    doc.setLanguage && doc.setLanguage(I.getLang());
 
     const W = 210, H = 297, M = 20, CW = W - 2 * M, TOP = 22, BOTTOM = H - 20;
     let y = TOP;
@@ -63,11 +65,11 @@
     font('bold', 20, INK);
     y += 2;
     para(model.title, 'bold', 20, { gapAfter: 1 });
-    para('Mínar glósur', 'normal', 13, { color: MUTED, gapAfter: 1 });
-    para(`${model.scopeLabel} · ${model.count} ${model.count === 1 ? 'glósa' : 'glósur'} · ${fmt(model.generatedAt)}`, 'normal', 9.5, { color: MUTED, gapAfter: 3 });
-    if (model.items.length) para('Skýringar: ' + model.legend + '. Frumtexti er skáletraður með striki á undan; glósan fylgir á eftir.', 'normal', 8.5, { color: MUTED, gapAfter: 2 });
+    para(T('md.myNotes'), 'normal', 13, { color: MUTED, gapAfter: 1 });
+    para(T('md.meta', { scope: model.scopeLabel, n: model.count, date: fmt(model.generatedAt) }), 'normal', 9.5, { color: MUTED, gapAfter: 3 });
+    if (model.items.length) para(T('pdf.legend', { l: model.legend }), 'normal', 8.5, { color: MUTED, gapAfter: 2 });
     rule(ACCENT);
-    if (!model.items.length) para('Engar glósur.', 'italic', 11);
+    if (!model.items.length) para(T('md.none'), 'italic', 11);
 
     let cur = null;
     for (const it of model.items) {
@@ -78,19 +80,19 @@
         cur = it.section;
       }
       need(lh(8.5) + lh(10.5) * 2 + lh(11) * 2);
-      para(it.kind === 'samantekt' ? it.code + ' · athugasemdir við kaflann' : it.code, 'normal', 8.5, { color: MUTED, gapAfter: 1 });
+      para(it.kind === 'samantekt' ? it.code + ' · ' + T('md.chapterNote') : it.code, 'normal', 8.5, { color: MUTED, gapAfter: 1 });
       if (it.quote != null) para(it.quote, 'italic', 10.5, { indent: 5, bar: QUOTE_BAR, color: [60, 60, 60], gapAfter: 1.5 });
       if (it.cue) para(it.cue, 'bold', 11, { gapAfter: 1 });
       if (it.sameAsQuote) y += 3.5;
-      else para(it.body.trim() ? it.body : '(tóm glósa)', it.body.trim() ? 'normal' : 'italic', 11, { gapAfter: 5 });
+      else para(it.body.trim() ? it.body : T('md.empty'), it.body.trim() ? 'normal' : 'italic', 11, { gapAfter: 5 });
     }
 
     const pages = doc.getNumberOfPages();
     for (let i = 1; i <= pages; i++) {
       doc.setPage(i);
       font('normal', 8.5, MUTED);
-      doc.text(clean(`${model.title} – mínar glósur`), M, H - 10);
-      doc.text(clean(`Síða ${i} af ${pages}`), W - M, H - 10, { align: 'right' });
+      doc.text(clean(T('pdf.footer', { t: model.title })), M, H - 10);
+      doc.text(clean(T('pdf.page', { a: i, b: pages })), W - M, H - 10, { align: 'right' });
     }
     return doc;
   }
@@ -98,10 +100,10 @@
   /* Cornell-uppsetning: lykilorð/spurning í vinstri dálki, texti í hægri dálki,
      athugasemdir við kaflann í lok hvers kafla. Dálkar flæða sjálfstætt yfir síðuskil. */
   function buildCornell(jsPDF, fonts, model) {
-    if (!fonts || !fonts.normal) throw new Error('Leturgerð fyrir PDF vantar; íslenskir stafir myndu ekki skila sér.');
+    if (!fonts || !fonts.normal) throw new Error(T('pdf.noFont'));
     const doc = new jsPDF({ unit: 'mm', format: 'a4', compress: true });
     for (const st of ['normal', 'bold', 'italic', 'bolditalic']) { doc.addFileToVFS('ody-' + st + '.ttf', fonts[st]); doc.addFont('ody-' + st + '.ttf', 'OdySans', st); }
-    doc.setProperties({ title: model.title + ' – Cornell-glósur', subject: 'Cornell-glósur nemanda', creator: 'Lestrarstofa – Ódysseifskviða' });
+    doc.setProperties({ title: T('pdf.cornellFooter', { t: model.title }), subject: T('pdf.subject'), creator: 'Lestrarstofa – Ódysseifskviða' });
     const W = 210, H = 297, M = 18, TOP = 20, BOTTOM = H - 20, LW = 55, GAP = 6;
     const XL = M, XR = M + LW + GAP, RW = W - M - XR;
     let y = TOP;
@@ -141,21 +143,21 @@
     }
 
     font('bold', 18); block(model.title, 'bold', 18, INK, 1);
-    block('Cornell-glósur', 'normal', 12, MUTED, 1);
-    block(`${model.scopeLabel} · ${model.count} ${model.count === 1 ? 'glósa' : 'glósur'} · ${fmt(model.generatedAt)}`, 'normal', 9, MUTED, 2);
-    block('bls. = blaðsíða · pdf-s. = PDF-síða · ¶ = efnisgrein. Hægra megin er valinn texti, með eða án umorðunar; frumtexti fylgir skáletraður ef textinn var umorðaður.', 'normal', 8.5, MUTED, 3);
+    block(T('c.title'), 'normal', 12, MUTED, 1);
+    block(T('md.meta', { scope: model.scopeLabel, n: model.count, date: fmt(model.generatedAt) }), 'normal', 9, MUTED, 2);
+    block(T('pdf.cornellLegend'), 'normal', 8.5, MUTED, 3);
     hline(ACCENT, 0.4); y += 6;
-    if (!model.sections.length) block('Engar glósur.', 'italic', 11, INK, 0);
+    if (!model.sections.length) block(T('md.none'), 'italic', 11, INK, 0);
     for (const g of model.sections) {
       if (y + 30 > BOTTOM) newPage();
       block(g.label, 'bold', 14, ACCENT, 2);
       if (g.rows.length) {
         font('bold', 8.5, MUTED);
-        doc.text('LYKILORÐ / SPURNING', XL, y); doc.text('GLÓSA', XR, y); y += 2;
+        doc.text(clean(T('pdf.cueHead')), XL, y); doc.text(clean(T('pdf.noteHead')), XR, y); y += 2;
         for (const r of g.rows) {
           const L = (r.cueIsType ? lines(r.typeLabel, 'italic', 10, LW, MUTED, 1) : lines(r.cue || '–', 'bold', 10.5, LW, INK, 1))
             .concat(lines(r.loc, 'normal', 8.5, LW, MUTED, 0));
-          let R = lines(r.text.trim() ? r.text : '(tóm glósa)', r.text.trim() ? 'normal' : 'italic', 11, RW, INK, r.quote ? 1.5 : 0);
+          let R = lines(r.text.trim() ? r.text : T('md.empty'), r.text.trim() ? 'normal' : 'italic', 11, RW, INK, r.quote ? 1.5 : 0);
           if (r.quote) R = R.concat(lines(r.quote, 'italic', 9.5, RW, MUTED, 0));
           row(L, R);
         }
@@ -163,17 +165,17 @@
       }
       if (y + 20 > BOTTOM) newPage();
       hline(ACCENT, 0.5); y += 5;
-      block('Athugasemdir við kaflann', 'bold', 10.5, ACCENT, 1.5);
+      block(T('chap.notesTitle'), 'bold', 10.5, ACCENT, 1.5);
       const sums = g.summaries.filter(s => s.trim());
       if (sums.length) sums.forEach(s => block(s, 'normal', 11, INK, 2));
-      else block('(engar athugasemdir)', 'italic', 10, MUTED, 0);
+      else block(T('c.none'), 'italic', 10, MUTED, 0);
       y += 8;
     }
     const pages = doc.getNumberOfPages();
     for (let p = 1; p <= pages; p++) {
       doc.setPage(p); font('normal', 8.5, MUTED);
-      doc.text(clean(`${model.title} – Cornell-glósur`), M, H - 10);
-      doc.text(clean(`Síða ${p} af ${pages}`), W - M, H - 10, { align: 'right' });
+      doc.text(clean(T('pdf.cornellFooter', { t: model.title })), M, H - 10);
+      doc.text(clean(T('pdf.page', { a: p, b: pages })), W - M, H - 10, { align: 'right' });
     }
     return doc;
   }
@@ -181,7 +183,7 @@
   function fmt(d) {
     const x = d instanceof Date ? d : new Date(d);
     const p = n => String(n).padStart(2, '0');
-    return `${x.getDate()}.${x.getMonth() + 1}.${x.getFullYear()} kl. ${p(x.getHours())}:${p(x.getMinutes())}`;
+    return `${x.getDate()}.${x.getMonth() + 1}.${x.getFullYear()} ${T('date.at')} ${p(x.getHours())}:${p(x.getMinutes())}`;
   }
 
   return { build, buildCornell, clean };

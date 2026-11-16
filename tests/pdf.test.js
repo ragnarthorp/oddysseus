@@ -93,3 +93,23 @@ test('Cornell-PDF: dálkar, lykilorð, athugasemd við kaflann og síðuskil', (
   assert.ok(txt.indexOf('Samantekt I. þáttar') < txt.indexOf('II. þáttur'), 'athugasemd í lok I. þáttar');
   assert.match(txt, /\(engar athugasemdir\)/);
 });
+
+test('PDF á úkraínsku: kýrillískt letur er innfellt og skilar sér', () => {
+  C.I18n.setLang('uk');
+  try {
+    const s1 = DATA.sections.find(s => s.id === 'thattur-01');
+    const ns = [C.newNote(C.anchorForUnit(index, s1.units[0].id).anchor, { type: 'endursogn', body: 'Боги радяться на Олімпі. Ґ ґ Є є І і Ї ї — ð þ æ ö' }),
+      C.newNote(C.anchorForSection(index, 'thattur-01').anchor, { kind: 'samantekt', type: 'athugasemd', body: 'Підсумок розділу.' })];
+    for (const [name, doc] of [['venjulegt', P.build(jsPDF, window.NASA_PDF_FONTS, C.exportModel(index, ns))], ['cornell', P.buildCornell(jsPDF, window.NASA_PDF_FONTS, C.cornellModel(index, ns))]]) {
+      const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'ody-')), name + '.pdf');
+      fs.writeFileSync(file, Buffer.from(doc.output('arraybuffer')));
+      if (!havePdftotext()) continue;
+      const txt = execFileSync('pdftotext', ['-enc', 'UTF-8', file, '-'], { stdio: ['ignore', 'pipe', 'ignore'] }).toString('utf8').replace(/\s+/g, ' ');
+      assert.match(txt, /Боги радяться на Олімпі\. Ґ ґ Є є І і Ї ї — ð þ æ ö/, name);
+      assert.match(txt, /Розділ I — Aþena kemur til Íþöku \(«Афіна прибуває на Ітаку»\)/, name);
+      assert.match(txt, /Коментарі до розділу|коментарі до розділу/, name);
+      assert.match(txt, /Сторінка 1 з 1/, name);
+      assert.ok(!/\?\?\?/.test(txt), 'engir staðgenglar');
+    }
+  } finally { C.I18n.setLang('is'); }
+});

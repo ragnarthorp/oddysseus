@@ -3,6 +3,7 @@
    Ef IndexedDB er ekki tiltækt (t.d. lokað í stillingum) er reynt localStorage; annars er villa tilkynnt. */
 (function (root) {
   'use strict';
+  const T = (k, v) => (root.OdyI18n ? root.OdyI18n.t(k, v) : k);
   const DB_NAME = 'odysseifskvida-lestrarstofa';
   const STORE = 'kv';
   const LS_PREFIX = 'odysseifskvida-lestrarstofa:';
@@ -11,13 +12,13 @@
     return new Promise((resolve, reject) => {
       let req;
       try {
-        if (!root.indexedDB) throw new Error('IndexedDB er ekki tiltækt í þessum vafra.');
+        if (!root.indexedDB) throw new Error(T('store.noIdb'));
         req = root.indexedDB.open(DB_NAME, 1);
       } catch (e) { reject(e); return; }
       req.onupgradeneeded = () => { const db = req.result; if (!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE); };
       req.onsuccess = () => resolve(req.result);
-      req.onerror = () => reject(req.error || new Error('Ekki tókst að opna gagnagrunn.'));
-      req.onblocked = () => reject(new Error('Gagnagrunnur er læstur af öðrum flipa.'));
+      req.onerror = () => reject(req.error || new Error(T('store.openFail')));
+      req.onblocked = () => reject(new Error(T('store.blocked')));
     });
   }
 
@@ -29,8 +30,8 @@
       let result;
       try { result = fn(st); } catch (e) { reject(e); return; }
       t.oncomplete = () => resolve(result && 'result' in result ? result.result : undefined);
-      t.onerror = () => reject(t.error || new Error('Vistun mistókst.'));
-      t.onabort = () => reject(t.error || new Error('Vistun var hætt (geymslupláss gæti verið fullt).'));
+      t.onerror = () => reject(t.error || new Error(T('store.writeFail')));
+      t.onabort = () => reject(t.error || new Error(T('store.aborted')));
     });
     return {
       kind: 'indexeddb',
@@ -63,9 +64,9 @@
       return { backend: b, warning: null };
     } catch (e) { idbError = e; }
     try {
-      return { backend: lsBackend(), warning: 'IndexedDB virkar ekki í þessum vafra; vinnan er vistuð með varaleið (localStorage).' };
+      return { backend: lsBackend(), warning: T('store.fallback') };
     } catch (e) {
-      const err = new Error('Ekki er hægt að vista í þessu tæki (' + (idbError && idbError.message || e.message) + ').');
+      const err = new Error(T('store.none', { err: idbError && idbError.message || e.message }));
       err.cause = e;
       throw err;
     }

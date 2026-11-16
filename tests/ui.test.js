@@ -616,3 +616,71 @@ test('Cornell: hamur, lykilorð/spurning við valinn texta, athugasemdir við ka
   assert.deepEqual(page.errors, []);
   await ctx.close();
 });
+
+test('úkraínsk útgáfa: [Ukr] skiptir um tungumál, munast og glósur haldast', { skip }, async () => {
+  const { ctx, page } = await open();
+  await goto(page, 'thattur-01');
+  await page.click(`.nb[data-note-unit="${S('thattur-01').units[0].id}"]`);
+  await page.fill('#edBody', 'Glósa á íslensku');
+  await page.click('#edSave');
+  await page.waitForFunction(() => window.__ody.state.notes.length === 1);
+  await idle(page);
+  assert.equal((await page.textContent('#btnLang')).trim(), 'Ukr');
+  await Promise.all([page.waitForURL(/[?&]lang=uk/), page.click('#btnLang')]);
+  await page.waitForSelector('html[data-ready="1"]');
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'uk');
+  assert.equal(await page.getAttribute('#article', 'lang'), 'is', 'lestrartextinn er áfram á íslensku');
+  assert.equal((await page.textContent('#btnLang')).trim(), 'Ísl');
+  assert.equal(await page.textContent('#btnExport'), 'Експорт');
+  assert.equal(await page.textContent('#btnToc span'), 'Зміст');
+  assert.match(await page.textContent('.sec-tr'), /Розділ I · Афіна прибуває на Ітаку/);
+  assert.equal((await notes(page)).length, 1, 'glósur haldast');
+  // ekkert íslenskt viðmótsorð í föstum hlutum viðmótsins
+  const ui = await page.evaluate(() => [...document.querySelectorAll('.topbar button, #notesPanel button, #notesPanel label, #notesPanel h2, #notesPanel .fine, #selbar button, dialog h2, dialog legend, dialog label, dialog button, dialog summary, dialog p')]
+    .map(e => (e.getAttribute('aria-label') || '') + ' ' + e.textContent).join(' | '));
+  for (const w of ['Glósur', 'Vista', 'Flytja', 'Hætta', 'Leturstærð', 'Tegund', 'Kafli', 'Sækja', 'Loka', 'Breyta', 'Eyða', 'Lykilorð', 'Valinn', 'skrá']) assert.ok(!ui.includes(w), `„${w}“ ekki þýtt`);
+  // valstika og ritspjald
+  const u = S('thattur-01').units[1];
+  await select(page, u.id, 0, u.id, 30);
+  assert.match(await page.textContent('#sbInfo'), /^Виділено: «/);
+  await page.click('#sbRecycle');
+  assert.equal(await page.textContent('#edTitle'), 'Переробити виділений текст');
+  assert.match(await page.textContent('#edGuide'), /Опишіть головну думку/);
+  await page.fill('#edBody', 'Ситуація на Ітаці погана.');
+  await page.click('#edSave');
+  await page.waitForFunction(() => window.__ody.state.notes.length === 2);
+  await page.waitForFunction(() => /Нотатку збережено/.test(document.getElementById('toast').textContent));
+  // útflutningur á úkraínsku
+  await page.click('#btnNotes');
+  await page.click('#btnExport');
+  await page.check('input[name="exFormat"][value="md"]', { force: true });
+  await page.click('#exBuild');
+  await page.waitForSelector('#fileDlg[open]');
+  assert.match(await page.textContent('#fileInfo'), /Файл Markdown: 2 нотатки/);
+  const md = fs.readFileSync(await saveDownload(page, '#fileDownload'), 'utf8');
+  assert.match(md, /Мої нотатки/);
+  assert.match(md, /\n1 · с\. 6 · ¶ 1 · \(к\)\n/);
+  assert.match(md, /\n2 · с\. 6 · ¶ 2 · \(пр\)\n/);
+  await page.click('#fileDlg [data-close]');
+  // munað eftir endurhleðslu án slóðarbreytu
+  await idle(page);
+  await page.goto(URL0); await page.waitForSelector('html[data-ready="1"]');
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'uk');
+  // til baka á íslensku
+  await Promise.all([page.waitForNavigation(), page.click('#btnLang')]);
+  await page.waitForSelector('html[data-ready="1"]');
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'is');
+  assert.equal(await page.textContent('#btnExport'), 'Flytja út');
+  assert.equal((await notes(page)).length, 2);
+  assert.deepEqual(page.errors, []);
+  await ctx.close();
+});
+
+test('úkraínsk útgáfa opnast beint með ?lang=uk', { skip }, async () => {
+  const ctx = await browser.newContext(LANDSCAPE);
+  const page = await ctx.newPage();
+  await page.goto(URL0 + '?lang=uk'); await page.waitForSelector('html[data-ready="1"]');
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'uk');
+  assert.match(await page.textContent('#article'), /Як працює читальня/);
+  await ctx.close();
+});

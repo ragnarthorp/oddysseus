@@ -201,7 +201,7 @@ function sampleState() {
   const a2 = C.anchorForUnit(index, s2.units[0].id).anchor;
   const long = 'Þetta er löng glósa með ð, þ, æ og ö. '.repeat(400);
   return {
-    settings: { fontSize: 24, font: 'sans', lineHeight: 'rumt', width: 'breidur', theme: 'dokkt', cornell: true },
+    settings: { fontSize: 24, font: 'sans', lineHeight: 'rumt', width: 'breidur', theme: 'dokkt', cornell: true, lang: 'is' },
     position: { sectionId: 'thattur-02', unitId: s2.units[1].id },
     notes: [
       C.finalizeNote(C.newNote(a1, { type: 'endurvinnsla', body: 'Guðirnir funda.\n\nAþena fær Seif til að leyfa heimferð.', origin: 'recycle', insertedText: a1.quote })),
@@ -376,4 +376,42 @@ test('Cornell-útflutningur (Markdown): tafla með lykilorði vinstra megin og a
   const plain = C.toMarkdown(C.exportModel(index, ns));
   assert.match(plain, /\*\*Hver hatar Ódysseif\?\*\*/);
   assert.match(plain, /4 · kaflinn · \(a\) · athugasemdir við kaflann/);
+});
+
+test('úkraínska: merkingar, kóðar, kaflaþýðingar, villuboð og útflutningur', () => {
+  const I = C.I18n;
+  I.setLang('uk');
+  try {
+    const s1 = sec('thattur-01');
+    assert.equal(C.sectionLabel(s1), 'Розділ I — Aþena kemur til Íþöku');
+    assert.equal(C.sectionLabelTr(index, 'thattur-01'), 'Розділ I — Aþena kemur til Íþöku («Афіна прибуває на Ітаку»)');
+    assert.equal(I.sectionTr('thattur-24'), 'Мир');
+    for (const s of DATA.sections) assert.ok(I.sectionTr(s.id), `þýðing á ${s.id}`);
+    assert.deepEqual(C.NOTE_TYPES.map(t => t.label), ['Переказ', 'Коментар', 'Питання', 'Переробка', 'Цитата']);
+    assert.equal(new Set(C.NOTE_TYPES.map(t => t.code)).size, 5, 'ólíkir kóðar');
+    const a = C.makeAnchor(index, { unitId: s1.units[0].id, offset: 0 }, { unitId: s1.units[1].id, offset: 10 }).anchor;
+    const loc = C.locationParts(index, a);
+    assert.equal(loc.pages, 'С. 6'); assert.equal(loc.paras, 'Абзаци 1–2');
+    assert.equal(C.locationCode(a), 'с. 6 · ¶ 1–2');
+    assert.equal(I.t('filter.total', { n: 1 }), '1 нотатка у порядку тексту.');
+    assert.equal(I.t('filter.total', { n: 3 }), '3 нотатки у порядку тексту.');
+    assert.equal(I.t('filter.total', { n: 5 }), '5 нотаток у порядку тексту.');
+    assert.equal(I.t('filter.total', { n: 21 }), '21 нотатка у порядку тексту.');
+    assert.equal(I.t('filter.total', { n: 12 }), '12 нотаток у порядку тексту.');
+    assert.match(C.parseWorkfile(index, '{').errors[0], /Файл пошкоджений/);
+    const ns = [C.newNote(a, { type: 'spurning', body: 'Чому Посейдон ненавидить Одіссея? ð þ' })];
+    const md = C.toMarkdown(C.exportModel(index, ns));
+    assert.match(md, /\*Мої нотатки · Усі нотатки · 1 нотатка · /);
+    assert.match(md, /## Розділ I — Aþena kemur til Íþöku \(«Афіна прибуває на Ітаку»\)/);
+    assert.match(md, /\n1 · с\. 6 · ¶ 1–2 · \(п\)\n/);
+    assert.match(md, /> „Guðirnir sitja/, 'frumtexti helst á íslensku');
+    assert.match(md, /Чому Посейдон ненавидить Одіссея\? ð þ/);
+    const cm = C.toCornellMarkdown(C.cornellModel(index, ns));
+    assert.match(cm, /\| Ключове слово \/ питання \| Нотатка \|/);
+    assert.match(cm, /\*\*Коментарі до розділу\*\*\n\n\*\(коментарів немає\)\*/);
+    // íslenskur texti sleppur ekki inn í úkraínsk viðmótsorð
+    for (const [k, v] of Object.entries(I._dicts.uk)) if (!/^lang\./.test(k)) assert.ok(!/[ðþæ]/i.test(v.replace(/Ódysseifskviða/g, '')), `${k} er á íslensku`);
+    assert.deepEqual(Object.keys(I._dicts.uk).sort(), Object.keys(I._dicts.is).sort(), 'sömu lyklar á báðum tungumálum');
+  } finally { I.setLang('is'); }
+  assert.equal(C.sectionLabel(sec('thattur-01')), 'I. þáttur — Aþena kemur til Íþöku');
 });

@@ -59,6 +59,16 @@ Hnappurinn **Cornell** í efstu stiku kveikir og slekkur á Cornell-ham. Stillin
   - Aðrar glósur fá tegund sína vinstra megin, t.d. `(s) spurning`.
   - Í PDF flæða dálkarnir sjálfstætt yfir síðuskil.
 
+## Úkraínsk útgáfa
+
+Hnappurinn **[Ukr]** í efstu stiku skiptir viðmótinu yfir á úkraínsku og síðan opnast aftur á því máli. Á úkraínsku stendur **[Ísl]** á hnappnum og skiptir til baka. Tækið man valið og það fylgir vinnuskrá. Úkraínska útgáfan opnast líka beint með `?lang=uk` aftan við slóðina, t.d. `…/index.html?lang=uk`.
+
+- **Hvað er á úkraínsku:** Viðmót, leiðbeiningar, villuboð, glósutegundir og útflutningsmerkingar í PDF og Markdown. Tegundakóðarnir eru `(пк)` переказ, `(к)` коментар, `(п)` питання, `(пр)` переробка og `(ц)` цитата, og staðarkóðinn er t.d. `с. 6 · ¶ 2`.
+- **Hvað helst á íslensku:** Lestrartextinn sjálfur, því endursögnin úr PDF-skjalinu er frumheimildin. Kaflaheitin eru sýnd á íslensku með úkraínskri þýðingu fyrir neðan, í efnisyfirliti og í útflutningi.
+- **Glósurnar:** Þær eru óháðar tungumáli. Nemandi getur skrifað á hvoru málinu sem er og skipt um tungumál án þess að tapa neinu.
+- **Útfærsla:** Allir viðmótstextar eru í `js/i18n.js`, með sömu lyklum fyrir bæði tungumál, og próf gæta þess að enginn lykill vanti.
+- **PDF-letur:** Það var endurgert úr Liberation Sans 2.1.5 með kýrillísku (`tools/build-pdf-fonts.py`) svo úkraínskur texti skili sér í PDF.
+
 ## Vistun, vinnuskrá og Drive
 
 - Glósur, ritdrög, stillingar og lestrarstaður vistast sjálfkrafa í **IndexedDB** í þessum vafra á þessu tæki. Ef IndexedDB virkar ekki er localStorage notað sem varaleið. Ef hvorugt virkar birtist villuborði. „Vistað í þessu tæki“ birtist aðeins eftir að færslan hefur verið staðfest.
@@ -130,5 +140,7 @@ npm run test:ui   # viðmótspróf með Playwright (iPad-hermun)
 - `data/`: Útdregin textagögn og útdráttarskýrsla.
 - `heimild/`: Óbreytt frumskjal.
 - `tools/extract.py`: Útdráttur.
-- `vendor/`: jsPDF og PDF-letur ásamt leyfum.
+- `js/i18n.js`: Viðmótstextar á íslensku og úkraínsku og úkraínsk þýðing kaflaheita.
+- `vendor/`: jsPDF og PDF-letur (latneskt letur og kýrillíska) ásamt leyfum.
+- `tools/build-pdf-fonts.py`: Býr til PDF-letrið úr Liberation Sans.
 - `tests/`: Próf og lítill vefþjónn.
