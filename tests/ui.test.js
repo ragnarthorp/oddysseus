@@ -15,6 +15,8 @@ const { start } = require('./server.js');
 const DATA = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'odysseifskvida.json'), 'utf8'));
 const UK = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'odysseifskvida.uk.json'), 'utf8'));
 const SU = id => UK.sections.find(s => s.id === id);
+const PL = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'odysseifskvida.pl.json'), 'utf8'));
+const SP = id => PL.sections.find(s => s.id === id);
 const S = id => DATA.sections.find(s => s.id === id);
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'ody-ui-'));
 
@@ -627,12 +629,12 @@ test('úkraínsk útgáfa: [Ukr] skiptir um tungumál, munast og glósur haldast
   await page.click('#edSave');
   await page.waitForFunction(() => window.__ody.state.notes.length === 1);
   await idle(page);
-  assert.equal((await page.textContent('#btnLang')).trim(), 'Ukr');
-  await Promise.all([page.waitForURL(/[?&]lang=uk/), page.click('#btnLang')]);
+  assert.deepEqual(await page.$$eval('#langGroup button', b => b.map(x => [x.textContent, x.getAttribute('aria-pressed')])), [['Ísl', 'true'], ['Ukr', 'false'], ['PL', 'false']]);
+  await Promise.all([page.waitForURL(/[?&]lang=uk/), page.click('[data-lang="uk"]')]);
   await page.waitForSelector('html[data-ready="1"]');
   assert.equal(await page.evaluate(() => document.documentElement.lang), 'uk');
   assert.equal(await page.getAttribute('#article', 'lang'), 'uk', 'lestrartextinn er á úkraínsku');
-  assert.equal((await page.textContent('#btnLang')).trim(), 'Ísl');
+  assert.equal(await page.getAttribute('[data-lang="uk"]', 'aria-pressed'), 'true');
   assert.equal(await page.textContent('#btnExport'), 'Експорт');
   assert.equal(await page.textContent('#btnToc span'), 'Зміст');
   assert.equal(await page.textContent('#secTitle'), 'Афіна прибуває на Ітаку');
@@ -670,7 +672,7 @@ test('úkraínsk útgáfa: [Ukr] skiptir um tungumál, munast og glósur haldast
   await page.goto(URL0); await page.waitForSelector('html[data-ready="1"]');
   assert.equal(await page.evaluate(() => document.documentElement.lang), 'uk');
   // til baka á íslensku
-  await Promise.all([page.waitForNavigation(), page.click('#btnLang')]);
+  await Promise.all([page.waitForNavigation(), page.click('[data-lang="is"]')]);
   await page.waitForSelector('html[data-ready="1"]');
   assert.equal(await page.evaluate(() => document.documentElement.lang), 'is');
   assert.equal(await page.textContent('#btnExport'), 'Flytja út');
@@ -716,7 +718,7 @@ test('[Ukr] virkar þó IndexedDB hangi (iPad/Safari) og vistun nær sér aftur'
   // [Ukr] meðan vistun hangir: síðan skiptir samt um tungumál
   await page.evaluate(() => { window.__hangIdb = true; });
   const t0 = Date.now();
-  await Promise.all([page.waitForURL(/[?&]lang=uk/, { timeout: 8000 }), page.click('#btnLang')]);
+  await Promise.all([page.waitForURL(/[?&]lang=uk/, { timeout: 8000 }), page.click('[data-lang="uk"]')]);
   await page.waitForSelector('html[data-ready="1"]');
   assert.ok(Date.now() - t0 < 8000);
   assert.equal(await page.evaluate(() => document.documentElement.lang), 'uk');
@@ -736,7 +738,7 @@ test('úkraínskur texti kviðunnar: lestur, endurvinnsla og glósur úr báðum
   await page.click('#edSave');
   await page.waitForFunction(() => window.__ody.state.notes.length === 1);
   await idle(page);
-  await Promise.all([page.waitForURL(/lang=uk/), page.click('#btnLang')]);
+  await Promise.all([page.waitForURL(/lang=uk/), page.click('[data-lang="uk"]')]);
   await page.waitForSelector('html[data-ready="1"]');
   assert.equal(await page.evaluate(() => window.__ody.state.sectionId), 'thattur-05');
   // allar einingar kaflans sýna úkraínska textann
@@ -765,7 +767,7 @@ test('úkraínskur texti kviðunnar: lestur, endurvinnsla og glósur úr báðum
   await page.waitForFunction(id => !!document.querySelector(`.u-row.flash[data-row="${id}"]`), ui.id);
   // til baka á íslensku: íslenskur texti, báðar glósur gildar
   await idle(page);
-  await Promise.all([page.waitForNavigation(), page.click('#btnLang')]);
+  await Promise.all([page.waitForNavigation(), page.click('[data-lang="is"]')]);
   await page.waitForSelector('html[data-ready="1"]');
   assert.equal(await page.textContent(`#u-${ui.id}`), ui.text);
   const after = await notes(page);
@@ -775,4 +777,73 @@ test('úkraínskur texti kviðunnar: lestur, endurvinnsla og glósur úr báðum
   if (hl) assert.deepEqual(hl, [ui.text.slice(0, 25).trim()], 'aðeins glósur úr sömu útgáfu fá nákvæma auðkenningu');
   assert.deepEqual(page.errors, []);
   await ctx.close();
+});
+
+test('[PL]: pólskur texti og viðmót, glósur úr öllum þremur málum haldast', { skip }, async () => {
+  const { ctx, page } = await open();
+  await goto(page, 'thattur-05');
+  // íslensk glósa
+  await select(page, S('thattur-05').units[1].id, 0, S('thattur-05').units[1].id, 20);
+  await page.click('#sbOwn'); await page.fill('#edBody', 'Íslensk glósa'); await page.click('#edSave');
+  await page.waitForFunction(() => window.__ody.state.notes.length === 1);
+  await idle(page);
+  await Promise.all([page.waitForURL(/lang=pl/), page.click('[data-lang="pl"]')]);
+  await page.waitForSelector('html[data-ready="1"]');
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'pl');
+  assert.equal(await page.getAttribute('#article', 'lang'), 'pl');
+  assert.equal(await page.getAttribute('[data-lang="pl"]', 'aria-pressed'), 'true');
+  assert.equal(await page.textContent('#btnExport'), 'Eksport');
+  assert.equal(await page.textContent('#secTitle'), 'Kalipso');
+  assert.equal(await page.textContent('.sec-tr'), 'Po islandzku: Kalypsó');
+  const shown = await page.$$eval('#article [data-unit]', els => els.map(e => [e.dataset.unit, e.textContent]));
+  assert.deepEqual(shown, SP('thattur-05').units.map(u => [u.id, u.text]));
+  // pólsk endurvinnsla
+  const pu = SP('thattur-05').units[0];
+  await select(page, pu.id, 0, pu.id, pu.text.indexOf('.') + 1);
+  assert.match(await page.textContent('#sbInfo'), /^Zaznaczono: „Teraz opowieść przechodzi do samego Odyseusza\.” · S\. 11 · Akapit 1/);
+  await page.click('#sbRecycle');
+  assert.equal(await page.inputValue('#edBody'), 'Teraz opowieść przechodzi do samego Odyseusza.');
+  await page.fill('#edBody', 'Zeus wysyła Hermesa do Kalipso.');
+  await page.click('#edSave');
+  await page.waitForFunction(() => window.__ody.state.notes.length === 2);
+  await page.waitForFunction(() => /Zapisano notatkę/.test(document.getElementById('toast').textContent));
+  // ekkert íslenskt eða úkraínskt viðmótsorð í föstum hlutum viðmótsins
+  const ui = await page.evaluate(() => [...document.querySelectorAll('.topbar button, #notesPanel button, #notesPanel label, #notesPanel h2, #notesPanel .fine, #selbar button, dialog h2, dialog legend, dialog label, dialog button, dialog summary, dialog p')]
+    .filter(e => !e.closest('#langGroup') && !e.closest('#tocList')).map(e => (e.getAttribute('aria-label') || '') + ' ' + e.textContent).join(' | '));
+  for (const w of ['Glósur', 'Vista', 'Flytja', 'Hætta', 'Tegund', 'Kafli', 'Нотатки', 'Зберегти']) assert.ok(!ui.includes(w), `„${w}“ ekki þýtt`);
+  assert.ok(!/[ðþæ\u0400-\u04FF]/i.test(ui), 'enginn íslenskur eða kýrillískur texti í pólsku viðmóti');
+  // úkraínska → glósa → íslenska: allar þrjár glósur gildar
+  await idle(page);
+  await Promise.all([page.waitForURL(/lang=uk/), page.click('[data-lang="uk"]')]);
+  await page.waitForSelector('html[data-ready="1"]');
+  const uu = SU('thattur-05').units[2];
+  await select(page, uu.id, 0, uu.id, 20);
+  await page.click('#sbOwn'); await page.fill('#edBody', 'Українська нотатка'); await page.click('#edSave');
+  await page.waitForFunction(() => window.__ody.state.notes.length === 3);
+  await idle(page);
+  await Promise.all([page.waitForNavigation(), page.click('[data-lang="is"]')]);
+  await page.waitForSelector('html[data-ready="1"]');
+  const ns = await notes(page);
+  assert.deepEqual(ns.map(n => n.anchor.textLang), ['is', 'pl', 'uk']);
+  assert.ok(ns.every(n => !n.orphan));
+  assert.equal(await page.textContent(`#u-${S('thattur-05').units[0].id}`), S('thattur-05').units[0].text);
+  assert.deepEqual(page.errors, []);
+  await ctx.close();
+});
+
+test('efsta stika rúmast á iPad (lóðrétt og lárétt) á öllum þremur málum', { skip }, async () => {
+  for (const dev of [PORTRAIT, LANDSCAPE]) {
+    for (const l of ['is', 'uk', 'pl']) {
+      const ctx = await browser.newContext(dev);
+      const page = await ctx.newPage();
+      await page.goto(URL0 + (l === 'is' ? '' : '?lang=' + l)); await page.waitForSelector('html[data-ready="1"]');
+      const w = dev.viewport.width;
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth) <= w, `engin lárétt skrun (${l}, ${w})`);
+      for (const sel of ['#btnToc', '#langGroup', '[data-lang="pl"]', '#btnCornell', '#btnSettings', '#btnNotes']) {
+        const b = await page.$eval(sel, e => e.getBoundingClientRect().toJSON());
+        assert.ok(b.left >= 0 && b.right <= w && b.height >= 44, `${sel} sýnilegt og nógu stórt (${l}, ${w})`);
+      }
+      await ctx.close();
+    }
+  }
 });

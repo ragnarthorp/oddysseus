@@ -1,0 +1,3402 @@
+{
+ "format": "odysseifskvida-textagogn",
+ "formatVersion": 1,
+ "document": {
+  "id": "odysseifskvida-endursogn",
+  "version": "pl-f9f07a5a51a1940e",
+  "sha256": "3dc9a9381435c1c65e568c4e39a40ad42d6867e9459e38393238c112dc6c504c",
+  "title": "Odyseja – opowieść",
+  "subject": "Saga Hómers endursögð í 24 þáttum með tilvitnunum í þýðingu Sveinbjarnar Egilssonar",
+  "sourceFile": "heimild/Odysseifskvida-endursogn.pdf",
+  "pdfPages": 51,
+  "edition": "pl",
+  "lang": "pl",
+  "baseVersion": "sha256-3dc9a9381435c1c6",
+  "translation": "Przekład islandzkiej opowieści na język polski, przygotowany dla tej czytelni."
+ },
+ "printedPagesConfirmed": [
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51
+ ],
+ "sections": [
+  {
+   "id": "titill",
+   "kind": "titill",
+   "number": null,
+   "numeral": null,
+   "kicker": "HOMER",
+   "title": "Odyseja",
+   "pdfPageStart": 1,
+   "pdfPageEnd": 2,
+   "units": [
+    {
+     "type": "titill",
+     "text": "Dziesięcioletnia podróż do domu z Troi na Itakę, opowiedziana rozdział po rozdziale",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 1,
+       "printedPage": null
+      }
+     ],
+     "n": 1,
+     "id": "titill-001",
+     "hash": "f7c031784590",
+     "srcHash": "99f290804f2f"
+    },
+    {
+     "type": "titill",
+     "text": "Z cytatami z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 1,
+       "printedPage": null
+      }
+     ],
+     "n": 2,
+     "id": "titill-002",
+     "hash": "d3edad80b76e",
+     "srcHash": "fd71228d79df"
+    },
+    {
+     "type": "titill",
+     "text": "Odyseja",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 2,
+       "printedPage": null
+      }
+     ],
+     "n": 3,
+     "id": "titill-003",
+     "hash": "2d40d9173bb5",
+     "srcHash": "71669aacfbde"
+    },
+    {
+     "type": "titill",
+     "text": "Opowieść Homera w dwudziestu czterech rozdziałach",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 2,
+       "printedPage": null
+      }
+     ],
+     "n": 4,
+     "id": "titill-004",
+     "hash": "7628435b7c7d",
+     "srcHash": "fcc07f10a217"
+    },
+    {
+     "type": "titill",
+     "text": "Z cytatami z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 2,
+       "printedPage": null
+      }
+     ],
+     "n": 5,
+     "id": "titill-005",
+     "hash": "d3edad80b76e",
+     "srcHash": "fd71228d79df"
+    }
+   ]
+  },
+  {
+   "id": "formali",
+   "kind": "formali",
+   "number": null,
+   "numeral": null,
+   "kicker": "PRZEDMOWA",
+   "title": "Zanim zacznie się opowieść",
+   "pdfPageStart": 4,
+   "pdfPageEnd": 5,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Przez dziesięć lat Grecy oblegali Troję, aby odzyskać Helenę, żonę spartańskiego króla Menelaosa, którą porwał trojański królewicz Parys. W końcu miasto upadło dzięki podstępowi. Grecy zbudowali wielkiego drewnianego konia, ukryli w nim wojowników i udali, że odpływają do domu. Kasandra, córka trojańskiego króla Priama, ostrzegała przed koniem. Miała dar proroctwa, ale ciążyła na niej klątwa: nikt nie wierzył jej słowom. Trojanie wciągnęli więc konia za mury i nocą miasto zostało zdobyte. Pomysł wymyślił Odyseusz, król wyspy Itaki.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 4,
+       "printedPage": 4
+      }
+     ],
+     "n": 1,
+     "id": "formali-001",
+     "hash": "4c6642182076",
+     "srcHash": "9c66826b0017"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Potem zwycięzcy wyruszyli do domów. Większość dotarła tam w ciągu kilku tygodni lub miesięcy. Odyseusz był w drodze przez dziesięć lat.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 4,
+       "printedPage": 4
+      }
+     ],
+     "n": 2,
+     "id": "formali-002",
+     "hash": "f3dd80460e90",
+     "srcHash": "0472acd71c48"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "„Odyseja” opowiada o tej podróży do domu, ale nie zaczyna się od początku. Gdy opowieść się zaczyna, minęło dwadzieścia lat, odkąd Odyseusz opuścił dom, a do końca jego wygnania zostało zaledwie kilka tygodni. Pierwsze cztery rozdziały nie mówią nawet o nim samym, lecz o jego synu, który wyrusza, by szukać wieści o ojcu, którego nigdy nie znał. Słynne przygody — cyklop, Kirke i syreny — pojawiają się dopiero w dziewiątym rozdziale i wtedy Odyseusz sam opowiada o nich podczas uczty.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 4,
+       "printedPage": 4
+      }
+     ],
+     "n": 3,
+     "id": "formali-003",
+     "hash": "9a743d95d2bd",
+     "srcHash": "e380bca132dc"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Ta książka trzyma się porządku Homera, rozdział po rozdziale. Opowieść została opowiedziana na nowo i bardzo skrócona. Natomiast cytaty z wcięciem to słowa Sveinbjörna Egilssona, który przełożył poemat na islandzki w Bessastaðir w pierwszej połowie XIX wieku. Język jest tam starszy i bardziej uroczysty. Tak właśnie Homer brzmiał w uszach Islandczyków przez blisko dwa stulecia.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 5,
+       "printedPage": 5
+      }
+     ],
+     "n": 4,
+     "id": "formali-004",
+     "hash": "b5bb7999ad48",
+     "srcHash": "c457071aa8a7"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Opowiedz mi, Muzo, o tym wielce wędrownym mężu, który tułał się bardzo daleko, po tym jak spustoszył święte miasto Troję…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 5,
+       "printedPage": 5
+      }
+     ],
+     "n": 5,
+     "id": "formali-005",
+     "hash": "d4dbf68816e8",
+     "sourceId": "formali-006",
+     "srcHash": "7627bac872d0"
+    },
+    {
+     "type": "heimild",
+     "text": "Początek poematu · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 5,
+       "printedPage": 5
+      }
+     ],
+     "n": 6,
+     "id": "formali-006",
+     "hash": "2128a7ab6ef4",
+     "quoteId": "formali-005",
+     "srcHash": "3516075ab247"
+    }
+   ]
+  },
+  {
+   "id": "thattur-01",
+   "kind": "thattur",
+   "number": 1,
+   "numeral": "I",
+   "kicker": "ROZDZIAŁ PIERWSZY",
+   "title": "Atena przybywa na Itakę",
+   "pdfPageStart": 6,
+   "pdfPageEnd": 6,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Bogowie obradują na Olimpie. Posejdona, który nienawidzi Odyseusza, nie ma, a Atena korzysta z okazji. Przypomina Zeusowi, że Odyseusz od siedmiu lat tkwi u bogini Kalipso, i prosi, by pozwolono mu wrócić do domu. Zeus się zgadza.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 6,
+       "printedPage": 6
+      }
+     ],
+     "n": 1,
+     "id": "thattur-01-001",
+     "hash": "74c4b600da5d",
+     "srcHash": "77f8d1588bb7"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Sama Atena udaje się na Itakę. Sytuacja jest tam zła. Ponad setka młodych synów możnych rozgościła się w pałacu Odyseusza. Uważają go za zmarłego i chcą, by Penelopa, jego żona, wyszła za jednego z nich. Dopóki ona zwleka z odpowiedzią, zarzynają jego bydło, piją jego wino i ucztują dzień po dniu.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 6,
+       "printedPage": 6
+      }
+     ],
+     "n": 2,
+     "id": "thattur-01-002",
+     "hash": "1f9227f36187",
+     "srcHash": "164308fe70a6"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Telemach, syn Odyseusza, siedzi wśród nich przygnębiony. Był niemowlęciem, gdy ojciec wyruszył na wojnę, i nic o nim nie pamięta. Teraz ma około dwudziestu lat, ale brak mu sił i odwagi, by przepędzić zalotników.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 6,
+       "printedPage": 6
+      }
+     ],
+     "n": 3,
+     "id": "thattur-01-003",
+     "hash": "cf236bd1ca02",
+     "srcHash": "398ce83643ab"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… i nie przystoi ci zachowywać się jak dziecko, skoro wyrosłeś już z lat dziecięcych.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 6,
+       "printedPage": 6
+      }
+     ],
+     "n": 4,
+     "id": "thattur-01-004",
+     "hash": "ec49964f7ff1",
+     "sourceId": "thattur-01-005",
+     "srcHash": "6d63388ea856"
+    },
+    {
+     "type": "heimild",
+     "text": "Atena do Telemacha · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 6,
+       "printedPage": 6
+      }
+     ],
+     "n": 5,
+     "id": "thattur-01-005",
+     "hash": "b9af36aef455",
+     "quoteId": "thattur-01-004",
+     "srcHash": "f7e12ed3aa1b"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Atena przychodzi do niego pod postacią Mentesa, dawnego przyjaciela jego ojca. Telemach — jako jedyny w pałacu — gościnnie przyjmuje przybysza. Gość mówi mu, że jego ojciec żyje. Radzi mu zwołać zgromadzenie, zażądać, by zalotnicy odeszli, a potem samemu popłynąć na stały ląd po wieści.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 6,
+       "printedPage": 6
+      }
+     ],
+     "n": 6,
+     "id": "thattur-01-006",
+     "hash": "69c24fdbd2f1",
+     "srcHash": "64375ab071ca"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Gdy gość znika jak ptak, Telemach rozumie, że rozmawiał z bogiem.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 6,
+       "printedPage": 6
+      }
+     ],
+     "n": 7,
+     "id": "thattur-01-007",
+     "hash": "8d0a25447520",
+     "srcHash": "21e30b2a7fcf"
+    }
+   ]
+  },
+  {
+   "id": "thattur-02",
+   "kind": "thattur",
+   "number": 2,
+   "numeral": "II",
+   "kicker": "ROZDZIAŁ DRUGI",
+   "title": "Zgromadzenie na Itace",
+   "pdfPageStart": 7,
+   "pdfPageEnd": 8,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Następnego ranka Telemach zwołuje zgromadzenie — pierwsze od czasu, gdy odszedł jego ojciec. Wstaje przed wszystkimi i skarży się na zalotników, którzy trwonią wszystko, co ma.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 7,
+       "printedPage": 7
+      }
+     ],
+     "n": 1,
+     "id": "thattur-02-001",
+     "hash": "c10c83bdda30",
+     "srcHash": "5cbed4bd8280"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Antinoos, najbezczelniejszy z zalotników, odpowiada pełnym głosem. Winni nie są oni, tylko Penelopa. Od ponad trzech lat wodzi ich za nos. Mówiła, że wybierze sobie męża, gdy skończy tkać całun dla Laertesa, starego ojca Odyseusza. Za dnia siedziała przy krosnach, a nocą pruła wszystko, co utkała. W końcu jedna ze służących ją wydała i musiała dokończyć tkaninę. Teraz zalotnicy mówią, że nie odejdą, dopóki ona nie wybierze.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 7,
+       "printedPage": 7
+      }
+     ],
+     "n": 2,
+     "id": "thattur-02-002",
+     "hash": "b8d0a7396044",
+     "srcHash": "66a563e58c2e"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Nad zgromadzeniem przelatują dwa orły i rozszarpują się nawzajem. Stary wróżbita mówi, że to znak: Odyseusz wraca do domu, a zalotników czeka śmierć — oni jednak się z niego śmieją. Zgromadzenie rozchodzi się bez rozstrzygnięcia.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 8,
+       "printedPage": 8
+      }
+     ],
+     "n": 3,
+     "id": "thattur-02-003",
+     "hash": "4e84bbc2668f",
+     "srcHash": "b2189442ee45"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… tak tkała w dzień wielką tkaninę, a nocą przy pochodniach znów ją pruła.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 8,
+       "printedPage": 8
+      }
+     ],
+     "n": 4,
+     "id": "thattur-02-004",
+     "hash": "ebfd5a00c47d",
+     "sourceId": "thattur-02-005",
+     "srcHash": "0283a8f784d2"
+    },
+    {
+     "type": "heimild",
+     "text": "Antinoos o Penelopie · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 8,
+       "printedPage": 8
+      }
+     ],
+     "n": 5,
+     "id": "thattur-02-005",
+     "hash": "a576ef2536e7",
+     "quoteId": "thattur-02-004",
+     "srcHash": "90acbd930c4d"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Telemach schodzi nad morze i modli się do bogini, która go odwiedziła. Atena przychodzi znowu, tym razem pod postacią Mentora, i zdobywa dla niego statek i załogę. Nocą odpływa, a jego matka o tym nie wie. Tylko stara piastunka Eurykleja wie, dokąd się udaje.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 8,
+       "printedPage": 8
+      }
+     ],
+     "n": 6,
+     "id": "thattur-02-006",
+     "hash": "0c3143f04994",
+     "srcHash": "f821eda2fe46"
+    }
+   ]
+  },
+  {
+   "id": "thattur-03",
+   "kind": "thattur",
+   "number": 3,
+   "numeral": "III",
+   "kicker": "ROZDZIAŁ TRZECI",
+   "title": "U Nestora w Pylos",
+   "pdfPageStart": 9,
+   "pdfPageEnd": 9,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "O świcie statek przybija do Pylos. Rządzi tam Nestor, najstarszy i najmądrzejszy z tych, którzy walczyli pod Troją. Razem z synami i całym swoim ludem składa na brzegu ofiarę Posejdonowi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 9,
+       "printedPage": 9
+      }
+     ],
+     "n": 1,
+     "id": "thattur-03-001",
+     "hash": "c2d48c4dbe09",
+     "srcHash": "c38eb59ae7eb"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Telemach jest onieśmielony. Nigdy nie rozmawiał z tak dostojnym człowiekiem i nie wie, jak przedstawić swoją sprawę. Atena, wciąż pod postacią Mentora, dodaje mu odwagi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 9,
+       "printedPage": 9
+      }
+     ],
+     "n": 2,
+     "id": "thattur-03-002",
+     "hash": "de8f7ff99563",
+     "srcHash": "fd0296d4e70a"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Nestor gościnnie przyjmuje przybyszów. Najpierw dostają jeść, a dopiero potem pyta się ich o imię i cel podróży. Takie są prawa gościnności. Gdy Telemach się przedstawia, starzec patrzy na niego ze zdumieniem: chłopak mówi zupełnie jak jego ojciec.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 9,
+       "printedPage": 9
+      }
+     ],
+     "n": 3,
+     "id": "thattur-03-003",
+     "hash": "f8bcaf91b569",
+     "srcHash": "12302b3a2e51"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Teraz, Telemachu, nie musisz się już wstydzić; po to bowiem przepłynąłeś morze, by wypytać o swego ojca…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 9,
+       "printedPage": 9
+      }
+     ],
+     "n": 4,
+     "id": "thattur-03-004",
+     "hash": "79897d88e19d",
+     "sourceId": "thattur-03-005",
+     "srcHash": "054c5c334546"
+    },
+    {
+     "type": "heimild",
+     "text": "Atena do Telemacha · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 9,
+       "printedPage": 9
+      }
+     ],
+     "n": 5,
+     "id": "thattur-03-005",
+     "hash": "b9af36aef455",
+     "quoteId": "thattur-03-004",
+     "srcHash": "f7e12ed3aa1b"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Nestor ma wiele do opowiedzenia o wojnie i o powrocie Greków do domu, który różnie się układał. Król Agamemnon dotarł do domu, ale zamordowała go żona i jej kochanek. O Odyseuszu natomiast Nestor nic nie wie. Radzi Telemachowi udać się do króla Menelaosa w Sparcie, który niedawno wrócił z długiej tułaczki.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 9,
+       "printedPage": 9
+      }
+     ],
+     "n": 6,
+     "id": "thattur-03-006",
+     "hash": "ce5a06eef4c2",
+     "srcHash": "03cc45ec6959"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wieczorem Mentor znika pod postacią ptaka i wszyscy widzą, że chłopcu towarzyszył bóg. Nestor każe zaprząc konie do rydwanu i wysyła swego syna Pejsistratosa z Telemachem lądem do Sparty.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 9,
+       "printedPage": 9
+      }
+     ],
+     "n": 7,
+     "id": "thattur-03-007",
+     "hash": "8399ffdd593a",
+     "srcHash": "210a3cf5bb09"
+    }
+   ]
+  },
+  {
+   "id": "thattur-04",
+   "kind": "thattur",
+   "number": 4,
+   "numeral": "IV",
+   "kicker": "ROZDZIAŁ CZWARTY",
+   "title": "U Menelaosa i Heleny",
+   "pdfPageStart": 10,
+   "pdfPageEnd": 10,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Gdy przybywają do Sparty, trwa tam uczta weselna. Pałac Menelaosa lśni złotem, srebrem i bursztynem, a Telemach nigdy nie widział czegoś podobnego. Gdy Menelaos wspomina Odyseusza — przyjaciela, za którym tęskni najbardziej — chłopak zaczyna płakać i zasłania twarz płaszczem.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 10,
+       "printedPage": 10
+      }
+     ],
+     "n": 1,
+     "id": "thattur-04-001",
+     "hash": "ed170602d600",
+     "srcHash": "8c4398f52c41"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wtedy do sali wchodzi Helena — kobieta, o którą toczyła się wojna. Od razu widzi, czyim synem jest gość. Wspomnienia zasmucają wszystkich, więc dolewa do wina ziela, które na jakiś czas odbiera wszelki smutek. Potem małżonkowie opowiadają historie o Odyseuszu pod Troją: jak zakradł się do miasta przebrany za żebraka i jak powstrzymał mężczyzn w drewnianym koniu, gdy Helena chodziła wokół niego i naśladowała głosy ich żon.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 10,
+       "printedPage": 10
+      }
+     ],
+     "n": 2,
+     "id": "thattur-04-002",
+     "hash": "6738a1c9043b",
+     "srcHash": "d816f8f5322e"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Następnego dnia Menelaos opowiada o własnej drodze do domu. W Egipcie pochwycił morskiego starca Proteusza, który zmieniał się w lwa, węża, wodę i drzewo, zanim się poddał i przekazał mu wieści. Odyseusz żyje, powiedział Proteusz, ale siedzi we łzach na wyspie bogini Kalipso i nie może się wydostać, bo nie ma ani statku, ani ludzi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 10,
+       "printedPage": 10
+      }
+     ],
+     "n": 3,
+     "id": "thattur-04-003",
+     "hash": "c0afccedc35b",
+     "srcHash": "31a96d19ca5f"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… pewne czarodziejskie ziele, które było lekiem na smutek, lekiem na gniew i zapomnieniem wszelkich cierpień.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 10,
+       "printedPage": 10
+      }
+     ],
+     "n": 4,
+     "id": "thattur-04-004",
+     "hash": "8fbaa4d0fa73",
+     "sourceId": "thattur-04-005",
+     "srcHash": "a35e6b86f102"
+    },
+    {
+     "type": "heimild",
+     "text": "O zielu, które Helena dolewa do wina · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 10,
+       "printedPage": 10
+      }
+     ],
+     "n": 5,
+     "id": "thattur-04-005",
+     "hash": "297bf2d27bc0",
+     "quoteId": "thattur-04-004",
+     "srcHash": "01db3c3fc237"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Tymczasem na Itace zalotnicy dowiedzieli się, że Telemach wyjechał. Wyposażają statek i czają się w cieśninie, by zabić go w drodze powrotnej. Penelopa dowiaduje się o jednym i o drugim i jest niepocieszona.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 10,
+       "printedPage": 10
+      }
+     ],
+     "n": 6,
+     "id": "thattur-04-006",
+     "hash": "df72461b9d92",
+     "srcHash": "81ec5783ced4"
+    }
+   ]
+  },
+  {
+   "id": "thattur-05",
+   "kind": "thattur",
+   "number": 5,
+   "numeral": "V",
+   "kicker": "ROZDZIAŁ PIĄTY",
+   "title": "Kalipso",
+   "pdfPageStart": 11,
+   "pdfPageEnd": 12,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Teraz opowieść przechodzi do samego Odyseusza. Zeus wysyła Hermesa na wyspę Ogygię z rozkazem dla Kalipso: ma uwolnić tego człowieka. Bogini się gniewa. Uratowała go, gdy po rozbiciu statku wyrzuciło go na brzeg, i przez siedem lat go kochała, ale wbrew woli Zeusa nic nie może zrobić.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 11,
+       "printedPage": 11
+      }
+     ],
+     "n": 1,
+     "id": "thattur-05-001",
+     "hash": "871117528881",
+     "srcHash": "dade2740cd1b"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Znajduje Odyseusza tam, gdzie siedzi codziennie — na brzegu, skąd z płaczem patrzy na morze. Mówi mu, że może odejść. On nie wierzy jej, dopóki nie przysięgnie, że nie knuje podstępu.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 11,
+       "printedPage": 11
+      }
+     ],
+     "n": 2,
+     "id": "thattur-05-002",
+     "hash": "4b7905b37fad",
+     "srcHash": "e0091b89f7e7"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wieczorem jeszcze raz próbuje go zatrzymać. Jeśli zostanie, uczyni go nieśmiertelnym i wiecznie młodym. I czy Penelopa może dorównać bogini urodą? Odyseusz odpowiada uprzejmie, lecz stanowczo. Dobrze wie, że jego żona nie wytrzyma porównania, ale mimo to chce wrócić do domu.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 12,
+       "printedPage": 12
+      }
+     ],
+     "n": 3,
+     "id": "thattur-05-003",
+     "hash": "f87f7c239040",
+     "srcHash": "d5e1ef45246c"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… ona jest śmiertelna, a ty nieśmiertelna i nie starzejesz się. A jednak pragnę i tęsknię co dzień, by dotrzeć do mojego domu i ujrzeć dzień mego powrotu.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 12,
+       "printedPage": 12
+      }
+     ],
+     "n": 4,
+     "id": "thattur-05-004",
+     "hash": "a982d285af5f",
+     "sourceId": "thattur-05-005",
+     "srcHash": "0a1af036e494"
+    },
+    {
+     "type": "heimild",
+     "text": "Odyseusz do Kalipso · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 12,
+       "printedPage": 12
+      }
+     ],
+     "n": 5,
+     "id": "thattur-05-005",
+     "hash": "35336989669f",
+     "quoteId": "thattur-05-004",
+     "srcHash": "0cadcf722109"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Kalipso daje mu topór i w cztery dni buduje sobie tratwę. Przez siedemnaście dni płynie według gwiazd. Osiemnastego dnia widzi ląd, ale wtedy dostrzega go Posejdon. Bóg wznieca burzę, która roztrzaskuje tratwę. Przez dwie doby Odyseusz miotany jest falami i tylko dzięki pomocy morskiej bogini i Ateny dociera do brzegu przy ujściu rzeki. Nagi i wyczerpany wpełza w zarośla, przykrywa się liśćmi i zasypia.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 12,
+       "printedPage": 12
+      }
+     ],
+     "n": 6,
+     "id": "thattur-05-006",
+     "hash": "5ae3ceba4ae0",
+     "srcHash": "46186d214bb8"
+    }
+   ]
+  },
+  {
+   "id": "thattur-06",
+   "kind": "thattur",
+   "number": 6,
+   "numeral": "VI",
+   "kicker": "ROZDZIAŁ SZÓSTY",
+   "title": "Nauzykaa",
+   "pdfPageStart": 13,
+   "pdfPageEnd": 14,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Ta kraina nazywa się Scheria, a mieszkają w niej Feakowie, wielki lud żeglarzy. Nocą Atena ukazuje się we śnie królewnie Nauzykai i zachęca ją, by poszła nad rzekę prać odzież, bo wkrótce czeka ją wesele.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 13,
+       "printedPage": 13
+      }
+     ],
+     "n": 1,
+     "id": "thattur-06-001",
+     "hash": "591cec725049",
+     "srcHash": "3fc50d51433b"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Rano Nauzykaa jedzie ze swoimi służącymi do ujścia rzeki. Piorą szaty, rozkładają je do wyschnięcia, kąpią się, jedzą, a potem grają w piłkę. Piłka wpada do rzeki, dziewczęta krzyczą i Odyseusz się budzi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 13,
+       "printedPage": 13
+      }
+     ],
+     "n": 2,
+     "id": "thattur-06-002",
+     "hash": "0915d4b0e490",
+     "srcHash": "436d9fb14845"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Nie wie, gdzie się znalazł ani czy mieszkają tu dzicy, czy cywilizowani ludzie. Odłamuje gałąź z liśćmi, by zakryć swoją nagość, i wychodzi z zarośli — rozczochrany, oblepiony zaschniętą solą. Służące rozbiegają się na wszystkie strony. Tylko Nauzykaa stoi nieruchomo.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 14,
+       "printedPage": 14
+      }
+     ],
+     "n": 3,
+     "id": "thattur-06-003",
+     "hash": "4151ef50f30d",
+     "srcHash": "475d110c8b59"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… nie ma nic lepszego ani piękniejszego niż to, gdy mąż i żona mieszkają razem w jednym domu w zgodzie myśli: to wielki smutek dla ich wrogów, a radość dla ich przyjaciół…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 14,
+       "printedPage": 14
+      }
+     ],
+     "n": 4,
+     "id": "thattur-06-004",
+     "hash": "153911f5f643",
+     "sourceId": "thattur-06-005",
+     "srcHash": "cd6dc27e2069"
+    },
+    {
+     "type": "heimild",
+     "text": "Odyseusz do Nauzykai · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 14,
+       "printedPage": 14
+      }
+     ],
+     "n": 5,
+     "id": "thattur-06-005",
+     "hash": "8f0ce4f872ed",
+     "quoteId": "thattur-06-004",
+     "srcHash": "ee24e3d8dc34"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Odyseusz się zastanawia. Czy paść jej do kolan, jak każe obyczaj, czy przemówić do niej z daleka? Wybiera odległość i słowa. Pyta, czy jest boginią, czy śmiertelną kobietą, wychwala jej urodę, opowiada o swoich nieszczęściach i życzy jej wszystkiego najlepszego: dobrego męża i domu, w którym małżonkowie żyją w zgodzie.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 14,
+       "printedPage": 14
+      }
+     ],
+     "n": 6,
+     "id": "thattur-06-006",
+     "hash": "fd8e6a55b980",
+     "srcHash": "7bde8e4e8403"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Nauzykaa każe przynieść mu ubranie, jedzenie i oliwę. Gdy się umył, wydaje jej się podobny do boga. Wskazuje mu drogę do pałacu swego ojca i daje jedną radę. Ma minąć króla i prosić o opiekę królową Arete, jej matkę, bo to ona ma największą władzę.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 14,
+       "printedPage": 14
+      }
+     ],
+     "n": 7,
+     "id": "thattur-06-007",
+     "hash": "53223f5378a1",
+     "srcHash": "2b57c76b5186"
+    }
+   ]
+  },
+  {
+   "id": "thattur-07",
+   "kind": "thattur",
+   "number": 7,
+   "numeral": "VII",
+   "kicker": "ROZDZIAŁ SIÓDMY",
+   "title": "W pałacu Alkinoosa",
+   "pdfPageStart": 15,
+   "pdfPageEnd": 15,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Odyseusz idzie do miasta sam, spowity mgłą, którą otula go Atena. Pałac króla Alkinoosa nie przypomina niczego, co dotąd widział. Ściany są ze spiżu, drzwi ze złota, a przy nich stoją psy ze złota i srebra. Na zewnątrz jest sad, w którym owoce dojrzewają przez cały rok, latem i zimą.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 15,
+       "printedPage": 15
+      }
+     ],
+     "n": 1,
+     "id": "thattur-07-001",
+     "hash": "8b4932adf144",
+     "srcHash": "92ee06bb86ab"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Idzie prosto do sali, obok możnych, i pada do kolan królowej Arete. Dopiero wtedy mgła się rozwiewa. Prosi ją, by pomogła mu wrócić do domu, a potem siada w popiele przy palenisku jak ktoś, kto nic nie ma.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 15,
+       "printedPage": 15
+      }
+     ],
+     "n": 2,
+     "id": "thattur-07-002",
+     "hash": "2c922af3b50f",
+     "srcHash": "d1ba4797e1e3"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wszyscy milkną. W końcu stary możny przypomina królowi o jego obowiązku wobec gości. Alkinoos bierze Odyseusza za rękę, prowadzi go na miejsce i każe podać mu jedzenie i wino.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 15,
+       "printedPage": 15
+      }
+     ],
+     "n": 3,
+     "id": "thattur-07-003",
+     "hash": "ff7b506e35aa",
+     "srcHash": "28c3166338c7"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… tam dojrzewa jedna gruszka, gdy inna się starzeje, jabłko na jabłku, winogrono na winogronie, figa na fidze.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 15,
+       "printedPage": 15
+      }
+     ],
+     "n": 4,
+     "id": "thattur-07-004",
+     "hash": "2e0e5bf85011",
+     "sourceId": "thattur-07-005",
+     "srcHash": "ca17d3e924a0"
+    },
+    {
+     "type": "heimild",
+     "text": "O sadzie Alkinoosa · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 15,
+       "printedPage": 15
+      }
+     ],
+     "n": 5,
+     "id": "thattur-07-005",
+     "hash": "0dc74ca5bd92",
+     "quoteId": "thattur-07-004",
+     "srcHash": "dfac064d3a9d"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Gdy inni się rozchodzą, Arete pyta, skąd ma szaty, bo rozpoznaje robotę: sama je utkała. Wtedy Odyseusz opowiada o Kalipso, rozbiciu statku i spotkaniu z Nauzykaą, ale swojego imienia nie wymienia. Alkinoos obiecuje, że statek Feaków zawiezie go do domu, gdziekolwiek ten dom jest. Gość tak mu się podoba, że chętnie wziąłby go sobie za zięcia.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 15,
+       "printedPage": 15
+      }
+     ],
+     "n": 6,
+     "id": "thattur-07-006",
+     "hash": "3bd331b9131c",
+     "srcHash": "995c755b3cd2"
+    }
+   ]
+  },
+  {
+   "id": "thattur-08",
+   "kind": "thattur",
+   "number": 8,
+   "numeral": "VIII",
+   "kicker": "ROZDZIAŁ ÓSMY",
+   "title": "Pieśń Demodoka",
+   "pdfPageStart": 16,
+   "pdfPageEnd": 17,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Następnego dnia Alkinoos wydaje ucztę na cześć gościa. Przyprowadzają tam Demodoka, ślepego pieśniarza, któremu Muza dała dar śpiewu, ale odebrała wzrok. Śpiewa o sporze Odyseusza z Achillesem pod Troją. Gość naciąga płaszcz na głowę i płacze tak, by nikt nie zauważył. Tylko Alkinoos to dostrzega.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 16,
+       "printedPage": 16
+      }
+     ],
+     "n": 1,
+     "id": "thattur-08-001",
+     "hash": "1f79de974764",
+     "srcHash": "8f1ba0fff78f"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Aby poprawić ludziom nastrój, urządza się zawody. Młody Feak drwi z gościa i mówi, że wygląda jak kupiec, a nie atleta. Odyseusz wpada w gniew, chwyta najcięższy dysk i rzuca go daleko poza wszystkie znaki. Potem tańczy się, a Demodok śpiewa żartobliwą pieśń o miłości Aresa i Afrodyty.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 16,
+       "printedPage": 16
+      }
+     ],
+     "n": 2,
+     "id": "thattur-08-002",
+     "hash": "dc8151fca838",
+     "srcHash": "019d021ca1dc"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wieczorem Odyseusz sam prosi pieśniarza o konkretną pieśń: o drewnianym koniu. Demodok śpiewa o tym, jak Grecy udali, że odpływają, jak Trojanie wciągnęli konia do miasta i jak nocą wysypali się z niego wojownicy.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 17,
+       "printedPage": 17
+      }
+     ],
+     "n": 3,
+     "id": "thattur-08-003",
+     "hash": "c63da197b095",
+     "srcHash": "894a13792c9b"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… o drewnianym koniu, którego Epeios zbudował z pomocą Ateny, o tej podstępnej machinie, którą dostojny Odyseusz zdołał wprowadzić do warowni…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 17,
+       "printedPage": 17
+      }
+     ],
+     "n": 4,
+     "id": "thattur-08-004",
+     "hash": "b88ea0e627d4",
+     "sourceId": "thattur-08-005",
+     "srcHash": "c4392908b4bf"
+    },
+    {
+     "type": "heimild",
+     "text": "Odyseusz prosi Demodoka o pieśń · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 17,
+       "printedPage": 17
+      }
+     ],
+     "n": 5,
+     "id": "thattur-08-005",
+     "hash": "111a47205452",
+     "quoteId": "thattur-08-004",
+     "srcHash": "921a4ded93d4"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Odyseusz znowu płacze, a tym razem Homer porównuje go do kobiety opłakującej poległego męża w zdobytym mieście. Zwycięzca płacze tak jak ci, których pokonał.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 17,
+       "printedPage": 17
+      }
+     ],
+     "n": 6,
+     "id": "thattur-08-006",
+     "hash": "49c17f0aa536",
+     "srcHash": "2ed8c8a45a98"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wtedy Alkinoos przerywa pieśń i pyta gościa wprost: kim jesteś? Skąd przybywasz? I dlaczego płaczesz, gdy śpiewa się o Troi?",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 17,
+       "printedPage": 17
+      }
+     ],
+     "n": 7,
+     "id": "thattur-08-007",
+     "hash": "2d5fd4b62b96",
+     "srcHash": "df83251ff1a0"
+    }
+   ]
+  },
+  {
+   "id": "thattur-09",
+   "kind": "thattur",
+   "number": 9,
+   "numeral": "IX",
+   "kicker": "ROZDZIAŁ DZIEWIĄTY",
+   "title": "Cyklop",
+   "pdfPageStart": 18,
+   "pdfPageEnd": 20,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Gość odpowiada, że jest Odyseuszem, synem Laertesa, z Itaki, znanym wszystkim ludziom ze swoich podstępów. Potem opowiada swoją historię. Następne cztery rozdziały to jego własna opowieść.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 18,
+       "printedPage": 18
+      }
+     ],
+     "n": 1,
+     "id": "thattur-09-001",
+     "hash": "347f9b0859ac",
+     "srcHash": "f43e9a7e0374"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Z Troi wypłynął z dwunastoma statkami. Najpierw złupili miasto Kikonów, ale ludzie nie chcieli od razu odpłynąć, ucztowali na brzegu i zapłacili za to życiem wielu towarzyszy. Potem burza zniosła ich na południe od Grecji, poza granice znanego świata. U Lotofagów jego zwiadowcy skosztowali owocu, po którym zapomnieli o tęsknocie za domem, i musiał siłą zaciągnąć ich z płaczem na statek.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 18,
+       "printedPage": 18
+      }
+     ],
+     "n": 2,
+     "id": "thattur-09-002",
+     "hash": "35597b734554",
+     "srcHash": "90655733ff62"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Następnie przybyli do krainy Cyklopów. Odyseusz wszedł z dwunastoma ludźmi do wielkiej jaskini i z ciekawości chciał zaczekać na gospodarza. Okazał się nim jednooki olbrzym Polifem. Zamknął jaskinię głazem i przy każdym posiłku zjadał po dwóch ludzi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 19,
+       "printedPage": 19
+      }
+     ],
+     "n": 3,
+     "id": "thattur-09-003",
+     "hash": "42eaf1292cce",
+     "srcHash": "bc0ed7cf3cf3"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Imię moje jest Nikt, i Nikt wołają na mnie matka moja, i ojciec mój, i wszyscy moi przyjaciele.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 19,
+       "printedPage": 19
+      }
+     ],
+     "n": 4,
+     "id": "thattur-09-004",
+     "hash": "9b1fcaeedfde",
+     "sourceId": "thattur-09-005",
+     "srcHash": "4385bd7af6f1"
+    },
+    {
+     "type": "heimild",
+     "text": "Odyseusz do Polifema · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 19,
+       "printedPage": 19
+      }
+     ],
+     "n": 5,
+     "id": "thattur-09-005",
+     "hash": "50adcdad93a0",
+     "quoteId": "thattur-09-004",
+     "srcHash": "cebb7f94edfc"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Odyseusz dał mu mocnego wina i powiedział, że nazywa się Nikt. Gdy olbrzym zasnął, wbili mu w oko rozżarzony pal. Wołał o pomoc, ale gdy sąsiedzi usłyszeli, że zabija go „Nikt”, wrócili do domów. Rano ludzie wydostali się na zewnątrz, przywiązani pod brzuchami owiec.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 19,
+       "printedPage": 19
+      }
+     ],
+     "n": 6,
+     "id": "thattur-09-006",
+     "hash": "f18d41e611a2",
+     "srcHash": "7dfd498bb470"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Już na pokładzie Odyseusz nie zdołał się powstrzymać. Wykrzyczał olbrzymowi swoje prawdziwe imię. Wtedy Polifem poprosił swego ojca, Posejdona, by go pomścił.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 20,
+       "printedPage": 20
+      }
+     ],
+     "n": 7,
+     "id": "thattur-09-007",
+     "hash": "8b91f9ca6fab",
+     "srcHash": "46ca3e263bc7"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… to spraw, by wpierw stracił wszystkich swoich towarzyszy, późno i w nędzy wrócił do domu na cudzym statku i by w domu zastał nieszczęście.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 20,
+       "printedPage": 20
+      }
+     ],
+     "n": 8,
+     "id": "thattur-09-008",
+     "hash": "b8a7cb80123e",
+     "sourceId": "thattur-09-009",
+     "srcHash": "8b4916797b50"
+    },
+    {
+     "type": "heimild",
+     "text": "Modlitwa Polifema do Posejdona · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 20,
+       "printedPage": 20
+      }
+     ],
+     "n": 9,
+     "id": "thattur-09-009",
+     "hash": "4265c67f833e",
+     "quoteId": "thattur-09-008",
+     "srcHash": "72117854fec1"
+    }
+   ]
+  },
+  {
+   "id": "thattur-10",
+   "kind": "thattur",
+   "number": 10,
+   "numeral": "X",
+   "kicker": "ROZDZIAŁ DZIESIĄTY",
+   "title": "Eol, Lajstrygonowie i Kirke",
+   "pdfPageStart": 21,
+   "pdfPageEnd": 23,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Z krainy Cyklopów popłynęli dalej, radzi, że ocaleli, ale smutni z powodu towarzyszy, których zjadł olbrzym. Następnie przybyli na pływającą wyspę otoczoną spiżowym murem. Mieszkał tam władca wiatrów Eol. Przyjął ich gościnnie, przez cały miesiąc dawał im schronienie, a na pożegnanie podarował Odyseuszowi worek, w którym związane były wszystkie przeciwne wiatry. Przez dziewięć dni płynęli z łagodnym pomyślnym wiatrem, a dziesiątego dnia zobaczyli ogniska na Itace. Wtedy Odyseusz zasnął, wyczerpany tym, że przez całą drogę sam stał przy sterze. Ludzie pomyśleli, że ukrywa w worku złoto, i go rozwiązali. Burza zaniosła ich z powrotem aż do Eola, a ten przepędził ich jako ludzi znienawidzonych przez bogów.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 21,
+       "printedPage": 21
+      }
+     ],
+     "n": 1,
+     "id": "thattur-10-001",
+     "hash": "6bc454d58094",
+     "srcHash": "0ebaa9611235"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Teraz nie mieli pomyślnego wiatru. Przez sześć dób wiosłowali, zmęczeni i przygnębieni, a siódmego dnia przybyli do krainy Lajstrygonów. Była tam przystań otoczona wysokimi skałami, z wąskim wejściem. Jedenaście statków weszło do środka i stanęło obok siebie na spokojnej wodzie, ale Odyseusz zostawił swój statek na zewnątrz. Trzech ludzi wysłano na zwiady. Dziewczyna wskazała im drogę do pałacu swego ojca, ale mieszkali tam olbrzymi ludożercy, a król pochwycił jednego z nich i go zjadł. Potem Lajstrygonowie zbiegli się na skały, roztrzaskali statki kamieniami i przebili ludzi jak ryby. Odyseusz przeciął cumę i uciekł tylko ze swoją załogą.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 21,
+       "printedPage": 21
+      }
+     ],
+     "n": 2,
+     "id": "thattur-10-002",
+     "hash": "637387dee19c",
+     "srcHash": "ac60091a034c"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Na następnej wyspie mieszkała bogini Kirke. Zaprosiła połowę załogi do siebie, dała im napój i uderzyła ich różdżką, a oni zamienili się w świnie. Jeden uciekł i o wszystkim opowiedział. Odyseusz sam wyruszył, by ich ratować. Po drodze spotkał Hermesa, który dał mu czarodziejskie ziele przeciw czarom. Gdy napój Kirke na niego nie podziałał, dobył miecza. Przysięgła, że nie wyrządzi mu krzywdy, i uwolniła ludzi od czarów.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 22,
+       "printedPage": 22
+      }
+     ],
+     "n": 3,
+     "id": "thattur-10-003",
+     "hash": "3b5c8c3c908e",
+     "srcHash": "3a088617a959"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Rozwiązali worek i wtedy wyrwały się wszystkie wiatry; burza nagle porwała żeglarzy na pełne morze, daleko od ojczystej ziemi…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 23,
+       "printedPage": 23
+      }
+     ],
+     "n": 4,
+     "id": "thattur-10-004",
+     "hash": "32e306f9ab4f",
+     "sourceId": "thattur-10-005",
+     "srcHash": "4fe9f88be0e6"
+    },
+    {
+     "type": "heimild",
+     "text": "O worku z wiatrami · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 23,
+       "printedPage": 23
+      }
+     ],
+     "n": 5,
+     "id": "thattur-10-005",
+     "hash": "7b2abfd83d74",
+     "quoteId": "thattur-10-004",
+     "srcHash": "3045af0b374a"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "U Kirke spędzili cały rok na ucztach. W końcu ludzie przypomnieli mu o powrocie do domu. Kirke powiedziała, że najpierw musi udać się tam, dokąd nie chodzi żaden żywy człowiek: do krainy umarłych.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 23,
+       "printedPage": 23
+      }
+     ],
+     "n": 6,
+     "id": "thattur-10-006",
+     "hash": "3d4cc7c31a3f",
+     "srcHash": "6bb57942777a"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… mieli wtedy głowę i głos, szczecinę i postać jak świnie, ale zachowali rozum nienaruszony, taki sam jak przedtem.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 23,
+       "printedPage": 23
+      }
+     ],
+     "n": 7,
+     "id": "thattur-10-007",
+     "hash": "8b7eb838bc12",
+     "sourceId": "thattur-10-008",
+     "srcHash": "097ab7601b51"
+    },
+    {
+     "type": "heimild",
+     "text": "O ludziach Odyseusza u Kirke · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 23,
+       "printedPage": 23
+      }
+     ],
+     "n": 8,
+     "id": "thattur-10-008",
+     "hash": "88985ce008e7",
+     "quoteId": "thattur-10-007",
+     "srcHash": "cc0e90d14bd1"
+    }
+   ]
+  },
+  {
+   "id": "thattur-11",
+   "kind": "thattur",
+   "number": 11,
+   "numeral": "XI",
+   "kicker": "ROZDZIAŁ JEDENASTY",
+   "title": "Kraina umarłych",
+   "pdfPageStart": 24,
+   "pdfPageEnd": 26,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Popłynęli na kraniec świata, gdzie nigdy nie widać słońca. Odyseusz wykopał dół, złożył w ofierze owce i pozwolił krwi spłynąć do niego. Wtedy z ciemności wyszły tłumnie dusze umarłych. Trzymał je mieczem na dystans, bo kto napije się krwi, na chwilę odzyskuje mowę i pamięć.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 24,
+       "printedPage": 24
+      }
+     ],
+     "n": 1,
+     "id": "thattur-11-001",
+     "hash": "c977d4999687",
+     "srcHash": "2186dbab3628"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Pierwszy napił się wróżbita Tejrezjasz. Powiedział Odyseuszowi, że Posejdon gniewa się na niego z powodu swego syna. Może jednak dotrzeć do domu, jeśli on i jego ludzie nie tkną wołów boga słońca. W przeciwnym razie wróci późno, sam, na cudzym statku, i zastanie swój pałac pełen zuchwalców.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 24,
+       "printedPage": 24
+      }
+     ],
+     "n": 2,
+     "id": "thattur-11-002",
+     "hash": "ca6b96f39d4e",
+     "srcHash": "3d303810394c"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Potem przyszła Antykleja, jego matka. Zmarła z tęsknoty za nim. Trzy razy próbował ją objąć i trzy razy wymykała mu się z rąk jak cień albo sen.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 25,
+       "printedPage": 25
+      }
+     ],
+     "n": 3,
+     "id": "thattur-11-003",
+     "hash": "f3a1508b2379",
+     "srcHash": "9e724d76a4c0"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Wolałbym żyć na wsi i być parobkiem u jakiegoś biedaka, który sam niewiele ma, niż panować nad wszystkimi umarłymi duchami.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 25,
+       "printedPage": 25
+      }
+     ],
+     "n": 4,
+     "id": "thattur-11-004",
+     "hash": "f751263250ae",
+     "sourceId": "thattur-11-005",
+     "srcHash": "c2db09a7381d"
+    },
+    {
+     "type": "heimild",
+     "text": "Achilles do Odyseusza · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 25,
+       "printedPage": 25
+      }
+     ],
+     "n": 5,
+     "id": "thattur-11-005",
+     "hash": "702eeb9eabd9",
+     "quoteId": "thattur-11-004",
+     "srcHash": "4a0a615822c7"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Spotkał też swoich towarzyszy spod Troi. Agamemnon opowiedział, jak jego własna żona zamordowała go po powrocie, i przestrzegł Odyseusza, by nikomu nie ufał. Achilles, największy z greckich wojowników, pytał o wieści o swoim synu. Odyseusz próbował go pocieszyć tym, że jest władcą wśród umarłych. Achilles odpowiedział, że wolałby być parobkiem u biednego chłopa na ziemi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 26,
+       "printedPage": 26
+      }
+     ],
+     "n": 6,
+     "id": "thattur-11-006",
+     "hash": "539d178f7118",
+     "srcHash": "277d85f159d5"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "W końcu dusze z przeraźliwym gwarem stłoczyły się wokół niego. Odyseusz przeląkł się i pospieszył na statek.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 26,
+       "printedPage": 26
+      }
+     ],
+     "n": 7,
+     "id": "thattur-11-007",
+     "hash": "7c5c1f4cabd9",
+     "srcHash": "298a17f3e492"
+    }
+   ]
+  },
+  {
+   "id": "thattur-12",
+   "kind": "thattur",
+   "number": 12,
+   "numeral": "XII",
+   "kicker": "ROZDZIAŁ DWUNASTY",
+   "title": "Syreny, Scylla i woły Heliosa",
+   "pdfPageStart": 27,
+   "pdfPageEnd": 29,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Kirke opowiedziała im, co ich czeka. Najpierw syreny, które śpiewem wabią ludzi do siebie i siedzą wśród kości tych, którzy słuchali. Odyseusz zatkał swoim ludziom uszy woskiem i kazał przywiązać się do masztu, bo chciał usłyszeć. Gdy śpiew do niego dotarł, prosił, by go rozwiązali, ale oni zacieśnili więzy i wiosłowali dalej.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 27,
+       "printedPage": 27
+      }
+     ],
+     "n": 1,
+     "id": "thattur-12-001",
+     "hash": "9795bf21c2ac",
+     "srcHash": "e473a4091937"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Dalej była cieśnina. Po jednej stronie mieszkała w jaskini Scylla o sześciu głowach na długich szyjach. Po drugiej stronie wir Charybdy trzy razy dziennie wsysał morze. Kirke poradziła mu płynąć bliżej Scylli. Nie powiedział o niej swoim ludziom. Gdy wszyscy wpatrywali się w wir, Scylla porwała sześciu z nich, po jednym każdą paszczą. Wykrzykiwali jego imię, gdy ich pożerała. Odyseusz mówi, że był to najstraszniejszy widok ze wszystkich jego wędrówek.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 27,
+       "printedPage": 27
+      }
+     ],
+     "n": 2,
+     "id": "thattur-12-002",
+     "hash": "8ee4b7779f92",
+     "srcHash": "3c5def955089"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Potem przybyli na wyspę boga słońca Heliosa. Odyseusz chciał przepłynąć obok, ale zmęczeni ludzie odmówili. Kazał im przysiąc, że nie tkną wołów. Potem przez cały miesiąc wiał przeciwny wiatr i skończyło się jedzenie. Gdy Odyseusz spał, zarżnęli najlepsze woły. Skóry pełzały, a mięso ryczało na rożnach.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 28,
+       "printedPage": 28
+      }
+     ],
+     "n": 3,
+     "id": "thattur-12-003",
+     "hash": "76209e5ba9a0",
+     "srcHash": "94ee77e90aac"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… bo syreny siedzą na jakiejś łące i czarują ludzi dźwięcznym śpiewem; obok nich leży wielka sterta kości ludzi, którzy tam gniją…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 28,
+       "printedPage": 28
+      }
+     ],
+     "n": 4,
+     "id": "thattur-12-004",
+     "hash": "b4b40b1a83f8",
+     "sourceId": "thattur-12-005",
+     "srcHash": "dd921b1f8fce"
+    },
+    {
+     "type": "heimild",
+     "text": "Kirke do Odyseusza · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 28,
+       "printedPage": 28
+      }
+     ],
+     "n": 5,
+     "id": "thattur-12-005",
+     "hash": "21d35d02d509",
+     "quoteId": "thattur-12-004",
+     "srcHash": "3ed10fa75334"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Gdy w końcu wypłynęli, Zeus uderzył w statek piorunem. Zginęli wszyscy oprócz Odyseusza. Przez dziewięć dni dryfował na szczątkach, aż dotarł na wyspę Kalipso. Na tym kończy swoją opowieść w pałacu Alkinoosa.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 29,
+       "printedPage": 29
+      }
+     ],
+     "n": 6,
+     "id": "thattur-12-006",
+     "hash": "003ff3cf39dc",
+     "srcHash": "00e184d6ac11"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… bo o wiele lepiej stracić ze swego statku sześciu ludzi niż wszystkich naraz.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 29,
+       "printedPage": 29
+      }
+     ],
+     "n": 7,
+     "id": "thattur-12-007",
+     "hash": "9cd10f11855f",
+     "sourceId": "thattur-12-008",
+     "srcHash": "948edbc27566"
+    },
+    {
+     "type": "heimild",
+     "text": "Rada Kirke o Scylli · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 29,
+       "printedPage": 29
+      }
+     ],
+     "n": 8,
+     "id": "thattur-12-008",
+     "hash": "d8d548dd41d4",
+     "quoteId": "thattur-12-007",
+     "srcHash": "7d4aa4b82973"
+    }
+   ]
+  },
+  {
+   "id": "thattur-13",
+   "kind": "thattur",
+   "number": 13,
+   "numeral": "XIII",
+   "kicker": "ROZDZIAŁ TRZYNASTY",
+   "title": "Do domu na Itakę",
+   "pdfPageStart": 30,
+   "pdfPageEnd": 30,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Gdy opowieść się kończy, Feakowie siedzą w milczeniu, oczarowani. Obsypują gościa darami, większymi niż cały jego łup spod Troi, i przygotowują statek. Odyseusz kładzie się na rufie i zapada w głęboki sen, bardzo podobny do śmierci. Nocą statek mknie przez morze. O świcie wioślarze kładą go śpiącego na brzegu Itaki, układają obok niego dary i odpływają.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 30,
+       "printedPage": 30
+      }
+     ],
+     "n": 1,
+     "id": "thattur-13-001",
+     "hash": "bee85ee48674",
+     "srcHash": "829bbc6caffd"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Posejdon gniewa się na Feaków za ich pomoc i zamienia ich statek w kamień, gdy ten jest już blisko domu.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 30,
+       "printedPage": 30
+      }
+     ],
+     "n": 2,
+     "id": "thattur-13-002",
+     "hash": "b2810ad03e1d",
+     "srcHash": "4bb5acb4b138"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Odyseusz budzi się i nie poznaje okolicy, bo Atena okryła kraj mgłą. Myśli, że Feakowie go oszukali i wysadzili w nieznanym miejscu. Wtedy podchodzi do niego młody pasterz. Odyseusz pyta, gdzie jest, a gdy słyszy nazwę Itaka, raduje się w sercu, ale niczego po sobie nie pokazuje. Zmyśla długą historię o tym, że jest zbiegiem z Krety.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 30,
+       "printedPage": 30
+      }
+     ],
+     "n": 3,
+     "id": "thattur-13-003",
+     "hash": "61b3b13c52fb",
+     "srcHash": "82a470434fa4"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Niestrudzony z ciebie człowiek, i pomysłowy, i pełen podstępów! … jesteś najrozważniejszy i najwymowniejszy ze wszystkich ludzi…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 30,
+       "printedPage": 30
+      }
+     ],
+     "n": 4,
+     "id": "thattur-13-004",
+     "hash": "bd149fdf76c8",
+     "sourceId": "thattur-13-005",
+     "srcHash": "c08351c905d9"
+    },
+    {
+     "type": "heimild",
+     "text": "Atena do Odyseusza · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 30,
+       "printedPage": 30
+      }
+     ],
+     "n": 5,
+     "id": "thattur-13-005",
+     "hash": "a3af3a49c96f",
+     "quoteId": "thattur-13-004",
+     "srcHash": "97db3c77a1e9"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Pasterz się uśmiecha i zmienia w wysoką, piękną kobietę. To Atena. Bawi ją to: nawet przed boginią nie potrafi przestać kłamać. Ukrywają dary w jaskini, siadają pod drzewem oliwnym i obmyślają, jak zgładzić zalotników.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 30,
+       "printedPage": 30
+      }
+     ],
+     "n": 6,
+     "id": "thattur-13-006",
+     "hash": "6819237973d3",
+     "srcHash": "2109dd851a6d"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Potem dotyka go różdżką. Skóra się marszczy, włosy wypadają, oczy matowieją. Stał się starym wędrowcem w łachmanach.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 30,
+       "printedPage": 30
+      }
+     ],
+     "n": 7,
+     "id": "thattur-13-007",
+     "hash": "d7504156d813",
+     "srcHash": "b8c4f0cffc28"
+    }
+   ]
+  },
+  {
+   "id": "thattur-14",
+   "kind": "thattur",
+   "number": 14,
+   "numeral": "XIV",
+   "kicker": "ROZDZIAŁ CZTERNASTY",
+   "title": "U świniopasa",
+   "pdfPageStart": 31,
+   "pdfPageEnd": 31,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Za radą Ateny wędrowiec idzie najpierw w górę, na wzgórza, do świniopasa Eumajosa. Psy pasterza rzucają się na niego, a on siada, by się przed nimi bronić, aż Eumajos przegania je kamieniami.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 31,
+       "printedPage": 31
+      }
+     ],
+     "n": 1,
+     "id": "thattur-14-001",
+     "hash": "4f17e1da40d0",
+     "srcHash": "713f758d113d"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Eumajos jest niewolnikiem, ale zaprasza nieznajomego żebraka do swojej chaty, rozkłada dla niego owczą skórę i daje mu to, co ma najlepszego. Nie skarży się na własny los, lecz opłakuje swego pana, którego uważa za dawno zmarłego, i oburza się na postępowanie zalotników.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 31,
+       "printedPage": 31
+      }
+     ],
+     "n": 2,
+     "id": "thattur-14-002",
+     "hash": "03c78c2b7f2a",
+     "srcHash": "db729406ee8e"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Gość przysięga, że Odyseusz wraca do domu i przybędzie, zanim minie ten miesiąc. Eumajos nie wierzy. Zbyt wielu włóczęgów przychodziło z takimi historiami, żeby dostać od Penelopy jedzenie i ubranie.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 31,
+       "printedPage": 31
+      }
+     ],
+     "n": 3,
+     "id": "thattur-14-003",
+     "hash": "c8bc5b037b4f",
+     "srcHash": "a303126d2792"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Nie przystoi mi, gościu, źle przyjmować żadnego przybysza, choćby był jeszcze nędzniejszy niż ty; bo wszyscy goście i ubodzy są pod opieką Zeusa.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 31,
+       "printedPage": 31
+      }
+     ],
+     "n": 4,
+     "id": "thattur-14-004",
+     "hash": "645f97255aa4",
+     "sourceId": "thattur-14-005",
+     "srcHash": "b1e017663cbf"
+    },
+    {
+     "type": "heimild",
+     "text": "Eumajos do wędrowca · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 31,
+       "printedPage": 31
+      }
+     ],
+     "n": 5,
+     "id": "thattur-14-005",
+     "hash": "a3257a5df0ff",
+     "quoteId": "thattur-14-004",
+     "srcHash": "51b635736980"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Gdy pasterz pyta, kim jest, Odyseusz opowiada kolejną zmyśloną historię. Jest podobno z Krety, walczył pod Troją, trafił do niewoli w Egipcie i błąkał się po świecie. Historia jest długa i przekonująca, a Eumajos wierzy we wszystko oprócz jedynej rzeczy, która jest prawdą.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 31,
+       "printedPage": 31
+      }
+     ],
+     "n": 6,
+     "id": "thattur-14-006",
+     "hash": "6ecb4b474628",
+     "srcHash": "3a47fab0a4cd"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Noc jest zimna i pada deszcz. Wtedy gość opowiada, jak Odyseusz kiedyś pod Troją podstępem zdobył dla niego płaszcz. Eumajos rozumie aluzję i pożycza mu grube okrycie. Sam idzie spać na dworze przy świniach, by ich pilnować.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 31,
+       "printedPage": 31
+      }
+     ],
+     "n": 7,
+     "id": "thattur-14-007",
+     "hash": "1ca9a5ba76d7",
+     "srcHash": "18ac10ffef8d"
+    }
+   ]
+  },
+  {
+   "id": "thattur-15",
+   "kind": "thattur",
+   "number": 15,
+   "numeral": "XV",
+   "kicker": "ROZDZIAŁ PIĘTNASTY",
+   "title": "Telemach wraca do domu",
+   "pdfPageStart": 32,
+   "pdfPageEnd": 32,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Atena udaje się do Sparty i nakłania Telemacha do powrotu do domu. Ostrzega go przed zasadzką zalotników i mówi mu, którędy ma płynąć.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 32,
+       "printedPage": 32
+      }
+     ],
+     "n": 1,
+     "id": "thattur-15-001",
+     "hash": "daf863232acf",
+     "srcHash": "fed95f9b2861"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Menelaos i Helena żegnają go z darami. Gdy wsiada do rydwanu, nad nim przelatuje orzeł z białą gęsią w szponach. Helena wykłada ten znak.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 32,
+       "printedPage": 32
+      }
+     ],
+     "n": 2,
+     "id": "thattur-15-002",
+     "hash": "4080b0034bab",
+     "srcHash": "e6bc18ec7ab5"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "W Pylos Telemach idzie prosto na statek, by stary Nestor nie zatrzymał go swoją gościnnością. Tuż przed odpłynięciem podchodzi do niego zbieg, wróżbita, który zabił człowieka, i prosi o zabranie go ze sobą. Telemach bierze go na pokład.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 32,
+       "printedPage": 32
+      }
+     ],
+     "n": 3,
+     "id": "thattur-15-003",
+     "hash": "213ef336dde5",
+     "srcHash": "38f3fc44d9fb"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Jak ten orzeł przyleciał z góry, gdzie ma gniazdo i pisklęta, i porwał gęś domową, tak i Odyseusz wróci do domu po wielu próbach i tułaczkach i się zemści…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 32,
+       "printedPage": 32
+      }
+     ],
+     "n": 4,
+     "id": "thattur-15-004",
+     "hash": "7c23021d490a",
+     "sourceId": "thattur-15-005",
+     "srcHash": "c645ed781b40"
+    },
+    {
+     "type": "heimild",
+     "text": "Helena wykłada znak · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 32,
+       "printedPage": 32
+      }
+     ],
+     "n": 5,
+     "id": "thattur-15-005",
+     "hash": "aa7662595afc",
+     "quoteId": "thattur-15-004",
+     "srcHash": "2619633a2de3"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Tymczasem Odyseusz siedzi w chacie u Eumajosa. Pyta o swoich rodziców, a świniopas mówi mu, że jego matka nie żyje, a ojciec Laertes żyje samotny i złamany gdzieś na wsi. Wtedy Eumajos opowiada swoją własną historię. Był synem króla, ale służąca w domu uciekła z nim, gdy był małym dzieckiem, do morskich rozbójników, którzy sprzedali go Laertesowi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 32,
+       "printedPage": 32
+      }
+     ],
+     "n": 6,
+     "id": "thattur-15-006",
+     "hash": "39a3c9a22068",
+     "srcHash": "094aa86198b8"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Telemach płynie inną drogą, niż spodziewali się zalotnicy, i omija ich. Wysyła statek dalej do miasta, a sam idzie na wzgórza do świniopasa, jak powiedziała mu Atena.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 32,
+       "printedPage": 32
+      }
+     ],
+     "n": 7,
+     "id": "thattur-15-007",
+     "hash": "008ae5e9506d",
+     "srcHash": "b1112545c303"
+    }
+   ]
+  },
+  {
+   "id": "thattur-16",
+   "kind": "thattur",
+   "number": 16,
+   "numeral": "XVI",
+   "kicker": "ROZDZIAŁ SZESNASTY",
+   "title": "Spotkanie ojca i syna",
+   "pdfPageStart": 33,
+   "pdfPageEnd": 33,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Gdy przychodzi Telemach, psy nie szczekają, tylko łaszą się do niego. Eumajos wita go jak ojciec syna, którego nie było dziesięć lat. Wędrowiec wstaje i ofiarowuje mu swoje miejsce, ale Telemach uprzejmie odmawia. Ojciec i syn siedzą naprzeciw siebie, a wie o tym tylko jeden z nich.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 33,
+       "printedPage": 33
+      }
+     ],
+     "n": 1,
+     "id": "thattur-16-001",
+     "hash": "02a4359d6b32",
+     "srcHash": "b0f1d09139aa"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Telemach wysyła Eumajosa do miasta, by powiedział Penelopie, że wrócił cały i zdrowy. Gdy zostają sami, w drzwiach pojawia się Atena. Widzą ją tylko Odyseusz i psy. Dotyka go różdżką i znów staje się wysoki i silny, w czystych szatach.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 33,
+       "printedPage": 33
+      }
+     ],
+     "n": 2,
+     "id": "thattur-16-002",
+     "hash": "c66ae8e280d4",
+     "srcHash": "49d78162746a"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Telemach się przeraża i myśli, że to któryś z bogów. Odyseusz mówi, że nie jest bogiem, lecz jego ojcem, tym, za którym tęsknił i przez którego tyle wycierpiał. Chłopak nie od razu wierzy. Potem padają sobie w ramiona i głośno płaczą jak ptaki, które straciły pisklęta.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 33,
+       "printedPage": 33
+      }
+     ],
+     "n": 3,
+     "id": "thattur-16-003",
+     "hash": "2b08f53e1539",
+     "srcHash": "1d6079d4c21e"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… Telemach rzucił się w objęcia swego dobrego ojca, szlochając, i wylewał łzy; i teraz obu ich ogarnęła chęć płaczu.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 33,
+       "printedPage": 33
+      }
+     ],
+     "n": 4,
+     "id": "thattur-16-004",
+     "hash": "1e3f21762ab9",
+     "sourceId": "thattur-16-005",
+     "srcHash": "ec68bc4b95db"
+    },
+    {
+     "type": "heimild",
+     "text": "Spotkanie ojca i syna · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 33,
+       "printedPage": 33
+      }
+     ],
+     "n": 5,
+     "id": "thattur-16-005",
+     "hash": "5b6389f977ef",
+     "quoteId": "thattur-16-004",
+     "srcHash": "fb12041c6114"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Potem rozmowa schodzi na zalotników. Telemach ich wylicza: jest ich stu ośmiu, nie licząc sług. Dwóch ludzi nie może walczyć z taką liczbą. Odyseusz pyta, czy Atena i Zeus nie wystarczą jako posiłki.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 33,
+       "printedPage": 33
+      }
+     ],
+     "n": 6,
+     "id": "thattur-16-006",
+     "hash": "6f43920a4509",
+     "srcHash": "2c9ef0f12110"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Plan jest taki. Odyseusz przyjdzie do pałacu jako wędrowiec i zniesie wszystko, co go spotka. Telemach na znak usunie broń z sali. I nikt nie może wiedzieć, kim jest wędrowiec — ani Laertes, ani Eumajos, ani Penelopa.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 33,
+       "printedPage": 33
+      }
+     ],
+     "n": 7,
+     "id": "thattur-16-007",
+     "hash": "84911637c10e",
+     "srcHash": "f51ac5900295"
+    }
+   ]
+  },
+  {
+   "id": "thattur-17",
+   "kind": "thattur",
+   "number": 17,
+   "numeral": "XVII",
+   "kicker": "ROZDZIAŁ SIEDEMNASTY",
+   "title": "Wędrowiec w pałacu",
+   "pdfPageStart": 34,
+   "pdfPageEnd": 35,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Następnego dnia Telemach idzie do miasta pierwszy. Eumajos prowadzi wędrowca za nim. Po drodze spotykają kozopasa Melantiosa, który trzyma stronę zalotników. Obrzuca ich obelgami i kopie Odyseusza. Odyseusz zastanawia się, czy nie zabić go na miejscu, ale się powstrzymuje.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 34,
+       "printedPage": 34
+      }
+     ],
+     "n": 1,
+     "id": "thattur-17-001",
+     "hash": "0b45397e97e6",
+     "srcHash": "42e2873ef7ab"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Przy drzwiach pałacu na kupie gnoju leży stary pies, cały w pchłach. To Argos, pies myśliwski, którego Odyseusz wychował, zanim wyruszył pod Troję. Pies poznaje jego głos. Merda ogonem i kładzie uszy, ale nie ma siły podpełznąć do swego pana. Odyseusz odwraca się i ociera łzę, by Eumajos nie zobaczył. Wchodzi do środka, a wtedy Argos umiera.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 34,
+       "printedPage": 34
+      }
+     ],
+     "n": 2,
+     "id": "thattur-17-002",
+     "hash": "6aaf3d364ee1",
+     "srcHash": "345ce375e2de"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "W sali wędrowiec chodzi między zalotnikami i prosi o jedzenie, jak mu poleciła Atena, by zobaczyć, którzy z nich są sprawiedliwi, a którzy nie. Większość coś mu daje. Antinoos nie daje nic. Łaje Eumajosa za to, że przyprowadził kolejnego żebraka, i rzuca podnóżkiem w ramię Odyseusza. Odyseusz stoi nieruchomo jak skała i tylko kręci głową.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 34,
+       "printedPage": 34
+      }
+     ],
+     "n": 3,
+     "id": "thattur-17-003",
+     "hash": "44ff3bfe9c60",
+     "srcHash": "61e41f5995f7"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Ale bogini śmierci, władająca ciemną śmiercią, porwała Argosa, gdy tylko ujrzał Odyseusza w dwudziestym roku.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 34,
+       "printedPage": 34
+      }
+     ],
+     "n": 4,
+     "id": "thattur-17-004",
+     "hash": "30dd5bd451c3",
+     "sourceId": "thattur-17-005",
+     "srcHash": "e520a823df9c"
+    },
+    {
+     "type": "heimild",
+     "text": "O psie Argosie · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 34,
+       "printedPage": 34
+      }
+     ],
+     "n": 5,
+     "id": "thattur-17-005",
+     "hash": "9790122bc737",
+     "quoteId": "thattur-17-004",
+     "srcHash": "40fb8043f4cf"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Nawet innym zalotnikom wydaje się to przesadą. A jeśli to bóg w przebraniu, który przyszedł zobaczyć, jak ludzie postępują? Penelopa słyszy o tym na górze, w swoich komnatach. Prosi Eumajosa, by przyprowadził wędrowca, bo może słyszał coś o Odyseuszu. Ten obiecuje przyjść, gdy zapadnie wieczór i zalotnicy odejdą.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 35,
+       "printedPage": 35
+      }
+     ],
+     "n": 6,
+     "id": "thattur-17-006",
+     "hash": "0f98aeb3dbce",
+     "srcHash": "95f7b44c319c"
+    }
+   ]
+  },
+  {
+   "id": "thattur-18",
+   "kind": "thattur",
+   "number": 18,
+   "numeral": "XVIII",
+   "kicker": "ROZDZIAŁ OSIEMNASTY",
+   "title": "Bójka żebraków",
+   "pdfPageStart": 36,
+   "pdfPageEnd": 36,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Do pałacu przychodzi jeszcze jeden żebrak, imieniem Iros, wielki i gruby mężczyzna, który zwykł żebrać u zalotników. Chce przegonić nowego rywala od drzwi. Zalotnicy widzą okazję do zabawy i szczują ich na siebie do walki na pięści. Zwycięzca ma dostać w nagrodę kozi żołądek nadziewany tłuszczem i krwią.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 36,
+       "printedPage": 36
+      }
+     ],
+     "n": 1,
+     "id": "thattur-18-001",
+     "hash": "d61317a0f691",
+     "srcHash": "3fa6d08191f2"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Gdy Odyseusz podwiązuje łachmany w pasie, ukazują się silne uda, barki i ramiona. Zalotnicy się dziwią, a Iros zaczyna drżeć. Odyseusz się zastanawia: zabić człowieka jednym ciosem czy tylko powalić go na ziemię? Wybiera słabszy cios, by nie wzbudzić podejrzeń. Mimo to szczęka pęka. Wywleka Irosa na dziedziniec i sadza go pod ścianą.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 36,
+       "printedPage": 36
+      }
+     ],
+     "n": 2,
+     "id": "thattur-18-002",
+     "hash": "e7508e1c12de",
+     "srcHash": "1204c6628a08"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Jeden z zalotników, Amfinomos, jest lepszy od pozostałych i pije zdrowie wędrowca. Odyseusz go ostrzega: pan domu jest niedaleko i najlepiej wrócić do domu, póki jest czas. Amfinomosa ogarnia ciężki nastrój, ale nigdzie nie odchodzi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 36,
+       "printedPage": 36
+      }
+     ],
+     "n": 3,
+     "id": "thattur-18-003",
+     "hash": "8157bcda5bbb",
+     "srcHash": "c455754cb4c4"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wtedy do sali schodzi Penelopa, piękniejsza niż kiedykolwiek. Gani syna za to, jak potraktowano gościa, i mówi zalotnikom, że porządni zalotnicy przynoszą kobiecie dary, zamiast pożerać jej majątek. Jeden po drugim posyłają po kosztowności. Odyseusz przygląda się temu i cieszy się z jej sprytu.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 36,
+       "printedPage": 36
+      }
+     ],
+     "n": 4,
+     "id": "thattur-18-004",
+     "hash": "1653975eaacf",
+     "srcHash": "b6d981748004"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wieczorem jedna ze służących drwi z wędrowca, a zalotnik Eurymach rzuca w niego podnóżkiem. W końcu Telemach prosi wszystkich, by poszli do domów spać.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 36,
+       "printedPage": 36
+      }
+     ],
+     "n": 5,
+     "id": "thattur-18-005",
+     "hash": "2fd89f50368e",
+     "srcHash": "ea4560b67fcb"
+    }
+   ]
+  },
+  {
+   "id": "thattur-19",
+   "kind": "thattur",
+   "number": 19,
+   "numeral": "XIX",
+   "kicker": "ROZDZIAŁ DZIEWIĘTNASTY",
+   "title": "Blizna",
+   "pdfPageStart": 37,
+   "pdfPageEnd": 39,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Gdy zalotnicy odchodzą, ojciec i syn wynoszą całą broń z sali do komory. Atena świeci im złotą lampą.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 37,
+       "printedPage": 37
+      }
+     ],
+     "n": 1,
+     "id": "thattur-19-001",
+     "hash": "8629d674f50d",
+     "srcHash": "da7cbba4e139"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wtedy przychodzi Penelopa i siada przy palenisku naprzeciw wędrowca. Pyta, kim jest. On się wykręca, ale w końcu mówi, że pochodzi z Krety i dwadzieścia lat temu gościł tam Odyseusza. Ona płacze, ale mimo to wystawia go na próbę: jak był ubrany Odyseusz? Wędrowiec opisuje purpurowy płaszcz ze złotą zapinką, na której pies trzyma jelonka. Penelopa poznaje opis, bo sama przypięła tę zapinkę. Przysięga, że jej mąż wróci do domu, zanim minie ten miesiąc.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 37,
+       "printedPage": 37
+      }
+     ],
+     "n": 2,
+     "id": "thattur-19-002",
+     "hash": "3a9afbb65b9f",
+     "srcHash": "32335c500859"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Każe starej piastunce Eurykleji umyć gościowi nogi. Odyseusz odwraca się od ognia, ale to nie pomaga. Piastunka wyczuwa bliznę nad kolanem — ślad po dziku, na którego polował za młodu ze swoim dziadkiem. Puszcza nogę, woda się wylewa i chce zawołać Penelopę. Odyseusz chwyta ją za gardło i szepcze, że nikomu nie wolno jej mówić. W tym czasie Atena odwraca uwagę Penelopy.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 38,
+       "printedPage": 38
+      }
+     ],
+     "n": 3,
+     "id": "thattur-19-003",
+     "hash": "8e9a33a53bb8",
+     "srcHash": "4bdd9ae2b31b"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Stara kobieta wyczuła bliznę, gdy objęła dłońmi nogę, i od razu ją rozpoznała…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 38,
+       "printedPage": 38
+      }
+     ],
+     "n": 4,
+     "id": "thattur-19-004",
+     "hash": "fcc8b8b43cc0",
+     "sourceId": "thattur-19-005",
+     "srcHash": "de50bc062515"
+    },
+    {
+     "type": "heimild",
+     "text": "O Eurykleji · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 38,
+       "printedPage": 38
+      }
+     ],
+     "n": 5,
+     "id": "thattur-19-005",
+     "hash": "19ef26a9e63f",
+     "quoteId": "thattur-19-004",
+     "srcHash": "c9365c87b682"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Potem Penelopa opowiada wędrowcowi sen: orzeł zabił jej dwadzieścia gęsi i powiedział, że jest jej mężem. I opowiada o swojej decyzji. Jutro urządzi zalotnikom próbę łukiem Odyseusza. Za tym, kto zdoła go napiąć i przestrzelić strzałę przez dwanaście toporów ustawionych w rzędzie, pójdzie. Wędrowiec namawia ją, by nie zwlekała.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 39,
+       "printedPage": 39
+      }
+     ],
+     "n": 6,
+     "id": "thattur-19-006",
+     "hash": "18ef6696d17e",
+     "srcHash": "9d03845d6230"
+    }
+   ]
+  },
+  {
+   "id": "thattur-20",
+   "kind": "thattur",
+   "number": 20,
+   "numeral": "XX",
+   "kicker": "ROZDZIAŁ DWUDZIESTY",
+   "title": "Noc przed rzezią",
+   "pdfPageStart": 40,
+   "pdfPageEnd": 40,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Odyseusz leży bezsennie w przedsionku. Słyszy, jak służące, chichocząc, wymykają się do zalotników, i wzbiera w nim gniew. Bije się w pierś i mówi do swego serca: zniosło już gorsze rzeczy w jaskini cyklopa. Atena przychodzi do niego i obiecuje zwycięstwo, i dopiero wtedy zasypia.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 40,
+       "printedPage": 40
+      }
+     ],
+     "n": 1,
+     "id": "thattur-20-001",
+     "hash": "e4161212edae",
+     "srcHash": "817e40125a91"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Na górze płacze Penelopa i woli umrzeć, niż poślubić gorszego męża. Śniło jej się, że jej mąż leży u jej boku. Odyseusz budzi się od jej płaczu i prosi Zeusa o znak. Z czystego nieba rozlega się grzmot, a kobieta, która miele ziarno dla zalotników, modli się na głos, by był to ich ostatni posiłek.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 40,
+       "printedPage": 40
+      }
+     ],
+     "n": 2,
+     "id": "thattur-20-002",
+     "hash": "63e2315092c9",
+     "srcHash": "175bbec39fe9"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Rano przygotowuje się święto. Pasterze przyprowadzają bydło na rzeź. Melantios znów obraża wędrowca, a pasterz wołów Filojtios wita go serdecznie i życzy, by jego pan wrócił do domu.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 40,
+       "printedPage": 40
+      }
+     ],
+     "n": 3,
+     "id": "thattur-20-003",
+     "hash": "3ba7e52ec10a",
+     "srcHash": "516e48e5dac2"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Bądź cierpliwe, serce moje, już raz zniosłoś cięższą krzywdę niż ta…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 40,
+       "printedPage": 40
+      }
+     ],
+     "n": 4,
+     "id": "thattur-20-004",
+     "hash": "c4281baa81af",
+     "sourceId": "thattur-20-005",
+     "srcHash": "203e5c772655"
+    },
+    {
+     "type": "heimild",
+     "text": "Odyseusz do samego siebie · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 40,
+       "printedPage": 40
+      }
+     ],
+     "n": 5,
+     "id": "thattur-20-005",
+     "hash": "592fc8c2c69c",
+     "quoteId": "thattur-20-004",
+     "srcHash": "6b015d787a5a"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Zalotnicy zasiadają do uczty. Jeden z nich rzuca w Odyseusza wolą nogą, ale ten uchyla się z zimnym uśmiechem. Wtedy zalotników ogarnia dziwny śmiech. Śmieją się i nie mogą przestać, a zarazem mięso wydaje im się zakrwawione, a ich oczy napełniają się łzami. Wróżbita, którego Telemach przywiózł do domu, widzi, że nad ich głowami zalega noc, a ściany spływają krwią. Wstaje i wychodzi. Zalotnicy śmieją się jeszcze głośniej.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 40,
+       "printedPage": 40
+      }
+     ],
+     "n": 6,
+     "id": "thattur-20-006",
+     "hash": "9c829eca3c4e",
+     "srcHash": "8e214551956c"
+    }
+   ]
+  },
+  {
+   "id": "thattur-21",
+   "kind": "thattur",
+   "number": 21,
+   "numeral": "XXI",
+   "kicker": "ROZDZIAŁ DWUDZIESTY PIERWSZY",
+   "title": "Próba łuku",
+   "pdfPageStart": 41,
+   "pdfPageEnd": 42,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Penelopa przynosi łuk z komory, gdzie wisiał dwadzieścia lat, i płacze, trzymając go na kolanach. Potem wnosi go do sali i ogłasza próbę.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 41,
+       "printedPage": 41
+      }
+     ],
+     "n": 1,
+     "id": "thattur-21-001",
+     "hash": "4e507f34d917",
+     "srcHash": "6412ec18b150"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Telemach ustawia dwanaście toporów w równym rzędzie. Chce sam spróbować jako pierwszy. Trzy razy próbuje napiąć łuk, a za czwartym razem by mu się udało, ale ojciec daje mu znak i on przestaje.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 41,
+       "printedPage": 41
+      }
+     ],
+     "n": 2,
+     "id": "thattur-21-002",
+     "hash": "35b3036291e3",
+     "srcHash": "866d19d9c202"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Potem próbują zalotnicy, jeden po drugim. Grzeją łuk przy ogniu i smarują go łojem, ale żaden nie zdoła go napiąć. Tymczasem Odyseusz wychodzi na zewnątrz z Eumajosem i Filojtiosem. Pyta, po czyjej stronie by stanęli, gdyby Odyseusz wrócił do domu, a gdy odpowiadają, pokazuje im bliznę. Płaczą i całują go. Każe im zamknąć drzwi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 42,
+       "printedPage": 42
+      }
+     ],
+     "n": 3,
+     "id": "thattur-21-003",
+     "hash": "f22bb8eed03a",
+     "srcHash": "025dd3b57e7c"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… wypuścił strzałę z cięciwy, nie chybił ucha pierwszego topora i spiżowy grot przeszedł przez wszystkie topory na wylot.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 42,
+       "printedPage": 42
+      }
+     ],
+     "n": 4,
+     "id": "thattur-21-004",
+     "hash": "8222db94ef0a",
+     "sourceId": "thattur-21-005",
+     "srcHash": "27dece2d8397"
+    },
+    {
+     "type": "heimild",
+     "text": "Strzał Odyseusza · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 42,
+       "printedPage": 42
+      }
+     ],
+     "n": 5,
+     "id": "thattur-21-005",
+     "hash": "cd28f36e447e",
+     "quoteId": "thattur-21-004",
+     "srcHash": "dce2f5f0f529"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Antinoos proponuje odłożyć zawody do rana. Wtedy wędrowiec prosi, by pozwolono mu spróbować — tylko po to, by zobaczyć, czy zostało jeszcze trochę siły w jego rękach. Zalotnicy się oburzają, ale Penelopa mówi, że ma dostać łuk. Wtedy Telemach odsyła matkę do jej komnat, bo łuk to sprawa mężczyzn.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 42,
+       "printedPage": 42
+      }
+     ],
+     "n": 6,
+     "id": "thattur-21-006",
+     "hash": "3ff760db5d23",
+     "srcHash": "1b0d0329b745"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Odyseusz ogląda łuk ze wszystkich stron. Potem napina go tak łatwo, jak pieśniarz naciąga strunę na lirze. Cięciwa śpiewa jak jaskółka. Zeus zsyła grzmot. Siedząc na krześle, Odyseusz zakłada strzałę na cięciwę i strzela.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 42,
+       "printedPage": 42
+      }
+     ],
+     "n": 7,
+     "id": "thattur-21-007",
+     "hash": "b9d62f76f8c0",
+     "srcHash": "05f8cf0a2cf2"
+    }
+   ]
+  },
+  {
+   "id": "thattur-22",
+   "kind": "thattur",
+   "number": 22,
+   "numeral": "XXII",
+   "kicker": "ROZDZIAŁ DWUDZIESTY DRUGI",
+   "title": "Rzeź zalotników",
+   "pdfPageStart": 43,
+   "pdfPageEnd": 44,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Odyseusz zrzuca łachmany, wskakuje na próg i wysypuje strzały pod swoje stopy. Pierwsza strzała trafia Antinoosa w gardło, akurat gdy podnosi złoty puchar. Zalotnicy myślą, że to wypadek. Wtedy mówi im, kim jest.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 43,
+       "printedPage": 43
+      }
+     ],
+     "n": 1,
+     "id": "thattur-22-001",
+     "hash": "795dc034ecab",
+     "srcHash": "0ee02ef84955"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Bledną. Eurymach próbuje się układać: winę za wszystko ponosi Antinoos, a pozostali wynagrodzą wszystkie szkody wielokrotnie. Odyseusz odmawia. Eurymach dobywa miecza i pada od następnej strzały.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 43,
+       "printedPage": 43
+      }
+     ],
+     "n": 2,
+     "id": "thattur-22-002",
+     "hash": "e3e6faa27db0",
+     "srcHash": "12b0981b4131"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Zalotnicy szukają broni na ścianach, ale nic nie znajdują. Telemach przynosi tarcze, włócznie i hełmy dla czterech: ojca, syna i dwóch pasterzy. Zapomina jednak zamknąć komorę i kozopas Melantios zdąża przynieść zalotnikom trochę broni, zanim pasterze go chwytają i wiążą.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 43,
+       "printedPage": 43
+      }
+     ],
+     "n": 3,
+     "id": "thattur-22-003",
+     "hash": "420021e18280",
+     "srcHash": "b914b7a1ebd8"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Atena przychodzi pod postacią Mentora i dodaje Odyseuszowi ducha, ale potem siada na belce pod postacią jaskółki i pozwala im walczyć samym. Gdy w końcu unosi swoją tarczę, zalotnicy rozpierzchają się jak stado wołów. Padają jeden po drugim. Pieśniarz i herold, którzy służyli zalotnikom wbrew swojej woli, zostają oszczędzeni.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 43,
+       "printedPage": 43
+      }
+     ],
+     "n": 4,
+     "id": "thattur-22-004",
+     "hash": "1331b01020bf",
+     "srcHash": "5669f65b5262"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Myśleliście, psy, że już nigdy nie wrócę do domu z ziemi trojańskiej…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 43,
+       "printedPage": 43
+      }
+     ],
+     "n": 5,
+     "id": "thattur-22-005",
+     "hash": "cda39da949c2",
+     "sourceId": "thattur-22-006",
+     "srcHash": "bf32b8683262"
+    },
+    {
+     "type": "heimild",
+     "text": "Odyseusz do zalotników · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 43,
+       "printedPage": 43
+      }
+     ],
+     "n": 6,
+     "id": "thattur-22-006",
+     "hash": "8243ef9cf5c7",
+     "quoteId": "thattur-22-005",
+     "srcHash": "a55f6133c0a7"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "W końcu wszyscy zalotnicy leżą martwi jak ryby wyciągnięte na brzeg. Eurykleja chce wydać okrzyk radości, ale Odyseusz jej zabrania: nie godzi się triumfować nad poległymi.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 44,
+       "printedPage": 44
+      }
+     ],
+     "n": 7,
+     "id": "thattur-22-007",
+     "hash": "ad2af8022cd9",
+     "srcHash": "eb49b51739c4"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Zemsta jednak jeszcze się nie skończyła. Dwanaście służących, które zadawały się z zalotnikami, musi wynieść ciała i umyć salę, a potem zostają powieszone. Melantios również zostaje stracony. Na koniec Odyseusz oczyszcza dom siarką i ogniem.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 44,
+       "printedPage": 44
+      }
+     ],
+     "n": 8,
+     "id": "thattur-22-008",
+     "hash": "ca306cf06397",
+     "srcHash": "722f7a513062"
+    }
+   ]
+  },
+  {
+   "id": "thattur-23",
+   "kind": "thattur",
+   "number": 23,
+   "numeral": "XXIII",
+   "kicker": "ROZDZIAŁ DWUDZIESTY TRZECI",
+   "title": "Łoże",
+   "pdfPageStart": 45,
+   "pdfPageEnd": 47,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Eurykleja ze śmiechem biegnie na górę do Penelopy i ją budzi: Odyseusz wrócił, a zalotnicy nie żyją. Penelopa myśli, że staruszka postradała zmysły albo że zalotników zabił któryś z bogów. Mimo to schodzi na dół.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 45,
+       "printedPage": 45
+      }
+     ],
+     "n": 1,
+     "id": "thattur-23-001",
+     "hash": "86bbb7db0cc3",
+     "srcHash": "6fef49184499"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Siada przy palenisku naprzeciw mężczyzny i długo w milczeniu mu się przygląda. Czasem wydaje jej się, że go poznaje, czasem nie. Telemach gani ją za oschłość. Odpowiada, że jeśli to Odyseusz, rozpoznają się po znakach, o których wiedzą tylko oni dwoje. Odyseusz się uśmiecha.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 45,
+       "printedPage": 45
+      }
+     ],
+     "n": 2,
+     "id": "thattur-23-002",
+     "hash": "f91348204df0",
+     "srcHash": "9c86d0e810f1"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Kąpie się, a Atena czyni go piękniejszym niż przedtem. Ona wciąż siedzi nieruchomo. Wtedy mówi, że ma serce z żelaza, i prosi piastunkę, by posłała mu łóżko gdzie indziej. Penelopa korzysta z okazji: Eurykleja ma wynieść jego łoże z sypialni.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 46,
+       "printedPage": 46
+      }
+     ],
+     "n": 3,
+     "id": "thattur-23-003",
+     "hash": "f741a2936b8c",
+     "srcHash": "ff49ee030f1e"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Teraz Odyseusz wpada w gniew. Kto przeniósł łoże? Żaden człowiek tego nie potrafi. Sam je zbudował wokół drzewa oliwnego, które rosło na dziedzińcu, ociosał pień na słup łoża i wzniósł komnatę wokół niego.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 46,
+       "printedPage": 46
+      }
+     ],
+     "n": 4,
+     "id": "thattur-23-004",
+     "hash": "23b3c557600a",
+     "srcHash": "bc158487f1b2"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„Sam je zbudowałem, i nikt inny. Wewnątrz dziedzińca pałacu rosło drzewo oliwne o długich liściach…”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 46,
+       "printedPage": 46
+      }
+     ],
+     "n": 5,
+     "id": "thattur-23-005",
+     "hash": "eb7b22d32563",
+     "sourceId": "thattur-23-006",
+     "srcHash": "de458310a5a9"
+    },
+    {
+     "type": "heimild",
+     "text": "Odyseusz o łożu · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 46,
+       "printedPage": 46
+      }
+     ],
+     "n": 6,
+     "id": "thattur-23-006",
+     "hash": "ccf3ee8b8f0b",
+     "quoteId": "thattur-23-005",
+     "srcHash": "b5ca2165f428"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Wtedy uginają się pod nią kolana. Z płaczem biegnie do niego, obejmuje go za szyję i prosi, by się na nią nie gniewał. Przychodziło tak wielu oszustów. Jest dla niej tak upragniony jak ląd dla rozbitka płynącego w morzu.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 47,
+       "printedPage": 47
+      }
+     ],
+     "n": 7,
+     "id": "thattur-23-007",
+     "hash": "fb7b7ceac585",
+     "srcHash": "d32b645998e7"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Atena powstrzymuje świt. Opowiadają sobie nawzajem wszystko, co ich spotkało, a ona nie zasypia, dopóki on nie skończy swojej opowieści.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 47,
+       "printedPage": 47
+      }
+     ],
+     "n": 8,
+     "id": "thattur-23-008",
+     "hash": "8bb2d9ab200f",
+     "srcHash": "be94fdbffdd4"
+    }
+   ]
+  },
+  {
+   "id": "thattur-24",
+   "kind": "thattur",
+   "number": 24,
+   "numeral": "XXIV",
+   "kicker": "ROZDZIAŁ DWUDZIESTY CZWARTY",
+   "title": "Pokój",
+   "pdfPageStart": 48,
+   "pdfPageEnd": 48,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Hermes prowadzi dusze zalotników w dół, do krainy umarłych. Tam opowiadają zmarłym o tkaninie, łuku i rzezi. Agamemnon chwali Odyseusza za tak wierną żonę i mówi, że o Penelopie będą śpiewać, dopóki świat istnieje.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 48,
+       "printedPage": 48
+      }
+     ],
+     "n": 1,
+     "id": "thattur-24-001",
+     "hash": "00feac1205b0",
+     "srcHash": "91c780533c25"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Rano Odyseusz idzie na wieś do swego ojca Laertesa. Zastaje starca samego w sadzie, gdy okopuje drzewo. Jeszcze raz zaczyna od tego, że wystawia ojca na próbę zmyśloną historią. Ale gdy Laertes z żalu posypuje swoje siwe włosy ziemią, nie wytrzymuje i go obejmuje.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 48,
+       "printedPage": 48
+      }
+     ],
+     "n": 2,
+     "id": "thattur-24-002",
+     "hash": "2ee778a0cf03",
+     "srcHash": "28b113c93ead"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Laertes prosi o dowód. Odyseusz pokazuje mu bliznę i wylicza drzewa, które ojciec podarował mu, gdy był małym chłopcem: trzynaście grusz, dziesięć jabłoni i czterdzieści drzew figowych.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 48,
+       "printedPage": 48
+      }
+     ],
+     "n": 3,
+     "id": "thattur-24-003",
+     "hash": "231c26b43352",
+     "srcHash": "13064b8e2718"
+    },
+    {
+     "type": "tilvitnun",
+     "text": "„… niech ludzie znów będą tak dobrymi przyjaciółmi jak dawniej i niech wrócą dobrobyt i pełny pokój.”",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 48,
+       "printedPage": 48
+      }
+     ],
+     "n": 4,
+     "id": "thattur-24-004",
+     "hash": "59a292956816",
+     "sourceId": "thattur-24-005",
+     "srcHash": "8371ea3e8376"
+    },
+    {
+     "type": "heimild",
+     "text": "Zeus do Ateny · z islandzkiego przekładu Sveinbjörna Egilssona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 48,
+       "printedPage": 48
+      }
+     ],
+     "n": 5,
+     "id": "thattur-24-005",
+     "hash": "1defd53aa9a5",
+     "quoteId": "thattur-24-004",
+     "srcHash": "e09ec13e90e6"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "W mieście rozeszła się wieść o rzezi. Ojciec Antinoosa podburza krewnych poległych do zemsty, a oni się zbroją i wyruszają na wieś. Odyseusz, Telemach i Laertes wychodzą im naprzeciw — trzy pokolenia ramię w ramię. Laertes rzuca włócznią i powala przywódcę.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 48,
+       "printedPage": 48
+      }
+     ],
+     "n": 6,
+     "id": "thattur-24-006",
+     "hash": "b15b85de5690",
+     "srcHash": "3e64b34c1411"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Walka zaraz się zacznie, gdy Atena woła, że już dość. Zeus ciska piorun pod jej stopy. Odyseusz słucha z radością w sercu. Bogini zaprowadza pokój między nim a ludem Itaki i na tym kończy się opowieść.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 48,
+       "printedPage": 48
+      }
+     ],
+     "n": 7,
+     "id": "thattur-24-007",
+     "hash": "98045300f856",
+     "srcHash": "77fddbee8b15"
+    }
+   ]
+  },
+  {
+   "id": "nofn",
+   "kind": "nofn",
+   "number": null,
+   "numeral": null,
+   "kicker": "DO POWTÓRKI",
+   "title": "Najważniejsze imiona",
+   "pdfPageStart": 49,
+   "pdfPageEnd": 49,
+   "units": [
+    {
+     "type": "nafn",
+     "text": "Odyseusz: król Itaki, słynny ze swoich podstępów",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 9,
+     "n": 1,
+     "id": "nofn-001",
+     "hash": "bb30918bdd31",
+     "srcHash": "4b7012b3225a"
+    },
+    {
+     "type": "nafn",
+     "text": "Penelopa: jego żona, równie sprytna jak on",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 9,
+     "n": 2,
+     "id": "nofn-002",
+     "hash": "80d7f281370b",
+     "srcHash": "425df51777c0"
+    },
+    {
+     "type": "nafn",
+     "text": "Telemach: ich syn, mniej więcej dwudziestoletni",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 9,
+     "n": 3,
+     "id": "nofn-003",
+     "hash": "8253a7c38e62",
+     "srcHash": "21d0282c5d5d"
+    },
+    {
+     "type": "nafn",
+     "text": "Laertes: stary ojciec Odyseusza",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 8,
+     "n": 4,
+     "id": "nofn-004",
+     "hash": "f1e54dab532f",
+     "srcHash": "e60bf178cc88"
+    },
+    {
+     "type": "nafn",
+     "text": "Atena: bogini mądrości i wojny, opiekunka Odyseusza",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 6,
+     "n": 5,
+     "id": "nofn-005",
+     "hash": "5779d5c1b57a",
+     "srcHash": "1451f1be7d70"
+    },
+    {
+     "type": "nafn",
+     "text": "Posejdon: bóg morza, wróg Odyseusza",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 9,
+     "n": 6,
+     "id": "nofn-006",
+     "hash": "df747944a4f7",
+     "srcHash": "c8cad1408176"
+    },
+    {
+     "type": "nafn",
+     "text": "Zeus: najwyższy z bogów",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 5,
+     "n": 7,
+     "id": "nofn-007",
+     "hash": "e25850792c9e",
+     "srcHash": "5f7e49f2518f"
+    },
+    {
+     "type": "nafn",
+     "text": "Hermes: posłaniec bogów",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 7,
+     "n": 8,
+     "id": "nofn-008",
+     "hash": "aa74bc82c505",
+     "srcHash": "cae99bc53fa4"
+    },
+    {
+     "type": "nafn",
+     "text": "Kalipso: bogini na wyspie Ogygii",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 8,
+     "n": 9,
+     "id": "nofn-009",
+     "hash": "8128b51ba382",
+     "srcHash": "f6dfec1e5c45"
+    },
+    {
+     "type": "nafn",
+     "text": "Kirke: bogini i czarodziejka",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 6,
+     "n": 10,
+     "id": "nofn-010",
+     "hash": "e3dc070877b1",
+     "srcHash": "6b5d2d792461"
+    },
+    {
+     "type": "nafn",
+     "text": "Feakowie: lud żeglarzy na wyspie Scherii; ich królem jest Alkinoos, królową Arete, a ich córką Nauzykaa",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 9,
+     "n": 11,
+     "id": "nofn-011",
+     "hash": "47a612d0c66e",
+     "srcHash": "1f9ca0c25dc2"
+    },
+    {
+     "type": "nafn",
+     "text": "Polifem: jednooki olbrzym, cyklop, syn Posejdona",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 8,
+     "n": 12,
+     "id": "nofn-012",
+     "hash": "51ba2b845aa6",
+     "srcHash": "3951562bb102"
+    },
+    {
+     "type": "nafn",
+     "text": "Nestor i Menelaos: królowie Pylos i Sparty, którzy walczyli pod Troją",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 18,
+     "n": 13,
+     "id": "nofn-013",
+     "hash": "dfd4fb3e999a",
+     "srcHash": "abc2533e4e35"
+    },
+    {
+     "type": "nafn",
+     "text": "Eumajos: świniopas Odyseusza",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 8,
+     "n": 14,
+     "id": "nofn-014",
+     "hash": "0782f5e6c6c6",
+     "srcHash": "387afdc5ada5"
+    },
+    {
+     "type": "nafn",
+     "text": "Eurykleja: stara piastunka Odyseusza",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 10,
+     "n": 15,
+     "id": "nofn-015",
+     "hash": "42c94ea3fce9",
+     "srcHash": "55932df81bf8"
+    },
+    {
+     "type": "nafn",
+     "text": "Antinoos i Eurymach: przywódcy zalotników",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 20,
+     "n": 16,
+     "id": "nofn-016",
+     "hash": "ec6ce5b2bfe3",
+     "srcHash": "bee958428bf4"
+    },
+    {
+     "type": "nafn",
+     "text": "Melantios i Filojtios: kozopas, stronnik zalotników, i pasterz wołów, wierny Odyseuszowi",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 49,
+       "printedPage": 49
+      }
+     ],
+     "termLength": 22,
+     "n": 17,
+     "id": "nofn-017",
+     "hash": "ee7e41b4cf75",
+     "srcHash": "46f7a07dd713"
+    }
+   ]
+  },
+  {
+   "id": "um-bokina",
+   "kind": "um-bokina",
+   "number": null,
+   "numeral": null,
+   "kicker": "O KSIĄŻCE",
+   "title": "Tekst i ilustracje",
+   "pdfPageStart": 50,
+   "pdfPageEnd": 50,
+   "units": [
+    {
+     "type": "efnisgrein",
+     "text": "Opowieść została opowiedziana na nowo i skrócona na podstawie „Odysei” Homera; trzyma się podziału poematu na pieśni.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 50,
+       "printedPage": 50
+      }
+     ],
+     "n": 1,
+     "id": "um-bokina-001",
+     "hash": "6c1198a1d3ca",
+     "srcHash": "ca4744aed68f"
+    },
+    {
+     "type": "efnisgrein",
+     "text": "Cytaty z wcięciem pochodzą z prozatorskiego przekładu Sveinbjörna Egilssona (1791–1852) według wydania Menningarsjóður z 1948 roku. Jego sformułowania nie zostały zmienione, ale imiona zapisano tak samo jak w opowieści, na przykład Ódysseifur zamiast Odysseifur. Pominięcia oznaczono trzema kropkami.",
+     "pages": [
+      {
+       "offset": 0,
+       "pdfPage": 50,
+       "printedPage": 50
+      }
+     ],
+     "n": 2,
+     "id": "um-bokina-002",
+     "hash": "5ae059808790",
+     "srcHash": "ae4f173c224a"
+    }
+   ]
+  }
+ ]
+}

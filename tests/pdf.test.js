@@ -113,3 +113,22 @@ test('PDF á úkraínsku: kýrillískt letur er innfellt og skilar sér', () => 
     }
   } finally { C.I18n.setLang('is'); }
 });
+
+test('PDF á pólsku: pólskir stafir skila sér', () => {
+  C.I18n.setLang('pl');
+  try {
+    const PL = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'odysseifskvida.pl.json'), 'utf8'));
+    const plIx = C.buildIndex(PL); C.linkEditions([index, plIx]);
+    const ns = [C.newNote(C.anchorForUnit(plIx, 'thattur-01-004').anchor, { type: 'spurning', body: 'Zażółć gęślą jaźń — ĄĆĘŁŃÓŚŹŻ' })];
+    for (const [name, doc] of [['venjulegt', P.build(jsPDF, window.NASA_PDF_FONTS, C.exportModel(plIx, ns))], ['cornell', P.buildCornell(jsPDF, window.NASA_PDF_FONTS, C.cornellModel(plIx, ns))]]) {
+      const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'ody-')), name + '.pdf');
+      fs.writeFileSync(file, Buffer.from(doc.output('arraybuffer')));
+      if (!havePdftotext()) continue;
+      const txt = execFileSync('pdftotext', ['-enc', 'UTF-8', file, '-'], { stdio: ['ignore', 'pipe', 'ignore'] }).toString('utf8').replace(/\s+/g, ' ');
+      assert.match(txt, /Zażółć gęślą jaźń — ĄĆĘŁŃÓŚŹŻ/, name);
+      assert.match(txt, /„… i nie przystoi ci zachowywać się jak dziecko/, name);
+      assert.match(txt, /Rozdział I — Atena przybywa na Itakę/, name);
+      assert.match(txt, /Strona 1 z 1/, name);
+    }
+  } finally { C.I18n.setLang('is'); }
+});

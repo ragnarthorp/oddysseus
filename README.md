@@ -59,26 +59,34 @@ Hnappurinn **Cornell** í efstu stiku kveikir og slekkur á Cornell-ham. Stillin
   - Aðrar glósur fá tegund sína vinstra megin, t.d. `(s) spurning`.
   - Í PDF flæða dálkarnir sjálfstætt yfir síðuskil.
 
-## Úkraínsk útgáfa
+## Tungumál: íslenska, úkraínska og pólska
 
-Hnappurinn **[Ukr]** í efstu stiku skiptir yfir á úkraínsku og síðan opnast aftur á því máli. Á úkraínsku stendur **[Ísl]** á hnappnum og skiptir til baka. Tækið man valið og það fylgir vinnuskrá. Úkraínska útgáfan opnast líka beint með `?lang=uk` aftan við slóðina.
+Efst á síðunni er tungumálaval: **[Ísl | Ukr | PL]**. Hvert mál heitir sínu eigin nafni og síðan opnast aftur á valda málinu. Tækið man valið og það fylgir vinnuskrá. Úkraínska og pólska útgáfan opnast líka beint með `?lang=uk` eða `?lang=pl` aftan við slóðina.
 
-- **Texti kviðunnar á úkraínsku:** Úkraínska útgáfan sýnir úkraínska þýðingu á allri endursögninni: formála, öllum 24 þáttum, „Helstu nöfnum“ og „Texta og myndum“. Íslenska kaflaheitið sést til hliðsjónar undir því úkraínska. Tilvitnanirnar eru þýddar úr íslenskri þýðingu Sveinbjarnar Egilssonar, en ekki teknar úr grískum frumtexta eða úkraínskum útgáfum Hómers. Heimildarlínurnar segja það.
-- **Uppruni þýðingarinnar:** Hún var gerð með gervigreind og hefur ekki verið yfirfarin af fagmanni. Það kemur fram á forsíðu og í „Про книгу“ í úkraínsku útgáfunni.
-- **Sama bygging:** Úkraínski textinn hefur sömu kafla, efnisgreinar, auðkenni og síðutilvísanir (íslenska PDF-ið) og sá íslenski. „С. 6 · Абзац 3“ vísar því á sama stað og „Bls. 6 · Efnisgrein 3“.
-- **Glósur:** Hver glósa man við hvora útgáfu textans hún var gerð (`textLang`). Glósur úr báðum útgáfum sjást alltaf, sannprófast, flytjast út og fylgja vinnuskrá. Glósa úr hinni útgáfunni er auðkennd sem heil efnisgrein.
-- **Viðmót og útflutningur:** Á úkraínsku eru viðmót, leiðbeiningar, villuboð, glósutegundir og útflutningsmerkingar. Tegundakóðarnir eru `(пк)` переказ, `(к)` коментар, `(п)` питання, `(пр)` переробка og `(ц)` цитата. Gæsalappir í útflutningi fylgja tungumáli textans: „…“ fyrir íslensku og «…» fyrir úkraínsku.
+- **Texti kviðunnar á hverju máli:** Úkraínska og pólska útgáfan sýna þýðingu á allri endursögninni: formála, öllum 24 þáttum, „Helstu nöfnum“ og „Texta og myndum“. Íslenska kaflaheitið sést til hliðsjónar undir því þýdda. Tilvitnanirnar eru þýddar úr íslenskri þýðingu Sveinbjarnar Egilssonar, en ekki teknar úr grískum frumtexta eða útgefnum þýðingum Hómers. Heimildarlínurnar segja það.
+- **Uppruni þýðinganna:** Þær voru gerðar með gervigreind og hafa ekki verið yfirfarnar af fagmanni. Það kemur fram á forsíðu og í „Um bókina“ á hvoru máli.
+- **Sama bygging:** Allar útgáfur hafa sömu kafla, efnisgreinar, auðkenni og síðutilvísanir (íslenska PDF-ið). „S. 6 · Akapit 3“, „С. 6 · Абзац 3“ og „Bls. 6 · Efnisgrein 3“ vísa því á sama stað.
+- **Glósur:** Hver glósa man við hvaða útgáfu textans hún var gerð (`textLang`). Glósur úr öllum útgáfum sjást alltaf, sannprófast, flytjast út og fylgja vinnuskrá. Glósa úr annarri útgáfu er auðkennd sem heil efnisgrein.
+- **Viðmót og útflutningur:** Viðmót, leiðbeiningar, villuboð, glósutegundir og útflutningsmerkingar eru á hverju máli, og fleirtölur fylgja reglum þess. Á pólsku er t.d. 1 notatka, 2 notatki, 5 notatek, 21 notatek og 22 notatki. Gæsalappir í útflutningi fylgja tungumáli textans: „…“ fyrir íslensku, «…» fyrir úkraínsku og „…” fyrir pólsku.
+  - Tegundakóðar á úkraínsku: `(пк)` `(к)` `(п)` `(пр)` `(ц)`.
+  - Tegundakóðar á pólsku: `(pa)` parafraza, `(k)` komentarz, `(p)` pytanie, `(pr)` przetworzenie og `(c)` cytat.
 - **Skrár:**
-  - `translations/uk/*.json` – þýðingin, ein færsla á hverja textaeiningu.
-  - `tools/build-translation.py` – sannprófar þýðinguna (allar einingar, tilvitnanir, heimildarlínur, nafnafærslur) og býr til `data/odysseifskvida.uk.{json,js}`.
-  - `translations/uk.sources.json` – fingraför íslensku eininganna sem þýtt var eftir. Ef íslenski textinn breytist stöðvast smíðin og bendir á efnisgreinarnar sem þarf að þýða aftur.
+  - `translations/<mál>/*.json` – þýðingin, ein færsla á hverja textaeiningu.
+  - `tools/build-translation.py` – sannprófar þýðingarnar (allar einingar, gæsalappir tilvitnana, heimildarlínur, nafnafærslur, enginn óþýddur íslenskur texti) og býr til `data/odysseifskvida.<mál>.{json,js}`.
+  - `translations/<mál>.sources.json` – fingraför íslensku eininganna sem þýtt var eftir. Ef íslenski textinn breytist stöðvast smíðin og bendir á efnisgreinarnar sem þarf að þýða aftur.
 
   ```bash
   python3 tools/build-translation.py
   ```
 
-- `js/i18n.js` geymir alla viðmótstexta, með sömu lyklum fyrir bæði tungumál.
-- PDF-letrið var endurgert úr Liberation Sans 2.1.5 með kýrillísku (`tools/build-pdf-fonts.py`).
+- **Nýtt mál** (t.d. enska):
+  1. Bætið færslu fyrir málið í `LANGS` í `tools/build-translation.py` (gæsalappir, nafn Sveinbjarnar og titill).
+  2. Búið til `translations/<mál>/` og keyrið `--lock` og síðan smíðina.
+  3. Bætið máli, beygingarreglu, orðabók og HTML-þýðingum við í `js/i18n.js`, og `QUOTE_MARKS` í `js/core.js`.
+  4. Hlaðið `data/odysseifskvida.<mál>.js` inn í `index.html`.
+
+  Próf gæta þess að allar orðabækur hafi sömu lykla.
+- **PDF-letur:** Það er hlutmengi úr Liberation Sans 2.1.5 með latnesku letri (íslensku, pólsku) og kýrillísku (`tools/build-pdf-fonts.py`).
 
 ## Vistun, vinnuskrá og Drive
 
@@ -134,7 +142,7 @@ npm run test:ui   # viðmótspróf með Playwright (iPad-hermun)
 
 ## Uppfærslur og skyndiminni
 
-Allar staðbundnar skrár í `index.html` bera útgáfunúmer (`?v=1.4.0`, sama og `APP.version` í `js/core.js`), svo Safari sæki nýjar skrár eftir uppfærslu í stað gamalla úr skyndiminni. Hækkið númerið á báðum stöðum við hverja útgáfu; próf gætir þess að þau stemmi. Útgáfan sést neðst í „Lestrarstillingum“.
+Allar staðbundnar skrár í `index.html` bera útgáfunúmer (`?v=1.5.0`, sama og `APP.version` í `js/core.js`), svo Safari sæki nýjar skrár eftir uppfærslu í stað gamalla úr skyndiminni. Hækkið númerið á báðum stöðum við hverja útgáfu; próf gætir þess að þau stemmi. Útgáfan sést neðst í „Lestrarstillingum“.
 
 Safari getur misst IndexedDB-tenginguna, t.d. eftir að flipi hefur verið í bakgrunni á iPad, og þá svara vistanir ekki. Hver vistun hefur því tímamörk. Mistakist hún er tengingin opnuð aftur og reynt á ný, og annars birtist villuborði. Tungumálaskipti bíða ekki eftir vistun.
 

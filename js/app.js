@@ -29,8 +29,8 @@
   }
   // Útgáfur textans: íslenski frumtextinn og úkraínsk þýðing (sömu kaflar og einingaauðkenni).
   const idxIs = C.buildIndex(DATA);
-  const idxUk = window.ODY_TEXT_UK ? C.buildIndex(window.ODY_TEXT_UK) : null;
-  C.linkEditions([idxIs, idxUk].filter(Boolean));
+  const editions = C.linkEditions([idxIs].concat(Object.values(window.ODY_TEXTS || {}).map(d => C.buildIndex(d))));
+  const editionFor = l => editions[l] || idxIs;
   let index = idxIs;          // útgáfan sem er sýnd; valin í init() eftir tungumáli
   let sections = index.sections;
   const sameEdition = a => (a.textLang || 'is') === index.edition;
@@ -883,11 +883,10 @@
   /* Tungumál: [Ukr] / [Ísl]. Stillingin vistast og síðan er hlaðin aftur á nýju tungumáli. */
   /* Skiptingin má aldrei stranda á vistun: tungumálið fer líka í slóðina (?lang=) og localStorage,
      og beðið er í mesta lagi stutta stund eftir IndexedDB áður en síðan er hlaðin aftur. */
-  $('btnLang').addEventListener('click', async () => {
-    const btn = $('btnLang');
-    if (btn.disabled) return;
-    btn.disabled = true;
-    const next = I.getLang() === 'is' ? 'uk' : 'is';
+  async function switchLang(next) {
+    const group = $('langGroup');
+    if (group.dataset.busy || next === I.getLang() || !I.LANGS.includes(next)) return;
+    group.dataset.busy = '1';
     let target = location.pathname + (next === 'is' ? '' : '?lang=' + next) + location.hash;
     try {
       const url = new URL(location.href);
@@ -898,7 +897,8 @@
       await Promise.race([persist(['settings']), new Promise(r => setTimeout(r, 1200))]);
     } catch (e) { /* skipt um tungumál samt */ }
     location.replace(target);
-  });
+  }
+  $('langGroup').addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) switchLang(b.dataset.lang); });
   $('btnCornell').addEventListener('click', () => {
     state.settings = C.sanitizeSettings(Object.assign({}, state.settings, { cornell: !state.settings.cornell }));
     applySettings();
@@ -1098,13 +1098,16 @@
     I.applyHtml(document);
     $('appVersion').textContent = t('app.version', { v: C.APP.version });
     document.querySelector('.dt-main').textContent = index.doc.title;
-    const b = $('btnLang');
-    b.disabled = false;
-    b.textContent = t('lang.switch');
-    b.setAttribute('aria-label', t('lang.switchAria'));
-    b.setAttribute('lang', t('lang.switchLang'));
-    b.title = t('lang.switchAria');
-    // Nemandi getur skrifað á íslensku eða úkraínsku; í úkraínskri útgáfu ræður vafrinn stafsetningarmáli.
+    // tungumálahnappar: heiti hvers máls á því sjálfu
+    const g = $('langGroup');
+    g.innerHTML = '';
+    delete g.dataset.busy;
+    g.setAttribute('aria-label', t('lang.group'));
+    for (const code of I.LANGS) {
+      const m = I.LANG_META[code];
+      g.appendChild(el('button', { type: 'button', class: 'lang-btn', 'data-lang': code, lang: code, 'aria-label': m.name, title: m.name, 'aria-pressed': code === l ? 'true' : 'false' }, m.short));
+    }
+    // Nemandi getur skrifað á hvaða máli sem er; utan íslensku ræður vafrinn stafsetningarmáli.
     if (l !== 'is') for (const id of ['edBody', 'edCue']) $(id).removeAttribute('lang');
     buildTypeRow();
     renderFilters();
@@ -1134,7 +1137,7 @@
     const fromUrl = urlLang();
     if (fromUrl && fromUrl !== state.settings.lang) { state.settings.lang = fromUrl; persist(['settings']); }
     I.setLang(state.settings.lang);
-    index = I.getLang() === 'uk' && idxUk ? idxUk : idxIs;
+    index = editionFor(I.getLang());
     sections = index.sections;
     try { localStorage.setItem('odysseifskvida-lestrarstofa:lang', state.settings.lang); } catch (e) { /* */ }
     applyLanguage();
@@ -1161,6 +1164,6 @@
   }
 
   // til prófana (sjálfvirk viðmótspróf); ekki notað af viðmótinu sjálfu
-  window.__ody = { state, get index() { return index; }, idxIs, idxUk, anchorFromSelection, idle: () => state.saveChain };
+  window.__ody = { state, get index() { return index; }, idxIs, editions, anchorFromSelection, idle: () => state.saveChain };
   init();
 })();

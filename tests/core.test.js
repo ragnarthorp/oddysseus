@@ -474,3 +474,66 @@ test('úkraínsk textaútgáfa: sama bygging, auðkenni og síður; glósur teng
   assert.match(md, /> „Guðirnir sitja/);
   assert.match(md, /^# Одіссея – переказ/);
 });
+
+test('pólsk textaútgáfa: sama bygging, pólskar gæsalappir; þrjár útgáfur tengdar', () => {
+  const load = l => JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', `odysseifskvida.${l}.json`), 'utf8'));
+  const PL = load('pl'), UK = load('uk');
+  const isIx = C.buildIndex(DATA), ukIx = C.buildIndex(UK), plIx = C.buildIndex(PL);
+  const eds = C.linkEditions([isIx, ukIx, plIx]);
+  assert.deepEqual(Object.keys(eds).sort(), ['is', 'pl', 'uk']);
+  assert.equal(PL.document.baseVersion, DATA.document.version);
+  assert.equal(PL.document.title, 'Odyseja – opowieść');
+  PL.sections.forEach((s, i) => {
+    const o = DATA.sections[i];
+    assert.equal(s.id, o.id);
+    assert.deepEqual(s.units.map(u => [u.id, u.type, u.n, u.pages[0].pdfPage]), o.units.map(u => [u.id, u.type, u.n, u.pages[0].pdfPage]), s.id);
+    for (const u of s.units) {
+      if (u.type === 'tilvitnun') assert.ok(u.text.startsWith('„') && u.text.endsWith('”'), u.id);
+      if (u.type === 'heimild') assert.match(u.text, /z islandzkiego przekładu Sveinbjörna Egilssona$/, u.id);
+      if (u.type === 'nafn') assert.equal(u.text[u.termLength - 1], ':', u.id);
+    }
+  });
+  assert.equal(plIx.sectionById.get('thattur-09').title, 'Cyklop');
+  assert.match(plIx.unitById.get('thattur-09-004').unit.text, /Nikt/);
+  // glósur úr öllum þremur útgáfum sannprófast hver við sína útgáfu
+  const mk = (ix, id, w) => { const u = ix.unitById.get(id).unit, st = u.text.indexOf(w); return C.makeAnchor(ix, { unitId: id, offset: st }, { unitId: id, offset: st + w.length }).anchor; };
+  const aPl = mk(plIx, 'thattur-01-001', 'Posejdona'), aUk = mk(ukIx, 'thattur-01-001', 'Посейдона'), aIs = mk(isIx, 'thattur-01-001', 'Póseidon');
+  assert.deepEqual([aPl.textLang, aUk.textLang, aIs.textLang], ['pl', 'uk', 'is']);
+  for (const ix of [isIx, ukIx, plIx]) for (const a of [aPl, aUk, aIs]) assert.ok(C.verifyAnchor(ix, a).ok, `${a.textLang} í ${ix.edition}`);
+  const ns = [aIs, aUk, aPl].map(a => C.newNote(a, { type: 'athugasemd', body: a.textLang }));
+  const wf = C.makeWorkfile(plIx, { notes: ns });
+  assert.deepEqual(Object.keys(wf.document.editions).sort(), ['is', 'pl', 'uk']);
+  const r = C.parseWorkfile(ukIx, JSON.stringify(wf));
+  assert.ok(r.ok, r.errors.join('; '));
+  // gæsalappir í útflutningi fylgja tungumáli textans
+  C.I18n.setLang('pl');
+  try {
+    const md = C.toMarkdown(C.exportModel(plIx, ns));
+    assert.match(md, /> „Póseidon“/);
+    assert.match(md, /> «Посейдона»/);
+    assert.match(md, /> „Posejdona”/);
+    assert.match(md, /^# Odyseja – opowieść/);
+    assert.match(md, /## Rozdział I — Atena przybywa na Itakę\n/);
+    assert.match(md, /\n1 · s\. 6 · ¶ 1 · \(k\)\n/);
+  } finally { C.I18n.setLang('is'); }
+});
+
+test('pólska: viðmótstextar, fleirtölur, kóðar og villuboð', () => {
+  const I = C.I18n;
+  const keys = o => Object.keys(o).sort();
+  for (const l of I.LANGS) assert.deepEqual(keys(I._dicts[l]), keys(I._dicts.is), `sömu lyklar: ${l}`);
+  assert.deepEqual(I.LANGS, ['is', 'uk', 'pl']);
+  assert.deepEqual(I.LANGS.map(l => I.LANG_META[l].short), ['Ísl', 'Ukr', 'PL']);
+  I.setLang('pl');
+  try {
+    const cases = { 1: 'notatka', 2: 'notatki', 4: 'notatki', 5: 'notatek', 12: 'notatek', 14: 'notatek', 21: 'notatek', 22: 'notatki', 25: 'notatek', 102: 'notatki', 112: 'notatek' };
+    for (const [n, w] of Object.entries(cases)) assert.equal(I.t('toc.count', { n: Number(n) }), `${n} ${w}`);
+    assert.deepEqual(C.NOTE_TYPES.map(t => t.label), ['Parafraza', 'Komentarz', 'Pytanie', 'Przetworzenie', 'Cytat']);
+    assert.equal(new Set(C.NOTE_TYPES.map(t => t.code)).size, 5);
+    const a = C.makeAnchor(index, { unitId: 'thattur-02-003', offset: 0 }, { unitId: 'thattur-02-004', offset: 5 }).anchor;
+    assert.equal(C.locationParts(index, a).paras, 'Akapity 3–4');
+    assert.equal(C.locationCode(a), 's. 8 · ¶ 3–4');
+    assert.match(C.parseWorkfile(index, '{').errors[0], /Plik jest uszkodzony/);
+    for (const [k, v] of Object.entries(I._dicts.pl)) assert.ok(!/[ðþæ]/i.test(v.replace(/Ódysseifskviða/g, '')), `${k} er á íslensku`);
+  } finally { I.setLang('is'); }
+});

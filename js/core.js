@@ -10,7 +10,7 @@
   const I = (typeof module === 'object' && module.exports) ? require('./i18n.js') : self.OdyI18n;
   const T = I.t;
 
-  const APP = { name: 'Lestrarstofa – Ódysseifskviða', version: '1.4.0' }; // sama númer og ?v= í index.html
+  const APP = { name: 'Lestrarstofa – Ódysseifskviða', version: '1.5.0' }; // sama númer og ?v= í index.html
   const WORKFILE_FORMAT = 'odysseifskvida-vinnuskra';
   const WORKFILE_VERSION = 1;
   const CONTEXT_CHARS = 40;
@@ -467,11 +467,11 @@
     return out.join('\n');
   }
 
-  /* Gæsalappir fylgja tungumáli textans sjálfs (íslenska „…“, úkraínska «…»), ekki viðmótsins. */
-  const QUOTE_MARKS = { is: ['„', '“'], uk: ['«', '»'] };
+  /* Gæsalappir fylgja tungumáli textans sjálfs (íslenska „…“, úkraínska «…», pólska „…”), ekki viðmótsins. */
+  const QUOTE_MARKS = { is: ['„', '“'], uk: ['«', '»'], pl: ['„', '”'] };
   function withQuoteMarks(q, textLang) {
     const t = String(q);
-    if ((t.startsWith('„') && t.endsWith('“')) || (t.startsWith('«') && t.endsWith('»'))) return t;
+    if ((t.startsWith('„') && (t.endsWith('“') || t.endsWith('”'))) || (t.startsWith('«') && t.endsWith('»'))) return t;
     const m = QUOTE_MARKS[textLang] || [T('q.open'), T('q.close')];
     return m[0] + t + m[1];
   }

@@ -1,0 +1,88 @@
+{
+  "sections": {
+    "titill": { "kicker": "HOMER", "title": "Odyseja" },
+    "formali": { "kicker": "PRZEDMOWA", "title": "Zanim zacznie się opowieść" },
+    "thattur-01": { "kicker": "ROZDZIAŁ PIERWSZY", "title": "Atena przybywa na Itakę" },
+    "thattur-02": { "kicker": "ROZDZIAŁ DRUGI", "title": "Zgromadzenie na Itace" },
+    "thattur-03": { "kicker": "ROZDZIAŁ TRZECI", "title": "U Nestora w Pylos" },
+    "thattur-04": { "kicker": "ROZDZIAŁ CZWARTY", "title": "U Menelaosa i Heleny" },
+    "thattur-05": { "kicker": "ROZDZIAŁ PIĄTY", "title": "Kalipso" },
+    "thattur-06": { "kicker": "ROZDZIAŁ SZÓSTY", "title": "Nauzykaa" },
+    "thattur-07": { "kicker": "ROZDZIAŁ SIÓDMY", "title": "W pałacu Alkinoosa" },
+    "thattur-08": { "kicker": "ROZDZIAŁ ÓSMY", "title": "Pieśń Demodoka" }
+  },
+  "units": {
+    "titill-001": "Dziesięcioletnia podróż do domu z Troi na Itakę, opowiedziana rozdział po rozdziale",
+    "titill-002": "Z cytatami z islandzkiego przekładu Sveinbjörna Egilssona",
+    "titill-003": "Odyseja",
+    "titill-004": "Opowieść Homera w dwudziestu czterech rozdziałach",
+    "titill-005": "Z cytatami z islandzkiego przekładu Sveinbjörna Egilssona",
+
+    "formali-001": "Przez dziesięć lat Grecy oblegali Troję, aby odzyskać Helenę, żonę spartańskiego króla Menelaosa, którą porwał trojański królewicz Parys. W końcu miasto upadło dzięki podstępowi. Grecy zbudowali wielkiego drewnianego konia, ukryli w nim wojowników i udali, że odpływają do domu. Kasandra, córka trojańskiego króla Priama, ostrzegała przed koniem. Miała dar proroctwa, ale ciążyła na niej klątwa: nikt nie wierzył jej słowom. Trojanie wciągnęli więc konia za mury i nocą miasto zostało zdobyte. Pomysł wymyślił Odyseusz, król wyspy Itaki.",
+    "formali-002": "Potem zwycięzcy wyruszyli do domów. Większość dotarła tam w ciągu kilku tygodni lub miesięcy. Odyseusz był w drodze przez dziesięć lat.",
+    "formali-003": "„Odyseja” opowiada o tej podróży do domu, ale nie zaczyna się od początku. Gdy opowieść się zaczyna, minęło dwadzieścia lat, odkąd Odyseusz opuścił dom, a do końca jego wygnania zostało zaledwie kilka tygodni. Pierwsze cztery rozdziały nie mówią nawet o nim samym, lecz o jego synu, który wyrusza, by szukać wieści o ojcu, którego nigdy nie znał. Słynne przygody — cyklop, Kirke i syreny — pojawiają się dopiero w dziewiątym rozdziale i wtedy Odyseusz sam opowiada o nich podczas uczty.",
+    "formali-004": "Ta książka trzyma się porządku Homera, rozdział po rozdziale. Opowieść została opowiedziana na nowo i bardzo skrócona. Natomiast cytaty z wcięciem to słowa Sveinbjörna Egilssona, który przełożył poemat na islandzki w Bessastaðir w pierwszej połowie XIX wieku. Język jest tam starszy i bardziej uroczysty. Tak właśnie Homer brzmiał w uszach Islandczyków przez blisko dwa stulecia.",
+    "formali-005": "„Opowiedz mi, Muzo, o tym wielce wędrownym mężu, który tułał się bardzo daleko, po tym jak spustoszył święte miasto Troję…”",
+    "formali-006": "Początek poematu · z islandzkiego przekładu Sveinbjörna Egilssona",
+
+    "thattur-01-001": "Bogowie obradują na Olimpie. Posejdona, który nienawidzi Odyseusza, nie ma, a Atena korzysta z okazji. Przypomina Zeusowi, że Odyseusz od siedmiu lat tkwi u bogini Kalipso, i prosi, by pozwolono mu wrócić do domu. Zeus się zgadza.",
+    "thattur-01-002": "Sama Atena udaje się na Itakę. Sytuacja jest tam zła. Ponad setka młodych synów możnych rozgościła się w pałacu Odyseusza. Uważają go za zmarłego i chcą, by Penelopa, jego żona, wyszła za jednego z nich. Dopóki ona zwleka z odpowiedzią, zarzynają jego bydło, piją jego wino i ucztują dzień po dniu.",
+    "thattur-01-003": "Telemach, syn Odyseusza, siedzi wśród nich przygnębiony. Był niemowlęciem, gdy ojciec wyruszył na wojnę, i nic o nim nie pamięta. Teraz ma około dwudziestu lat, ale brak mu sił i odwagi, by przepędzić zalotników.",
+    "thattur-01-004": "„… i nie przystoi ci zachowywać się jak dziecko, skoro wyrosłeś już z lat dziecięcych.”",
+    "thattur-01-005": "Atena do Telemacha · z islandzkiego przekładu Sveinbjörna Egilssona",
+    "thattur-01-006": "Atena przychodzi do niego pod postacią Mentesa, dawnego przyjaciela jego ojca. Telemach — jako jedyny w pałacu — gościnnie przyjmuje przybysza. Gość mówi mu, że jego ojciec żyje. Radzi mu zwołać zgromadzenie, zażądać, by zalotnicy odeszli, a potem samemu popłynąć na stały ląd po wieści.",
+    "thattur-01-007": "Gdy gość znika jak ptak, Telemach rozumie, że rozmawiał z bogiem.",
+
+    "thattur-02-001": "Następnego ranka Telemach zwołuje zgromadzenie — pierwsze od czasu, gdy odszedł jego ojciec. Wstaje przed wszystkimi i skarży się na zalotników, którzy trwonią wszystko, co ma.",
+    "thattur-02-002": "Antinoos, najbezczelniejszy z zalotników, odpowiada pełnym głosem. Winni nie są oni, tylko Penelopa. Od ponad trzech lat wodzi ich za nos. Mówiła, że wybierze sobie męża, gdy skończy tkać całun dla Laertesa, starego ojca Odyseusza. Za dnia siedziała przy krosnach, a nocą pruła wszystko, co utkała. W końcu jedna ze służących ją wydała i musiała dokończyć tkaninę. Teraz zalotnicy mówią, że nie odejdą, dopóki ona nie wybierze.",
+    "thattur-02-003": "Nad zgromadzeniem przelatują dwa orły i rozszarpują się nawzajem. Stary wróżbita mówi, że to znak: Odyseusz wraca do domu, a zalotników czeka śmierć — oni jednak się z niego śmieją. Zgromadzenie rozchodzi się bez rozstrzygnięcia.",
+    "thattur-02-004": "„… tak tkała w dzień wielką tkaninę, a nocą przy pochodniach znów ją pruła.”",
+    "thattur-02-005": "Antinoos o Penelopie · z islandzkiego przekładu Sveinbjörna Egilssona",
+    "thattur-02-006": "Telemach schodzi nad morze i modli się do bogini, która go odwiedziła. Atena przychodzi znowu, tym razem pod postacią Mentora, i zdobywa dla niego statek i załogę. Nocą odpływa, a jego matka o tym nie wie. Tylko stara piastunka Eurykleja wie, dokąd się udaje.",
+
+    "thattur-03-001": "O świcie statek przybija do Pylos. Rządzi tam Nestor, najstarszy i najmądrzejszy z tych, którzy walczyli pod Troją. Razem z synami i całym swoim ludem składa na brzegu ofiarę Posejdonowi.",
+    "thattur-03-002": "Telemach jest onieśmielony. Nigdy nie rozmawiał z tak dostojnym człowiekiem i nie wie, jak przedstawić swoją sprawę. Atena, wciąż pod postacią Mentora, dodaje mu odwagi.",
+    "thattur-03-003": "Nestor gościnnie przyjmuje przybyszów. Najpierw dostają jeść, a dopiero potem pyta się ich o imię i cel podróży. Takie są prawa gościnności. Gdy Telemach się przedstawia, starzec patrzy na niego ze zdumieniem: chłopak mówi zupełnie jak jego ojciec.",
+    "thattur-03-004": "„Teraz, Telemachu, nie musisz się już wstydzić; po to bowiem przepłynąłeś morze, by wypytać o swego ojca…”",
+    "thattur-03-005": "Atena do Telemacha · z islandzkiego przekładu Sveinbjörna Egilssona",
+    "thattur-03-006": "Nestor ma wiele do opowiedzenia o wojnie i o powrocie Greków do domu, który różnie się układał. Król Agamemnon dotarł do domu, ale zamordowała go żona i jej kochanek. O Odyseuszu natomiast Nestor nic nie wie. Radzi Telemachowi udać się do króla Menelaosa w Sparcie, który niedawno wrócił z długiej tułaczki.",
+    "thattur-03-007": "Wieczorem Mentor znika pod postacią ptaka i wszyscy widzą, że chłopcu towarzyszył bóg. Nestor każe zaprząc konie do rydwanu i wysyła swego syna Pejsistratosa z Telemachem lądem do Sparty.",
+
+    "thattur-04-001": "Gdy przybywają do Sparty, trwa tam uczta weselna. Pałac Menelaosa lśni złotem, srebrem i bursztynem, a Telemach nigdy nie widział czegoś podobnego. Gdy Menelaos wspomina Odyseusza — przyjaciela, za którym tęskni najbardziej — chłopak zaczyna płakać i zasłania twarz płaszczem.",
+    "thattur-04-002": "Wtedy do sali wchodzi Helena — kobieta, o którą toczyła się wojna. Od razu widzi, czyim synem jest gość. Wspomnienia zasmucają wszystkich, więc dolewa do wina ziela, które na jakiś czas odbiera wszelki smutek. Potem małżonkowie opowiadają historie o Odyseuszu pod Troją: jak zakradł się do miasta przebrany za żebraka i jak powstrzymał mężczyzn w drewnianym koniu, gdy Helena chodziła wokół niego i naśladowała głosy ich żon.",
+    "thattur-04-003": "Następnego dnia Menelaos opowiada o własnej drodze do domu. W Egipcie pochwycił morskiego starca Proteusza, który zmieniał się w lwa, węża, wodę i drzewo, zanim się poddał i przekazał mu wieści. Odyseusz żyje, powiedział Proteusz, ale siedzi we łzach na wyspie bogini Kalipso i nie może się wydostać, bo nie ma ani statku, ani ludzi.",
+    "thattur-04-004": "„… pewne czarodziejskie ziele, które było lekiem na smutek, lekiem na gniew i zapomnieniem wszelkich cierpień.”",
+    "thattur-04-005": "O zielu, które Helena dolewa do wina · z islandzkiego przekładu Sveinbjörna Egilssona",
+    "thattur-04-006": "Tymczasem na Itace zalotnicy dowiedzieli się, że Telemach wyjechał. Wyposażają statek i czają się w cieśninie, by zabić go w drodze powrotnej. Penelopa dowiaduje się o jednym i o drugim i jest niepocieszona.",
+
+    "thattur-05-001": "Teraz opowieść przechodzi do samego Odyseusza. Zeus wysyła Hermesa na wyspę Ogygię z rozkazem dla Kalipso: ma uwolnić tego człowieka. Bogini się gniewa. Uratowała go, gdy po rozbiciu statku wyrzuciło go na brzeg, i przez siedem lat go kochała, ale wbrew woli Zeusa nic nie może zrobić.",
+    "thattur-05-002": "Znajduje Odyseusza tam, gdzie siedzi codziennie — na brzegu, skąd z płaczem patrzy na morze. Mówi mu, że może odejść. On nie wierzy jej, dopóki nie przysięgnie, że nie knuje podstępu.",
+    "thattur-05-003": "Wieczorem jeszcze raz próbuje go zatrzymać. Jeśli zostanie, uczyni go nieśmiertelnym i wiecznie młodym. I czy Penelopa może dorównać bogini urodą? Odyseusz odpowiada uprzejmie, lecz stanowczo. Dobrze wie, że jego żona nie wytrzyma porównania, ale mimo to chce wrócić do domu.",
+    "thattur-05-004": "„… ona jest śmiertelna, a ty nieśmiertelna i nie starzejesz się. A jednak pragnę i tęsknię co dzień, by dotrzeć do mojego domu i ujrzeć dzień mego powrotu.”",
+    "thattur-05-005": "Odyseusz do Kalipso · z islandzkiego przekładu Sveinbjörna Egilssona",
+    "thattur-05-006": "Kalipso daje mu topór i w cztery dni buduje sobie tratwę. Przez siedemnaście dni płynie według gwiazd. Osiemnastego dnia widzi ląd, ale wtedy dostrzega go Posejdon. Bóg wznieca burzę, która roztrzaskuje tratwę. Przez dwie doby Odyseusz miotany jest falami i tylko dzięki pomocy morskiej bogini i Ateny dociera do brzegu przy ujściu rzeki. Nagi i wyczerpany wpełza w zarośla, przykrywa się liśćmi i zasypia.",
+
+    "thattur-06-001": "Ta kraina nazywa się Scheria, a mieszkają w niej Feakowie, wielki lud żeglarzy. Nocą Atena ukazuje się we śnie królewnie Nauzykai i zachęca ją, by poszła nad rzekę prać odzież, bo wkrótce czeka ją wesele.",
+    "thattur-06-002": "Rano Nauzykaa jedzie ze swoimi służącymi do ujścia rzeki. Piorą szaty, rozkładają je do wyschnięcia, kąpią się, jedzą, a potem grają w piłkę. Piłka wpada do rzeki, dziewczęta krzyczą i Odyseusz się budzi.",
+    "thattur-06-003": "Nie wie, gdzie się znalazł ani czy mieszkają tu dzicy, czy cywilizowani ludzie. Odłamuje gałąź z liśćmi, by zakryć swoją nagość, i wychodzi z zarośli — rozczochrany, oblepiony zaschniętą solą. Służące rozbiegają się na wszystkie strony. Tylko Nauzykaa stoi nieruchomo.",
+    "thattur-06-004": "„… nie ma nic lepszego ani piękniejszego niż to, gdy mąż i żona mieszkają razem w jednym domu w zgodzie myśli: to wielki smutek dla ich wrogów, a radość dla ich przyjaciół…”",
+    "thattur-06-005": "Odyseusz do Nauzykai · z islandzkiego przekładu Sveinbjörna Egilssona",
+    "thattur-06-006": "Odyseusz się zastanawia. Czy paść jej do kolan, jak każe obyczaj, czy przemówić do niej z daleka? Wybiera odległość i słowa. Pyta, czy jest boginią, czy śmiertelną kobietą, wychwala jej urodę, opowiada o swoich nieszczęściach i życzy jej wszystkiego najlepszego: dobrego męża i domu, w którym małżonkowie żyją w zgodzie.",
+    "thattur-06-007": "Nauzykaa każe przynieść mu ubranie, jedzenie i oliwę. Gdy się umył, wydaje jej się podobny do boga. Wskazuje mu drogę do pałacu swego ojca i daje jedną radę. Ma minąć króla i prosić o opiekę królową Arete, jej matkę, bo to ona ma największą władzę.",
+
+    "thattur-07-001": "Odyseusz idzie do miasta sam, spowity mgłą, którą otula go Atena. Pałac króla Alkinoosa nie przypomina niczego, co dotąd widział. Ściany są ze spiżu, drzwi ze złota, a przy nich stoją psy ze złota i srebra. Na zewnątrz jest sad, w którym owoce dojrzewają przez cały rok, latem i zimą.",
+    "thattur-07-002": "Idzie prosto do sali, obok możnych, i pada do kolan królowej Arete. Dopiero wtedy mgła się rozwiewa. Prosi ją, by pomogła mu wrócić do domu, a potem siada w popiele przy palenisku jak ktoś, kto nic nie ma.",
+    "thattur-07-003": "Wszyscy milkną. W końcu stary możny przypomina królowi o jego obowiązku wobec gości. Alkinoos bierze Odyseusza za rękę, prowadzi go na miejsce i każe podać mu jedzenie i wino.",
+    "thattur-07-004": "„… tam dojrzewa jedna gruszka, gdy inna się starzeje, jabłko na jabłku, winogrono na winogronie, figa na fidze.”",
+    "thattur-07-005": "O sadzie Alkinoosa · z islandzkiego przekładu Sveinbjörna Egilssona",
+    "thattur-07-006": "Gdy inni się rozchodzą, Arete pyta, skąd ma szaty, bo rozpoznaje robotę: sama je utkała. Wtedy Odyseusz opowiada o Kalipso, rozbiciu statku i spotkaniu z Nauzykaą, ale swojego imienia nie wymienia. Alkinoos obiecuje, że statek Feaków zawiezie go do domu, gdziekolwiek ten dom jest. Gość tak mu się podoba, że chętnie wziąłby go sobie za zięcia.",
+
+    "thattur-08-001": "Następnego dnia Alkinoos wydaje ucztę na cześć gościa. Przyprowadzają tam Demodoka, ślepego pieśniarza, któremu Muza dała dar śpiewu, ale odebrała wzrok. Śpiewa o sporze Odyseusza z Achillesem pod Troją. Gość naciąga płaszcz na głowę i płacze tak, by nikt nie zauważył. Tylko Alkinoos to dostrzega.",
+    "thattur-08-002": "Aby poprawić ludziom nastrój, urządza się zawody. Młody Feak drwi z gościa i mówi, że wygląda jak kupiec, a nie atleta. Odyseusz wpada w gniew, chwyta najcięższy dysk i rzuca go daleko poza wszystkie znaki. Potem tańczy się, a Demodok śpiewa żartobliwą pieśń o miłości Aresa i Afrodyty.",
+    "thattur-08-003": "Wieczorem Odyseusz sam prosi pieśniarza o konkretną pieśń: o drewnianym koniu. Demodok śpiewa o tym, jak Grecy udali, że odpływają, jak Trojanie wciągnęli konia do miasta i jak nocą wysypali się z niego wojownicy.",
+    "thattur-08-004": "„… o drewnianym koniu, którego Epeios zbudował z pomocą Ateny, o tej podstępnej machinie, którą dostojny Odyseusz zdołał wprowadzić do warowni…”",
+    "thattur-08-005": "Odyseusz prosi Demodoka o pieśń · z islandzkiego przekładu Sveinbjörna Egilssona",
+    "thattur-08-006": "Odyseusz znowu płacze, a tym razem Homer porównuje go do kobiety opłakującej poległego męża w zdobytym mieście. Zwycięzca płacze tak jak ci, których pokonał.",
+    "thattur-08-007": "Wtedy Alkinoos przerywa pieśń i pyta gościa wprost: kim jesteś? Skąd przybywasz? I dlaczego płaczesz, gdy śpiewa się o Troi?"
+  }
+}
