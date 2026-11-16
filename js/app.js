@@ -863,14 +863,23 @@
   });
 
   /* Tungumál: [Ukr] / [Ísl]. Stillingin vistast og síðan er hlaðin aftur á nýju tungumáli. */
+  /* Skiptingin má aldrei stranda á vistun: tungumálið fer líka í slóðina (?lang=) og localStorage,
+     og beðið er í mesta lagi stutta stund eftir IndexedDB áður en síðan er hlaðin aftur. */
   $('btnLang').addEventListener('click', async () => {
+    const btn = $('btnLang');
+    if (btn.disabled) return;
+    btn.disabled = true;
     const next = I.getLang() === 'is' ? 'uk' : 'is';
-    state.settings = C.sanitizeSettings(Object.assign({}, state.settings, { lang: next }));
-    try { localStorage.setItem('odysseifskvida-lestrarstofa:lang', next); } catch (e) { /* aðeins þægindi */ }
-    await persist(['settings']);
-    const url = new URL(location.href);
-    if (next === 'is') url.searchParams.delete('lang'); else url.searchParams.set('lang', next);
-    location.replace(url.toString());
+    let target = location.pathname + (next === 'is' ? '' : '?lang=' + next) + location.hash;
+    try {
+      const url = new URL(location.href);
+      if (next === 'is') url.searchParams.delete('lang'); else url.searchParams.set('lang', next);
+      target = url.toString();
+      state.settings = C.sanitizeSettings(Object.assign({}, state.settings, { lang: next }));
+      try { localStorage.setItem('odysseifskvida-lestrarstofa:lang', next); } catch (e) { /* aðeins þægindi */ }
+      await Promise.race([persist(['settings']), new Promise(r => setTimeout(r, 1200))]);
+    } catch (e) { /* skipt um tungumál samt */ }
+    location.replace(target);
   });
   $('btnCornell').addEventListener('click', () => {
     state.settings = C.sanitizeSettings(Object.assign({}, state.settings, { cornell: !state.settings.cornell }));
@@ -985,8 +994,8 @@
         const md = cornell ? C.toCornellMarkdown(model) : C.toMarkdown(model);
         file = new File(['﻿' + md], `${stem}${C.fileStamp()}.md`, { type: 'text/markdown;charset=utf-8' });
       } else {
-        await loadScript(VENDOR + 'jspdf.umd.min.js', () => !!(window.jspdf && window.jspdf.jsPDF));
-        await loadScript(VENDOR + 'pdf-fonts.js', () => !!window.NASA_PDF_FONTS);
+        await loadScript(VENDOR + 'jspdf.umd.min.js?v=' + C.APP.version, () => !!(window.jspdf && window.jspdf.jsPDF));
+        await loadScript(VENDOR + 'pdf-fonts.js?v=' + C.APP.version, () => !!window.NASA_PDF_FONTS);
         const doc = (cornell ? window.OdyPdf.buildCornell : window.OdyPdf.build)(window.jspdf.jsPDF, window.NASA_PDF_FONTS, model);
         file = new File([doc.output('arraybuffer')], `${stem}${C.fileStamp()}.pdf`, { type: 'application/pdf' });
       }
@@ -1069,7 +1078,9 @@
     const l = I.getLang();
     document.documentElement.lang = l;
     I.applyHtml(document);
+    $('appVersion').textContent = t('app.version', { v: C.APP.version });
     const b = $('btnLang');
+    b.disabled = false;
     b.textContent = t('lang.switch');
     b.setAttribute('aria-label', t('lang.switchAria'));
     b.setAttribute('lang', t('lang.switchLang'));

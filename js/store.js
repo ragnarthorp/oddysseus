@@ -22,17 +22,42 @@
     });
   }
 
-  function idbBackend(db) {
-    const tx = (mode, fn) => new Promise((resolve, reject) => {
-      let t;
-      try { t = db.transaction(STORE, mode); } catch (e) { reject(e); return; }
-      const st = t.objectStore(STORE);
+  /* Safari (sérstaklega á iPad) getur misst IndexedDB-tenginguna, t.d. eftir að flipi hefur verið í
+     bakgrunni; þá geta færslur hangið án þess að skila villu. Hver færsla hefur því tímamörk, og ef
+     hún mistekst eða rennur út er tengingin opnuð upp á nýtt og reynt einu sinni enn. */
+  const TX_TIMEOUT = 4000;
+  function idbBackend(firstDb) {
+    let db = firstDb;
+    const watch = d => {
+      d.onclose = () => { if (db === d) db = null; };
+      d.onversionchange = () => { try { d.close(); } catch (e) { /* */ } if (db === d) db = null; };
+    };
+    watch(db);
+    async function conn() {
+      if (!db) { db = await openIdb(); watch(db); }
+      return db;
+    }
+    const once = (d, mode, fn) => new Promise((resolve, reject) => {
+      let t, done = false;
+      const timer = setTimeout(() => { if (!done) { done = true; try { t && t.abort(); } catch (e) { /* */ } reject(new Error(T('store.timeout'))); } }, TX_TIMEOUT);
+      const fin = (f, v) => { if (!done) { done = true; clearTimeout(timer); f(v); } };
+      try { t = d.transaction(STORE, mode); } catch (e) { fin(reject, e); return; }
       let result;
-      try { result = fn(st); } catch (e) { reject(e); return; }
-      t.oncomplete = () => resolve(result && 'result' in result ? result.result : undefined);
-      t.onerror = () => reject(t.error || new Error(T('store.writeFail')));
-      t.onabort = () => reject(t.error || new Error(T('store.aborted')));
+      try { result = fn(t.objectStore(STORE)); } catch (e) { fin(reject, e); return; }
+      t.oncomplete = () => fin(resolve, result && 'result' in result ? result.result : undefined);
+      t.onerror = () => fin(reject, t.error || new Error(T('store.writeFail')));
+      t.onabort = () => fin(reject, t.error || new Error(T('store.aborted')));
     });
+    async function tx(mode, fn) {
+      try {
+        return await once(await conn(), mode, fn);
+      } catch (e) {
+        if (e && e.name === 'QuotaExceededError') throw e; // fullt geymslupláss lagast ekki við endurtengingu
+        try { if (db) db.close(); } catch (x) { /* */ }
+        db = null;
+        return once(await conn(), mode, fn);
+      }
+    }
     return {
       kind: 'indexeddb',
       get: key => tx('readonly', st => st.get(key)),

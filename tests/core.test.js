@@ -415,3 +415,10 @@ test('úkraínska: merkingar, kóðar, kaflaþýðingar, villuboð og útflutnin
   } finally { I.setLang('is'); }
   assert.equal(C.sectionLabel(sec('thattur-01')), 'I. þáttur — Aþena kemur til Íþöku');
 });
+
+test('skyndiminni: allar staðbundnar skrár í index.html bera útgáfunúmer forritsins', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const refs = [...html.matchAll(/(?:src|href)="((?:js|css|data)\/[^"]+)"/g)].map(m => m[1]);
+  assert.ok(refs.length >= 7);
+  for (const r of refs) assert.ok(r.endsWith('?v=' + C.APP.version), `${r} vantar ?v=${C.APP.version}`);
+});

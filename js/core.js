@@ -10,7 +10,7 @@
   const I = (typeof module === 'object' && module.exports) ? require('./i18n.js') : self.OdyI18n;
   const T = I.t;
 
-  const APP = { name: 'Lestrarstofa – Ódysseifskviða', version: '1.0.0' };
+  const APP = { name: 'Lestrarstofa – Ódysseifskviða', version: '1.3.1' }; // sama númer og ?v= í index.html
   const WORKFILE_FORMAT = 'odysseifskvida-vinnuskra';
   const WORKFILE_VERSION = 1;
   const CONTEXT_CHARS = 40;

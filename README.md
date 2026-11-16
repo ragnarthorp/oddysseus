@@ -121,6 +121,12 @@ npm run test:ui   # viðmótspróf með Playwright (iPad-hermun)
 8. „Vista vinnuskrá“ og síðan „Opna vinnuskrá“ úr Files eða Drive. Prófa líka ranga skrá.
 9. Einkavafur (Private Browsing) og fullt geymslupláss: skýr villuskilaboð birtast.
 
+## Uppfærslur og skyndiminni
+
+Allar staðbundnar skrár í `index.html` bera útgáfunúmer (`?v=1.3.1`, sama og `APP.version` í `js/core.js`), svo Safari sæki nýjar skrár eftir uppfærslu í stað gamalla úr skyndiminni. Hækkið númerið á báðum stöðum við hverja útgáfu; próf gætir þess að þau stemmi. Útgáfan sést neðst í „Lestrarstillingum“.
+
+Safari getur misst IndexedDB-tenginguna, t.d. eftir að flipi hefur verið í bakgrunni á iPad, og þá svara vistanir ekki. Hver vistun hefur því tímamörk. Mistakist hún er tengingin opnuð aftur og reynt á ný, og annars birtist villuborði. Tungumálaskipti bíða ekki eftir vistun.
+
 ## Þekktar takmarkanir
 
 - Engin samstilling milli tækja. Vinnuskrá er leiðin til að flytja vinnu. Vinnuskrár eru ekki sameinaðar.

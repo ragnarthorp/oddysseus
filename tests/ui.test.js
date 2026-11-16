@@ -684,3 +684,40 @@ test('úkraínsk útgáfa opnast beint með ?lang=uk', { skip }, async () => {
   assert.match(await page.textContent('#article'), /Як працює читальня/);
   await ctx.close();
 });
+
+test('[Ukr] virkar þó IndexedDB hangi (iPad/Safari) og vistun nær sér aftur', { skip }, async () => {
+  // Hermir eftir Safari-villu: færslur í IndexedDB svara aldrei (hvorki oncomplete né onerror).
+  const init = () => {
+    const orig = IDBDatabase.prototype.transaction;
+    IDBDatabase.prototype.transaction = function () {
+      if (!window.__hangIdb) return orig.apply(this, arguments);
+      const fake = { abort() {}, objectStore() { return { put() {}, get() { return {}; }, delete() {} }; } };
+      return fake;
+    };
+  };
+  const { ctx, page } = await open({ init });
+  await goto(page, 'thattur-01');
+  await page.evaluate(() => { window.__hangIdb = true; });
+  // vistun hangir → villa eftir tímamörk, aldrei „Vistað“
+  await page.click(`.nb[data-note-unit="${S('thattur-01').units[0].id}"]`);
+  await page.fill('#edBody', 'Glósa meðan vistun hangir');
+  await page.click('#edSave');
+  await page.waitForSelector('.banner.error', { timeout: 15000 });
+  assert.doesNotMatch(await savedLabel(page), /Vistað í þessu tæki/);
+  // tenging lagast → næsta vistun tekst (ný tenging)
+  await page.evaluate(() => { window.__hangIdb = false; });
+  await page.click(`.nb[data-note-unit="${S('thattur-01').units[1].id}"]`);
+  await page.fill('#edBody', 'Glósa eftir að tenging lagaðist');
+  await page.click('#edSave');
+  await page.waitForFunction(() => /Vistað í þessu tæki/.test(document.getElementById('saveStatus').textContent), null, { timeout: 15000 });
+  // [Ukr] meðan vistun hangir: síðan skiptir samt um tungumál
+  await page.evaluate(() => { window.__hangIdb = true; });
+  const t0 = Date.now();
+  await Promise.all([page.waitForURL(/[?&]lang=uk/, { timeout: 8000 }), page.click('#btnLang')]);
+  await page.waitForSelector('html[data-ready="1"]');
+  assert.ok(Date.now() - t0 < 8000);
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'uk');
+  assert.equal((await notes(page)).length, 2, 'báðar glósur vistuðust (fyrri með endurtengingu eða seinni vistun)');
+  assert.match(await page.textContent('#appVersion'), /^Версія \d/);
+  await ctx.close();
+});
