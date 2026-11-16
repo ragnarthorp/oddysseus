@@ -61,13 +61,24 @@ Hnappurinn **Cornell** í efstu stiku kveikir og slekkur á Cornell-ham. Stillin
 
 ## Úkraínsk útgáfa
 
-Hnappurinn **[Ukr]** í efstu stiku skiptir viðmótinu yfir á úkraínsku og síðan opnast aftur á því máli. Á úkraínsku stendur **[Ísl]** á hnappnum og skiptir til baka. Tækið man valið og það fylgir vinnuskrá. Úkraínska útgáfan opnast líka beint með `?lang=uk` aftan við slóðina, t.d. `…/index.html?lang=uk`.
+Hnappurinn **[Ukr]** í efstu stiku skiptir yfir á úkraínsku og síðan opnast aftur á því máli. Á úkraínsku stendur **[Ísl]** á hnappnum og skiptir til baka. Tækið man valið og það fylgir vinnuskrá. Úkraínska útgáfan opnast líka beint með `?lang=uk` aftan við slóðina.
 
-- **Hvað er á úkraínsku:** Viðmót, leiðbeiningar, villuboð, glósutegundir og útflutningsmerkingar í PDF og Markdown. Tegundakóðarnir eru `(пк)` переказ, `(к)` коментар, `(п)` питання, `(пр)` переробка og `(ц)` цитата, og staðarkóðinn er t.d. `с. 6 · ¶ 2`.
-- **Hvað helst á íslensku:** Lestrartextinn sjálfur, því endursögnin úr PDF-skjalinu er frumheimildin. Kaflaheitin eru sýnd á íslensku með úkraínskri þýðingu fyrir neðan, í efnisyfirliti og í útflutningi.
-- **Glósurnar:** Þær eru óháðar tungumáli. Nemandi getur skrifað á hvoru málinu sem er og skipt um tungumál án þess að tapa neinu.
-- **Útfærsla:** Allir viðmótstextar eru í `js/i18n.js`, með sömu lyklum fyrir bæði tungumál, og próf gæta þess að enginn lykill vanti.
-- **PDF-letur:** Það var endurgert úr Liberation Sans 2.1.5 með kýrillísku (`tools/build-pdf-fonts.py`) svo úkraínskur texti skili sér í PDF.
+- **Texti kviðunnar á úkraínsku:** Úkraínska útgáfan sýnir úkraínska þýðingu á allri endursögninni: formála, öllum 24 þáttum, „Helstu nöfnum“ og „Texta og myndum“. Íslenska kaflaheitið sést til hliðsjónar undir því úkraínska. Tilvitnanirnar eru þýddar úr íslenskri þýðingu Sveinbjarnar Egilssonar, en ekki teknar úr grískum frumtexta eða úkraínskum útgáfum Hómers. Heimildarlínurnar segja það.
+- **Uppruni þýðingarinnar:** Hún var gerð með gervigreind og hefur ekki verið yfirfarin af fagmanni. Það kemur fram á forsíðu og í „Про книгу“ í úkraínsku útgáfunni.
+- **Sama bygging:** Úkraínski textinn hefur sömu kafla, efnisgreinar, auðkenni og síðutilvísanir (íslenska PDF-ið) og sá íslenski. „С. 6 · Абзац 3“ vísar því á sama stað og „Bls. 6 · Efnisgrein 3“.
+- **Glósur:** Hver glósa man við hvora útgáfu textans hún var gerð (`textLang`). Glósur úr báðum útgáfum sjást alltaf, sannprófast, flytjast út og fylgja vinnuskrá. Glósa úr hinni útgáfunni er auðkennd sem heil efnisgrein.
+- **Viðmót og útflutningur:** Á úkraínsku eru viðmót, leiðbeiningar, villuboð, glósutegundir og útflutningsmerkingar. Tegundakóðarnir eru `(пк)` переказ, `(к)` коментар, `(п)` питання, `(пр)` переробка og `(ц)` цитата. Gæsalappir í útflutningi fylgja tungumáli textans: „…“ fyrir íslensku og «…» fyrir úkraínsku.
+- **Skrár:**
+  - `translations/uk/*.json` – þýðingin, ein færsla á hverja textaeiningu.
+  - `tools/build-translation.py` – sannprófar þýðinguna (allar einingar, tilvitnanir, heimildarlínur, nafnafærslur) og býr til `data/odysseifskvida.uk.{json,js}`.
+  - `translations/uk.sources.json` – fingraför íslensku eininganna sem þýtt var eftir. Ef íslenski textinn breytist stöðvast smíðin og bendir á efnisgreinarnar sem þarf að þýða aftur.
+
+  ```bash
+  python3 tools/build-translation.py
+  ```
+
+- `js/i18n.js` geymir alla viðmótstexta, með sömu lyklum fyrir bæði tungumál.
+- PDF-letrið var endurgert úr Liberation Sans 2.1.5 með kýrillísku (`tools/build-pdf-fonts.py`).
 
 ## Vistun, vinnuskrá og Drive
 
@@ -123,7 +134,7 @@ npm run test:ui   # viðmótspróf með Playwright (iPad-hermun)
 
 ## Uppfærslur og skyndiminni
 
-Allar staðbundnar skrár í `index.html` bera útgáfunúmer (`?v=1.3.1`, sama og `APP.version` í `js/core.js`), svo Safari sæki nýjar skrár eftir uppfærslu í stað gamalla úr skyndiminni. Hækkið númerið á báðum stöðum við hverja útgáfu; próf gætir þess að þau stemmi. Útgáfan sést neðst í „Lestrarstillingum“.
+Allar staðbundnar skrár í `index.html` bera útgáfunúmer (`?v=1.4.0`, sama og `APP.version` í `js/core.js`), svo Safari sæki nýjar skrár eftir uppfærslu í stað gamalla úr skyndiminni. Hækkið númerið á báðum stöðum við hverja útgáfu; próf gætir þess að þau stemmi. Útgáfan sést neðst í „Lestrarstillingum“.
 
 Safari getur misst IndexedDB-tenginguna, t.d. eftir að flipi hefur verið í bakgrunni á iPad, og þá svara vistanir ekki. Hver vistun hefur því tímamörk. Mistakist hún er tengingin opnuð aftur og reynt á ný, og annars birtist villuborði. Tungumálaskipti bíða ekki eftir vistun.
 

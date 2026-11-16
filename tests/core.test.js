@@ -422,3 +422,55 @@ test('skyndiminni: allar staðbundnar skrár í index.html bera útgáfunúmer f
   assert.ok(refs.length >= 7);
   for (const r of refs) assert.ok(r.endsWith('?v=' + C.APP.version), `${r} vantar ?v=${C.APP.version}`);
 });
+
+test('úkraínsk textaútgáfa: sama bygging, auðkenni og síður; glósur tengdar sinni útgáfu', () => {
+  const UK = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'odysseifskvida.uk.json'), 'utf8'));
+  const isIx = C.buildIndex(DATA), ukIx = C.buildIndex(UK);
+  C.linkEditions([isIx, ukIx]);
+  assert.equal(ukIx.edition, 'uk');
+  assert.equal(UK.document.id, DATA.document.id);
+  assert.equal(UK.document.baseVersion, DATA.document.version);
+  assert.notEqual(UK.document.version, DATA.document.version);
+  assert.deepEqual(UK.sections.map(s => s.id), DATA.sections.map(s => s.id));
+  UK.sections.forEach((s, i) => {
+    const o = DATA.sections[i];
+    assert.deepEqual(s.units.map(u => [u.id, u.type, u.n, u.pages[0].pdfPage, u.pages[0].printedPage]), o.units.map(u => [u.id, u.type, u.n, u.pages[0].pdfPage, u.pages[0].printedPage]), s.id);
+    for (const u of s.units) {
+      if (u.id !== 'titill-003' && u.id !== 'um-bokina-002') assert.ok(!/[ðþæÐÞÆ]/.test(u.text), `${u.id} á úkraínsku`);
+      if (u.type === 'tilvitnun') assert.ok(u.text.startsWith('«') && u.text.endsWith('»'), u.id);
+      if (u.type === 'nafn') assert.equal(u.text[u.termLength - 1], ':', u.id);
+    }
+  });
+  assert.equal(ukIx.sectionById.get('thattur-01').title, 'Афіна прибуває на Ітаку');
+  assert.match(ukIx.unitById.get('thattur-09-004').unit.text, /Ніхто/);
+  // glósa við úkraínskan texta
+  const u = ukIx.unitById.get('thattur-01-001').unit;
+  const st = u.text.indexOf('Посейдона'), en = st + 'Посейдона'.length;
+  const a = C.makeAnchor(ukIx, { unitId: u.id, offset: st }, { unitId: u.id, offset: en }).anchor;
+  assert.equal(a.textLang, 'uk'); assert.equal(a.quote, 'Посейдона'); assert.deepEqual(a.printedPages, [6, 6]);
+  assert.ok(C.verifyAnchor(isIx, a).ok, 'sannprófuð við úkraínsku útgáfuna þótt íslenska sé sýnd');
+  assert.ok(C.verifyAnchor(ukIx, a).ok);
+  // glósa við íslenskan texta sannprófuð þegar úkraínska er sýnd
+  const b = C.anchorForUnit(isIx, 'thattur-01-001').anchor;
+  assert.equal(b.textLang, 'is');
+  assert.ok(C.verifyAnchor(ukIx, b).ok);
+  assert.ok(!C.verifyAnchor(ukIx, Object.assign({}, a, { quote: 'Зевса' })).ok);
+  assert.ok(!C.verifyAnchor(ukIx, Object.assign({}, a, { docVersion: 'uk-gamalt' })).ok, 'eldri þýðing tengist ekki í hljóði');
+  // eldri glósur án textLang teljast íslenskar
+  const old = Object.assign({}, b); delete old.textLang;
+  assert.ok(C.verifyAnchor(ukIx, old).ok);
+  // vinnuskrá með glósum úr báðum útgáfum
+  const ns = [C.newNote(a, { type: 'spurning', body: 'Чому?' }), C.newNote(b, { type: 'athugasemd', body: 'Íslensk glósa' }),
+    C.newNote(C.anchorForSection(ukIx, 'thattur-01').anchor, { kind: 'samantekt', type: 'athugasemd', body: 'Підсумок' })];
+  const wf = C.makeWorkfile(ukIx, { notes: ns, settings: { lang: 'uk' } });
+  assert.equal(wf.document.version, DATA.document.version, 'vinnuskrá vísar í íslenska frumtextann');
+  assert.equal(wf.document.editions.uk, UK.document.version);
+  const r = C.parseWorkfile(isIx, JSON.stringify(wf));
+  assert.ok(r.ok, r.errors.join('; '));
+  assert.deepEqual(r.data.notes, JSON.parse(JSON.stringify(ns)));
+  // útflutningur: gæsalappir fylgja tungumáli textans
+  const md = C.toMarkdown(C.exportModel(ukIx, ns));
+  assert.match(md, /> «Посейдона»/);
+  assert.match(md, /> „Guðirnir sitja/);
+  assert.match(md, /^# Одіссея – переказ/);
+});

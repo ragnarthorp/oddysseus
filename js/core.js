@@ -10,7 +10,7 @@
   const I = (typeof module === 'object' && module.exports) ? require('./i18n.js') : self.OdyI18n;
   const T = I.t;
 
-  const APP = { name: 'Lestrarstofa – Ódysseifskviða', version: '1.3.1' }; // sama númer og ?v= í index.html
+  const APP = { name: 'Lestrarstofa – Ódysseifskviða', version: '1.4.0' }; // sama númer og ?v= í index.html
   const WORKFILE_FORMAT = 'odysseifskvida-vinnuskra';
   const WORKFILE_VERSION = 1;
   const CONTEXT_CHARS = 40;
@@ -66,7 +66,22 @@
       sectionById.set(s.id, s);
       s.units.forEach((u, ui) => unitById.set(u.id, { unit: u, section: s, si, ui }));
     });
-    return { data, doc: data.document, sections, sectionById, unitById };
+    return { data, doc: data.document, edition: data.document.edition || 'is', sections, sectionById, unitById, editions: null, base: null };
+  }
+  /* Tengir saman útgáfur textans (íslensku og þýðingar). Allar hafa sömu kafla og einingaauðkenni;
+     glósa ber `textLang` og er alltaf sannprófuð við þá útgáfu sem hún var gerð í. */
+  function linkEditions(list) {
+    const editions = {};
+    for (const ix of list) editions[ix.edition] = ix;
+    const base = editions.is || list[0];
+    for (const ix of list) { ix.editions = editions; ix.base = base; }
+    return editions;
+  }
+  const baseOf = index => index.base || index;
+  function edIndex(index, anchor) {
+    const ed = anchor.textLang || 'is';
+    if (index.editions) return index.editions[ed] || null;
+    return ed === index.edition ? index : null;
   }
 
   function sectionLabel(s) {
@@ -81,7 +96,7 @@
   function sectionLabelTr(index, sid) {
     const sec = index.sectionById.get(sid);
     if (!sec) return '';
-    const tr = I.sectionTr(sid);
+    const tr = index.edition === 'is' ? I.sectionTr(sid) : '';
     return tr && I.getLang() !== 'is' ? `${sectionLabel(sec)} («${tr}»)` : sectionLabel(sec);
   }
   function sectionShort(s) {
@@ -149,6 +164,7 @@
     const anchor = {
       docId: index.doc.id,
       docVersion: index.doc.version,
+      textLang: index.edition,
       sectionId: sec.id,
       start: { unitId: su.id, offset: a.offset },
       end: { unitId: eu.id, offset: b.offset },
@@ -180,7 +196,7 @@
     return {
       ok: true,
       anchor: {
-        scope: 'kafli', docId: index.doc.id, docVersion: index.doc.version, sectionId: s.id,
+        scope: 'kafli', docId: index.doc.id, docVersion: index.doc.version, textLang: index.edition, sectionId: s.id,
         unitIds: [], quote: '',
         pdfPages: [first.pdfPage, last.pdfPage],
         printedPages: first.printedPage != null && last.printedPage != null ? [first.printedPage, last.printedPage] : null,
@@ -189,8 +205,10 @@
   }
 
   /* Staðfestir að tenging vísi enn á sama texta. */
-  function verifyAnchor(index, anchor) {
+  function verifyAnchor(index0, anchor) {
     if (!anchor || typeof anchor !== 'object') return { ok: false, reason: T('verify.missing') };
+    const index = edIndex(index0, anchor);
+    if (!index) return { ok: false, reason: T('verify.noEdition') };
     if (isSectionAnchor(anchor)) {
       if (anchor.docId !== index.doc.id) return { ok: false, reason: T('verify.otherDoc') };
       if (anchor.docVersion !== index.doc.version) return { ok: false, reason: T('verify.otherVersion') };
@@ -291,7 +309,12 @@
       formatVersion: WORKFILE_VERSION,
       savedAt: new Date().toISOString(),
       app: APP,
-      document: { id: index.doc.id, version: index.doc.version, sha256: index.doc.sha256, title: index.doc.title },
+      document: (() => {
+        const b = baseOf(index).doc;
+        const d = { id: b.id, version: b.version, sha256: b.sha256, title: b.title };
+        if (index.editions) d.editions = Object.fromEntries(Object.entries(index.editions).map(([k, ix]) => [k, ix.doc.version]));
+        return d;
+      })(),
       settings: sanitizeSettings(state.settings),
       readingPosition: state.position || null,
       notes: state.notes || [],
@@ -329,8 +352,8 @@
     if (obj.formatVersion < 1) return { ok: false, errors: [T('wf.badVersion')] };
     const d = obj.document;
     if (!d || typeof d !== 'object') return { ok: false, errors: [T('wf.noDoc')] };
-    if (d.id !== index.doc.id) return { ok: false, errors: [T('wf.otherDoc', { id: String(d.id).slice(0, 60) })] };
-    if (d.version !== index.doc.version) return { ok: false, errors: [T('wf.otherVersion')] };
+    if (d.id !== baseOf(index).doc.id) return { ok: false, errors: [T('wf.otherDoc', { id: String(d.id).slice(0, 60) })] };
+    if (d.version !== baseOf(index).doc.version) return { ok: false, errors: [T('wf.otherVersion')] };
     if (!Array.isArray(obj.notes)) return { ok: false, errors: [T('wf.noNotes')] };
     const errors = [];
     const ids = new Set();
@@ -376,7 +399,7 @@
         section: loc.section,
         location: [loc.pages, loc.paras].filter(Boolean).join(' · '),
         type: typeLabel(n.type),
-        quote: o.includeQuote && n.anchor && !isSectionAnchor(n.anchor) ? withQuoteMarks(n.anchor.quote) : null,
+        quote: o.includeQuote && n.anchor && !isSectionAnchor(n.anchor) ? withQuoteMarks(n.anchor.quote, n.anchor.textLang || 'is') : null,
         cue: n.kind === 'cornell' ? (n.cue || '') : null,
         kind: n.kind || null,
         // óbreyttur frumtexti er ekki endurtekinn sem glósutexti þegar frumtextinn fylgir
@@ -413,7 +436,7 @@
         typeLabel: `(${typeCode(n.type)}) ${typeLabel(n.type).toLowerCase()}`,
         loc: loc + (n.orphan ? ' · ' + T('ex.orphan') : ''),
         text: n.body,
-        quote: o.includeQuote && quote && reworded ? withQuoteMarks(quote) : null,
+        quote: o.includeQuote && quote && reworded ? withQuoteMarks(quote, n.anchor && n.anchor.textLang || 'is') : null,
       };
       g.rows.push(row);
     }
@@ -444,9 +467,13 @@
     return out.join('\n');
   }
 
-  function withQuoteMarks(q) {
+  /* Gæsalappir fylgja tungumáli textans sjálfs (íslenska „…“, úkraínska «…»), ekki viðmótsins. */
+  const QUOTE_MARKS = { is: ['„', '“'], uk: ['«', '»'] };
+  function withQuoteMarks(q, textLang) {
     const t = String(q);
-    return t.startsWith('„') && t.endsWith('“') ? t : '„' + t + '“';
+    if ((t.startsWith('„') && t.endsWith('“')) || (t.startsWith('«') && t.endsWith('»'))) return t;
+    const m = QUOTE_MARKS[textLang] || [T('q.open'), T('q.close')];
+    return m[0] + t + m[1];
   }
   function mdEscapeLine(line) {
     return line.replace(/^(\s*)([#>+\-*]|\d+[.)]|=+$|`{3,}|~{3,})/, '$1\\$2');
@@ -489,7 +516,7 @@
     get EXPORT_LEGEND() { return exportLegend(); },
     I18n: I, sectionLabelTr,
     DEFAULT_SETTINGS, SETTING_OPTIONS, FONT_MIN, FONT_MAX, sanitizeSettings,
-    buildIndex, sectionLabel, sectionShort, pageAt, makeAnchor, anchorForUnit, verifyAnchor, locationParts,
+    buildIndex, linkEditions, sectionLabel, sectionShort, pageAt, makeAnchor, anchorForUnit, verifyAnchor, locationParts,
     newNote, finalizeNote, sortNotes, filterNotes, notesForUnit,
     makeWorkfile, parseWorkfile, exportModel, cornellModel, toCornellMarkdown, isSectionAnchor, anchorForSection, withQuoteMarks, typeCode, locationCode, toMarkdown, fmtDate, fileStamp,
   };

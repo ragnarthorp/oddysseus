@@ -27,8 +27,13 @@
     document.body.textContent = I ? I.t('app.loadFail') : 'Textagögn hlóðust ekki.';
     return;
   }
-  const index = C.buildIndex(DATA);
-  const sections = index.sections;
+  // Útgáfur textans: íslenski frumtextinn og úkraínsk þýðing (sömu kaflar og einingaauðkenni).
+  const idxIs = C.buildIndex(DATA);
+  const idxUk = window.ODY_TEXT_UK ? C.buildIndex(window.ODY_TEXT_UK) : null;
+  C.linkEditions([idxIs, idxUk].filter(Boolean));
+  let index = idxIs;          // útgáfan sem er sýnd; valin í init() eftir tungumáli
+  let sections = index.sections;
+  const sameEdition = a => (a.textLang || 'is') === index.edition;
 
   const state = {
     sectionId: 'titill',
@@ -177,14 +182,23 @@
     const art = $('article');
     art.innerHTML = '';
     art.setAttribute('aria-labelledby', 'secTitle');
-    art.lang = 'is';
+    art.lang = index.edition;
     if (sec.kind === 'titill') renderCover(sec, art);
     else {
       const head = el('header', { class: 'sec-head' });
       head.appendChild(el('p', { class: 'kicker' }, sec.kicker));
       head.appendChild(el('h1', { id: 'secTitle' }, sec.title));
-      const tr = I.sectionTr(sec.id);
-      if (tr) head.appendChild(el('p', { class: 'sec-tr', lang: I.getLang() }, `${C.sectionShort(sec)} · ${tr}`));
+      if (index.edition !== 'is') {
+        // þýddur texti: upprunalega íslenska kaflaheitið sýnt til hliðsjónar
+        const orig = idxIs.sectionById.get(sec.id);
+        const p = el('p', { class: 'sec-tr', lang: I.getLang() }, t('sec.original', { t: '' }));
+        p.appendChild(el('span', { lang: 'is' }, orig.title));
+        head.appendChild(p);
+      } else {
+        const tr = I.sectionTr(sec.id);
+        if (tr) head.appendChild(el('p', { class: 'sec-tr', lang: I.getLang() }, `${C.sectionShort(sec)} · ${tr}`));
+      }
+      if (sec.kind === 'um-bokina' && t('tr.note')) head.appendChild(el('p', { class: 'lang-note', lang: I.getLang() }, t('tr.note')));
       art.appendChild(head);
       let list = null;
       for (let i = 0; i < sec.units.length; i++) {
@@ -248,9 +262,8 @@
     wrap.appendChild(el('p', { class: 'c-kicker' }, sec.kicker));
     wrap.appendChild(el('h1', { id: 'secTitle' }, sec.title));
     // titilsíðutexti úr PDF (síður 1–2)
-    const sub = units.find(u => u.pages[0].pdfPage === 1 && /Tíu ára/.test(u.text));
-    const sub2 = units.find(u => u.pages[0].pdfPage === 2 && /Saga Hómers/.test(u.text));
-    const trans = units.find(u => /Sveinbjarnar/.test(u.text));
+    const byId = id => units.find(u => u.id === id);
+    const sub = byId('titill-001'), sub2 = byId('titill-004'), trans = byId('titill-002');
     if (sub) wrap.appendChild(el('p', { class: 'c-sub' }, sub.text));
     if (sub2) wrap.appendChild(el('p', { class: 'c-sub' }, sub2.text));
     if (trans) wrap.appendChild(el('p', { class: 'c-sub2' }, trans.text));
@@ -292,9 +305,12 @@
       b.appendChild(el('span', { class: 'num' }, num));
       const label = s.kind === 'thattur' ? s.title : s.kind === 'titill' ? C.sectionShort(s) : s.kind === 'formali' ? t('toc.formali', { t: s.title }) : s.kind === 'um-bokina' ? t('toc.umBokina', { t: s.title }) : s.title;
       const lab = el('span', { class: 'tl' });
-      lab.appendChild(el('span', { lang: 'is' }, label));
-      const tr = s.kind !== 'titill' ? I.sectionTr(s.id) : '';
-      if (tr) lab.appendChild(el('span', { class: 'tr' }, tr));
+      lab.appendChild(el('span', { lang: index.edition }, label));
+      const tr = s.kind === 'titill' ? '' : index.edition !== 'is' ? idxIs.sectionById.get(s.id).title : I.sectionTr(s.id);
+      if (s.kind !== 'titill') {
+        if (index.edition !== 'is') lab.appendChild(el('span', { class: 'tr', lang: 'is' }, idxIs.sectionById.get(s.id).title));
+        else if (I.sectionTr(s.id)) lab.appendChild(el('span', { class: 'tr' }, I.sectionTr(s.id)));
+      }
       b.appendChild(lab);
       const cnt = state.notes.filter(n => n.anchor && n.anchor.sectionId === s.id).length;
       b.appendChild(el('span', { class: 'cnt' }, cnt ? t('toc.count', { n: cnt }) : ''));
@@ -399,7 +415,7 @@
     if (!HL) return;
     const ranges = [];
     for (const n of state.notes) {
-      if (n.orphan || !n.anchor || n.anchor.sectionId !== state.sectionId || C.isSectionAnchor(n.anchor)) continue;
+      if (n.orphan || !n.anchor || n.anchor.sectionId !== state.sectionId || C.isSectionAnchor(n.anchor) || !sameEdition(n.anchor)) continue;
       const r = rangeForAnchor(n.anchor);
       if (r) ranges.push(r);
     }
@@ -409,10 +425,11 @@
   function flashAnchor(a) {
     clearTimeout(flashTimer);
     for (const r of document.querySelectorAll('.u-row.flash')) r.classList.remove('flash');
-    if (HL) {
+    if (HL && sameEdition(a)) {
       const r = rangeForAnchor(a);
       if (r) CSS.highlights.set('ody-flash', new Highlight(r));
     } else {
+      // glósa úr annarri útgáfu (t.d. gerð við íslenska textann): heil efnisgrein auðkennd
       for (const id of a.unitIds) { const row = document.querySelector(`[data-row="${id}"]`); if (row) row.classList.add('flash'); }
     }
     flashTimer = setTimeout(() => {
@@ -535,6 +552,7 @@
       : ed.mode === 'edit' ? 'ed.edit' : ed.origin === 'recycle' ? 'ed.recycle' : 'ed.new');
     $('edLoc').textContent = `${loc.section} · ${loc.pages} · ${loc.paras}`;
     $('edSrc').textContent = a.quote || '';
+    $('edSrc').lang = a.textLang || 'is';
     $('edSrcWrap').hidden = kind === 'samantekt';
     $('edTypes').hidden = kind === 'cornell' || kind === 'samantekt';
     $('edCueWrap').hidden = kind !== 'cornell';
@@ -720,7 +738,7 @@
     li.appendChild(head);
     if (n.orphan) li.appendChild(el('p', { class: 'nc-warn' }, t('card.orphan') + n.orphan));
     if (n.kind === 'cornell') li.appendChild(el('p', { class: 'nc-cue' }, (n.cue || '').trim() ? n.cue : t('card.noCue')));
-    if (n.anchor && n.anchor.quote) li.appendChild(el('blockquote', { class: 'nc-quote' }, n.anchor.quote));
+    if (n.anchor && n.anchor.quote) li.appendChild(el('blockquote', { class: 'nc-quote', lang: n.anchor.textLang || 'is' }, n.anchor.quote));
     const body = n.body.trim();
     li.appendChild(el('p', { class: 'nc-body' + (body ? '' : ' emptyb') }, body ? n.body : t('card.empty')));
     const act = el('div', { class: 'nc-actions' });
@@ -1079,6 +1097,7 @@
     document.documentElement.lang = l;
     I.applyHtml(document);
     $('appVersion').textContent = t('app.version', { v: C.APP.version });
+    document.querySelector('.dt-main').textContent = index.doc.title;
     const b = $('btnLang');
     b.disabled = false;
     b.textContent = t('lang.switch');
@@ -1115,6 +1134,8 @@
     const fromUrl = urlLang();
     if (fromUrl && fromUrl !== state.settings.lang) { state.settings.lang = fromUrl; persist(['settings']); }
     I.setLang(state.settings.lang);
+    index = I.getLang() === 'uk' && idxUk ? idxUk : idxIs;
+    sections = index.sections;
     try { localStorage.setItem('odysseifskvida-lestrarstofa:lang', state.settings.lang); } catch (e) { /* */ }
     applyLanguage();
     markOrphans();
@@ -1140,6 +1161,6 @@
   }
 
   // til prófana (sjálfvirk viðmótspróf); ekki notað af viðmótinu sjálfu
-  window.__ody = { state, index, anchorFromSelection, idle: () => state.saveChain };
+  window.__ody = { state, get index() { return index; }, idxIs, idxUk, anchorFromSelection, idle: () => state.saveChain };
   init();
 })();
